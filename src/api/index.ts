@@ -1,4 +1,5 @@
 import { AuthPathEnum } from '@/types/auth.types';
+import { PageUrls } from '@/types/path.enums';
 import isDev from '@/utils/helpers/isDev.utils';
 import axios, { AxiosError, AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios';
 import Cookies from 'js-cookie';
@@ -36,7 +37,6 @@ axiosInstance.interceptors.request.use(
     if (noAuthRequired.some((path) => config.url?.includes(path))) {
       return config;
     }
-    console.log('here');
 
     const accessToken = Cookies.get('accessToken');
 
@@ -93,13 +93,11 @@ axiosInstance.interceptors.response.use(
 );
 
 function handleLogout() {
-  console.log('logout');
-
   Object.keys(Cookies.get()).forEach((cookieName) => {
     Cookies.remove(cookieName, { path: '/' });
   });
 
-  // window.location.href = PageUrls.HOME;
+  window.location.href = PageUrls.HOME;
 }
 
 export const API = {
