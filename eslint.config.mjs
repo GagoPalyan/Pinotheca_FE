@@ -4,7 +4,7 @@ export default [
   {
     ...js.configs.recommended,
     rules: {
-      ...js.configs.recommended.rules, // պահպանել նախորդ կանոնները
+      ...js.configs.recommended.rules,
       'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
       'no-console': 'warn',
       eqeqeq: ['error', 'always'],
