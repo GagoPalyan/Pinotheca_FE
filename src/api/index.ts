@@ -124,3 +124,5 @@ export const API = {
   async delete<DataType>(url: string, config?: AxiosRequestConfig) {
     const res = await axiosInstance.delete<DataType>(url, config).then((res) => res.data);
     return res;
+  },
+};
