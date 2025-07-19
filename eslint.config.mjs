@@ -1,16 +1,28 @@
 import js from '@eslint/js';
+import globals from 'globals';
+import tseslint from 'typescript-eslint';
+import pluginReact from 'eslint-plugin-react';
 
 export default [
   {
-    ...js.configs.recommended,
+    files: ['**/*.{js,jsx,ts,tsx}'],
     languageOptions: {
-      parserOptions: {
-        ecmaVersion: 2020,
-        sourceType: 'module',
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      globals: {
+        ...globals.browser,
       },
+      parser: tseslint.parser,
+    },
+    plugins: {
+      react: pluginReact,
     },
     rules: {
       ...js.configs.recommended.rules,
+      ...tseslint.configs.recommended[0].rules,
+      ...pluginReact.configs.flat.recommended.rules,
+
+      // Քո լրացուցիչ կանոնները
       'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
       'no-console': 'warn',
       eqeqeq: ['error', 'always'],
@@ -25,6 +37,7 @@ export default [
       'space-before-function-paren': ['error', 'never'],
       'prefer-const': 'error',
       'no-var': 'error',
+      'react/react-in-jsx-scope': 'off', // React 17+ համար
     },
   },
 ];
