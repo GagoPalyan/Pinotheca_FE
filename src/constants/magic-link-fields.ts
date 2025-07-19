@@ -1,4 +1,4 @@
-import { TRegisterFormFields } from '@/types/auth/magic-link.types';
+import type { TRegisterFormFields } from '@/types/auth.types';
 
 export const magicLinkFields: TRegisterFormFields[] = [
   {
