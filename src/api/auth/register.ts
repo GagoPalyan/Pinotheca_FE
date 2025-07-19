@@ -9,7 +9,7 @@ import {
 } from '@/types/auth.types';
 import { AuthAPIPathEnum } from './paths';
 
-const register = async (data: TRegisterEmailForm): Promise<TRegisterEmailResponse> => {
+const register = async(data: TRegisterEmailForm): Promise<TRegisterEmailResponse> => {
   const response = await API.post<TRegisterEmailResponse>(AuthAPIPathEnum.REGISTER, data);
 
   return response;

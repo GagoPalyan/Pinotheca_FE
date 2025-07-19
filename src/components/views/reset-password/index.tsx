@@ -19,15 +19,19 @@ function ResetPasswordPage() {
   const { mutateAsync, isPending, isSuccess } = useResetPassword();
   const disableFields = isPending || isSuccess;
 
-  const onSubmit = async (data: TResetPasswordFrom) => {
+  const onSubmit = async(data: TResetPasswordFrom) => {
     const token = searchParams.get('token');
-    if (!token) return toast.error('Invalid token');
+    if (!token) {
+      return toast.error('Invalid token');
+    }
 
     const result = await mutateAsync({
       token,
       ...data,
     });
-    if (result.accessToken) return router.replace(PageUrls.HOME);
+    if (result.accessToken) {
+      return router.replace(PageUrls.HOME);
+    }
   };
 
   return (

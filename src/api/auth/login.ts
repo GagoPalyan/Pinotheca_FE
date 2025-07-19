@@ -7,7 +7,7 @@ import type { TError } from '@/types/global';
 import { AuthPathEnum, type TLoginFrom } from '@/types/auth.types';
 import type { TAccessTokenResponse } from '@/types/auth.types';
 
-const login = async (data: TLoginFrom): Promise<TAccessTokenResponse> => {
+const login = async(data: TLoginFrom): Promise<TAccessTokenResponse> => {
   const result = await API.post<TAccessTokenResponse>(AuthAPIPathEnum.LOGIN, data);
   return result;
 };

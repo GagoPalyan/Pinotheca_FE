@@ -9,7 +9,7 @@ import {
   type TRegisterEmailResponse,
 } from '@/types/auth.types';
 
-const forgotPassword = async (data: TRegisterEmailForm): Promise<TRegisterEmailResponse> => {
+const forgotPassword = async(data: TRegisterEmailForm): Promise<TRegisterEmailResponse> => {
   const response = await API.post<TRegisterEmailResponse>(AuthAPIPathEnum.FORGOT_PASSWORD, data);
 
   return response;

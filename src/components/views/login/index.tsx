@@ -22,9 +22,11 @@ function LoginPage() {
   const { mutateAsync, isPending, isSuccess } = useLogin();
   const disableFields = isPending || isSuccess;
 
-  const onSubmit = async (data: TLoginFrom) => {
+  const onSubmit = async(data: TLoginFrom) => {
     const result = await mutateAsync(data);
-    if (result.accessToken) return router.replace(PageUrls.HOME);
+    if (result.accessToken) {
+      return router.replace(PageUrls.HOME);
+    }
   };
 
   return (

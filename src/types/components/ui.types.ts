@@ -1,3 +1,5 @@
+import React from 'react';
+
 export interface IModalBasic {
   onClose: () => void;
   children: React.ReactNode;

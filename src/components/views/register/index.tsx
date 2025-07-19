@@ -14,7 +14,7 @@ function RegisterPage() {
   const { mutateAsync, isPending, isSuccess } = useRegister();
   const disableFields = isPending || isSuccess;
 
-  const onSubmit = async (data: TRegisterEmailForm) => {
+  const onSubmit = async(data: TRegisterEmailForm) => {
     const result = await mutateAsync(data);
 
     if (result.message === 'success') {

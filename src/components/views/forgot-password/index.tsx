@@ -14,7 +14,7 @@ function ForgotPasswordPage() {
   const { mutateAsync, isPending, isSuccess } = useForgotPassword();
   const disableFields = isPending || isSuccess;
 
-  const onSubmit = async (data: TRegisterEmailForm) => {
+  const onSubmit = async(data: TRegisterEmailForm) => {
     const result = await mutateAsync(data);
 
     if (result.message === 'success') {

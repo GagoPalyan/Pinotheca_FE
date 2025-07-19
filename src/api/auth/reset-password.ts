@@ -7,7 +7,7 @@ import type { TError } from '@/types/global';
 import { AuthPathEnum, type TResetPasswordRequest } from '@/types/auth.types';
 import type { TAccessTokenResponse } from '@/types/auth.types';
 
-const resetPassword = async (data: TResetPasswordRequest): Promise<TAccessTokenResponse> => {
+const resetPassword = async(data: TResetPasswordRequest): Promise<TAccessTokenResponse> => {
   const result = await API.post<TAccessTokenResponse>(AuthAPIPathEnum.RESET_PASSWORD, data);
   return result;
 };

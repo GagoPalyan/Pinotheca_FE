@@ -54,9 +54,11 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
   (response) => response,
-  async (error: AxiosError) => {
+  async(error: AxiosError) => {
     const originalRequest = error.config as CustomAxiosRequestConfig;
-    if (!originalRequest) return Promise.reject(error);
+    if (!originalRequest) {
+      return Promise.reject(error);
+    }
 
     const isUnauthorized = error.response?.status === 401;
 
@@ -70,7 +72,9 @@ axiosInstance.interceptors.response.use(
           })
           .then((res) => res.data);
 
-        if (!accessToken) throw new Error('New access token is missing.');
+        if (!accessToken) {
+          throw new Error('New access token is missing.');
+        }
 
         Cookies.set('accessToken', accessToken, {
           secure: !isDev(),

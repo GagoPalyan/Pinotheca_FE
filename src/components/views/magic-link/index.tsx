@@ -22,12 +22,16 @@ function MagicLinkPage() {
   const { mutateAsync, isPending, isSuccess } = useMagicLink();
   const disableFields = isPending || isSuccess;
 
-  const onSubmit = async (data: TRegisterMagicLinkFrom) => {
+  const onSubmit = async(data: TRegisterMagicLinkFrom) => {
     const token = searchParams.get('token');
-    if (!token) return toast.error('Invalid token');
+    if (!token) {
+      return toast.error('Invalid token');
+    }
 
     const result = await mutateAsync({ ...data, token });
-    if (result.accessToken) return router.replace(PageUrls.HOME);
+    if (result.accessToken) {
+      return router.replace(PageUrls.HOME);
+    }
   };
 
   return (

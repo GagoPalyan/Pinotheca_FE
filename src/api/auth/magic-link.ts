@@ -7,7 +7,7 @@ import type { TError } from '@/types/global';
 import { AuthPathEnum, type TRegisterMagicLinkRequest } from '@/types/auth.types';
 import type { TAccessTokenResponse } from '@/types/auth.types';
 
-const magicLink = async (data: TRegisterMagicLinkRequest): Promise<TAccessTokenResponse> => {
+const magicLink = async(data: TRegisterMagicLinkRequest): Promise<TAccessTokenResponse> => {
   const result = await API.post<TAccessTokenResponse>(AuthAPIPathEnum.MAGIC_LINK, data);
 
   return result;
