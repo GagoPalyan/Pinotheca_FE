@@ -22,7 +22,6 @@ export default [
       ...tseslint.configs.recommended[0].rules,
       ...pluginReact.configs.flat.recommended.rules,
 
-      // Քո լրացուցիչ կանոնները
       'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
       'no-console': 'warn',
       eqeqeq: ['error', 'always'],
@@ -37,7 +36,7 @@ export default [
       'space-before-function-paren': ['error', 'never'],
       'prefer-const': 'error',
       'no-var': 'error',
-      'react/react-in-jsx-scope': 'off', // React 17+ համար
+      'react/react-in-jsx-scope': 'off',
     },
   },
 ];
