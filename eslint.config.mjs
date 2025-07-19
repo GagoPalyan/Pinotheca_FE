@@ -11,9 +11,9 @@ export default [
       ecmaVersion: 'latest',
       sourceType: 'module',
       globals: {
-        ...globals.browser, // browser globals
-        ...globals.node, // node globals
-        process: 'readonly', // Եթե process-ը պետք է լինի
+        ...globals.browser,
+        ...globals.node,
+        process: 'readonly',
       },
       parser: tseslint.parser,
     },
