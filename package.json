@@ -19,6 +19,7 @@
     "js-cookie": "^3.0.5",
     "next": "15.3.4",
     "next-i18next": "^15.4.2",
+    "next-intl": "^4.3.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.59.0",

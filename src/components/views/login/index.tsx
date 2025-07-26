@@ -6,9 +6,11 @@ import { loginSchema } from '@/utils/validations/auth.schema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
+import { useTranslations } from 'next-intl';
 import type { TLoginFrom } from '@/types/auth.types';
 
 function LoginPage() {
+  const t = useTranslations();
   const router = useRouter();
   const {
     handleSubmit,
@@ -39,7 +41,7 @@ function LoginPage() {
         disabled={disableFields}
       />
       <button type="submit" disabled={disableFields}>
-        Login
+        {t('auth.login.title')}
       </button>
     </form>
   );
