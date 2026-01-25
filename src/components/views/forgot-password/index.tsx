@@ -4,32 +4,62 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { emailSchema } from '@/utils/validations/auth.schema';
 import { useForgotPassword } from '@/hooks/api/auth/forgot-password';
-import type { TRegisterEmailForm } from '@/types/auth.types';
+import type { TRegisterEmailForm, TRegisterEmailResponse } from '@/types/auth.types';
+import AuthLayout from '@/components/shared/auth';
+import Input from '@/components/ui/input';
+import { useTranslations } from 'next-intl';
+import Button from '@/components/ui/button';
+import PageSwitcher from '@/components/shared/auth/page-switcher';
+import { PageUrls } from '@/types/path.enums';
+import { useState } from 'react';
+import AuthSuccessModal from '@/components/shared/auth/modal';
 
 function ForgotPasswordPage() {
-  const { handleSubmit, register } = useForm<TRegisterEmailForm>({
+  const t = useTranslations();
+  const [modalContent, setModalContent] = useState<TRegisterEmailResponse | null>(null);
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<TRegisterEmailForm>({
     mode: 'onBlur',
     resolver: yupResolver(emailSchema),
   });
-  const { mutateAsync, isPending, isSuccess } = useForgotPassword();
-  const disableFields = isPending || isSuccess;
+  const { mutateAsync, isPending } = useForgotPassword();
 
   const onSubmit = async (data: TRegisterEmailForm) => {
     const result = await mutateAsync(data);
-
-    if (result.message === 'success') {
-      alert('success');
-    }
+    setModalContent(result);
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input {...register('email')} type="email" placeholder="Email" disabled={disableFields} />
+    <>
+      <AuthLayout title="auth.pages.forgot_password.title" hideLoginWithGoogle>
+        <form
+          className="w-full flex items-center justify-center flex-col gap-1"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <Input
+            {...register('email')}
+            type="email"
+            placeholder={t(`auth.fields.email.label`)}
+            label={t(`auth.fields.email.label`)}
+            disabled={isPending}
+            errorMessage={errors.email?.message}
+          />
+          <Button type="submit" disabled={isPending}>
+            {t('auth.pages.forgot_password.button')}
+          </Button>
 
-      <button type="submit" disabled={disableFields}>
-        Send Message
-      </button>
-    </form>
+          <PageSwitcher page="forgot_password" link={PageUrls.LOGIN} />
+        </form>
+      </AuthLayout>
+      <AuthSuccessModal
+        page="forgot_password"
+        modalContent={modalContent}
+        setModalContent={setModalContent}
+      />
+    </>
   );
 }
 

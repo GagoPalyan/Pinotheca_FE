@@ -1,4 +1,4 @@
-import type { IIcon } from '@/types/components/ui.types';
+import type { IIcon } from '@/types/shared.types';
 import React, { useCallback } from 'react';
 import { twMerge } from 'tailwind-merge';
 

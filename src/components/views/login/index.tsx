@@ -14,6 +14,8 @@ import Link from '@/components/ui/link';
 import AuthLayout from '@/components/shared/auth';
 import PageSwitcher from '@/components/shared/auth/page-switcher';
 
+const fieldsList: (keyof TLoginFrom)[] = ['email', 'password'];
+
 function LoginPage() {
   const t = useTranslations();
   const router = useRouter();
@@ -26,17 +28,12 @@ function LoginPage() {
     resolver: yupResolver(loginSchema),
   });
 
-  const { mutateAsync, isPending, isSuccess } = useLogin();
-  const disableFields = isPending || isSuccess;
+  const { mutateAsync, isPending } = useLogin();
 
   const onSubmit = async (data: TLoginFrom) => {
     const result = await mutateAsync(data);
-    // if (result.accessToken) {
-    //   return router.replace(PageUrls.HOME);
-    // }
+    if (result?.accessToken) return router.replace(PageUrls.HOME);
   };
-
-  const fieldsList: (keyof TLoginFrom)[] = ['email', 'password'];
 
   return (
     <AuthLayout>
@@ -51,7 +48,7 @@ function LoginPage() {
             type={key}
             placeholder={t(`auth.fields.${key}.label`)}
             label={t(`auth.fields.${key}.label`)}
-            disabled={disableFields}
+            disabled={isPending}
             errorMessage={errors[key]?.message}
           />
         ))}
@@ -60,11 +57,11 @@ function LoginPage() {
           to={AuthPathEnum.FORGOT_PASSWORD}
           text={`${t('auth.pages.forgot_password.title')}?`}
         />
-        <Button type="submit" disabled={disableFields}>
+        <Button type="submit" disabled={isPending}>
           {t('auth.pages.login.title')}
         </Button>
 
-        <PageSwitcher page="register" />
+        <PageSwitcher page="login" link={PageUrls.REGISTER} />
       </form>
     </AuthLayout>
   );

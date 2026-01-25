@@ -1,4 +1,4 @@
-import { IComponentIcons } from '@/types/components/ui.types';
+import { IComponentIcons } from '@/types/shared.types';
 import { Control, FieldValues } from 'react-hook-form';
 
 export interface IInput extends IComponentIcons {

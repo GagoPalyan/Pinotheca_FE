@@ -1,4 +1,4 @@
-import { IComponentIcons } from '@/types/components/ui.types';
+import { IComponentIcons } from '@/types/shared.types';
 import { IButtonSizes, IButtonVariants } from '../constants';
 
 export interface IButton extends IComponentIcons {
