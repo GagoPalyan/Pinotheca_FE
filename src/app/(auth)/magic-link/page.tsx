@@ -1,5 +1,5 @@
-import MagicLinkPage from '@/components/views/magic-link';
 import Loading from '@/components/shared/loading';
+import MagicLinkPage from '@/components/views/magic-link';
 import { Suspense } from 'react';
 
 function MagicLink() {

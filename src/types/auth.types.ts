@@ -1,4 +1,4 @@
-import { TInputTypes } from './global';
+import { TInputTypes } from './global.types';
 
 export enum AuthPathEnum {
   REGISTER = '/register',
@@ -14,6 +14,7 @@ export type TRegisterEmailForm = {
 };
 export type TRegisterEmailResponse = {
   message: string;
+  status: number;
 };
 
 export type TRegisterFormFields = {

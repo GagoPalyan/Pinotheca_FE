@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { resetPasswordSchema } from '@/utils/validations/auth.schema';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { PageUrls } from '@/types/path.enums';
-import { useResetPassword } from '@/api/auth/reset-password';
+import { useResetPassword } from '@/hooks/api/auth/reset-password';
 import { toast } from 'react-toastify';
 import type { TResetPasswordFrom } from '@/types/auth.types';
 
@@ -19,7 +19,7 @@ function ResetPasswordPage() {
   const { mutateAsync, isPending, isSuccess } = useResetPassword();
   const disableFields = isPending || isSuccess;
 
-  const onSubmit = async(data: TResetPasswordFrom) => {
+  const onSubmit = async (data: TResetPasswordFrom) => {
     const token = searchParams.get('token');
     if (!token) {
       return toast.error('Invalid token');
