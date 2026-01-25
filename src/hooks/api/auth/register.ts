@@ -7,7 +7,6 @@ import {
 import { AuthAPIPathEnum } from './paths';
 import { API } from '@/utils/helpers/api.utils';
 import { TErrorMessage } from '@/types/global.types';
-import { toast } from 'react-toastify';
 
 const register = async (data: TRegisterEmailForm): Promise<TRegisterEmailResponse> => {
   try {
@@ -15,7 +14,6 @@ const register = async (data: TRegisterEmailForm): Promise<TRegisterEmailRespons
     return response;
   } catch (error) {
     const errorMessage = error as TErrorMessage;
-    toast.error((error as TErrorMessage).message);
     return errorMessage;
   }
 };

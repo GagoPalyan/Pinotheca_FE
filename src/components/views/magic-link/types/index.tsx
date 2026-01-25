@@ -1,4 +1,7 @@
+import { IInput } from '@/components/ui/input/types';
+import { TRegisterMagicLinkFrom } from '@/types/auth.types';
+
 export interface IMagicLinkFields {
-  name: string;
-  type: string;
+  name: keyof TRegisterMagicLinkFrom;
+  type: IInput['type'];
 }

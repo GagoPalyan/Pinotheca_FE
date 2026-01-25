@@ -4,14 +4,6 @@ import { AuthPathEnum } from '@/types/auth.types';
 import { PageUrls } from '@/types/path.enums';
 import isDev from '@/utils/helpers/isDev.utils';
 
-type RequestCache =
-  | 'default'
-  | 'no-store'
-  | 'reload'
-  | 'no-cache'
-  | 'force-cache'
-  | 'only-if-cached';
-
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_API_URL as string;
 const IS_SERVER = typeof window === 'undefined';
 
@@ -41,20 +33,24 @@ function logoutClient() {
 }
 
 async function refreshTokenClient() {
-  const res = await fetch(`${BASE_URL}${AuthPathEnum.REFRESH}`, {
-    credentials: 'include',
-  });
+  try {
+    const res = await fetch(`${BASE_URL}${AuthPathEnum.REFRESH}`, {
+      credentials: 'include',
+    });
 
-  if (!res.ok) throw new Error('Refresh failed');
+    if (!res.ok) throw new Error('Refresh failed');
 
-  const { accessToken } = await res.json();
+    const { accessToken } = await res.json();
+    Cookies.set('accessToken', accessToken, {
+      secure: !isDev(),
+      sameSite: 'Strict',
+    });
 
-  Cookies.set('accessToken', accessToken, {
-    secure: !isDev(),
-    sameSite: 'Strict',
-  });
-
-  return accessToken;
+    return accessToken;
+  } catch (err) {
+    console.error('Refresh token error:', err);
+    return undefined;
+  }
 }
 
 async function getServerAccessToken(): Promise<string | undefined> {
@@ -63,6 +59,8 @@ async function getServerAccessToken(): Promise<string | undefined> {
   const { cookies } = require('next/headers') as typeof import('next/headers');
   return (await cookies()).get('accessToken')?.value;
 }
+
+type TErrorObject = { status: number; message: string };
 
 async function serverFetch<T>(
   url: string,
@@ -73,23 +71,38 @@ async function serverFetch<T>(
     tags?: string[];
   } = {},
 ): Promise<T> {
-  const token = await getServerAccessToken();
+  try {
+    const token = await getServerAccessToken();
 
-  const res = await fetch(buildUrl(url, options.params), {
-    headers: {
-      'Content-Type': 'application/json',
-      ...(token && { Authorization: `Bearer ${token}` }),
-    },
-    cache: options.cache ?? 'force-cache',
-    next: {
-      revalidate: options.revalidate,
-      tags: options.tags,
-    },
-  });
+    const res = await fetch(buildUrl(url, options.params), {
+      headers: {
+        'Content-Type': 'application/json',
+        ...(token && { Authorization: `Bearer ${token}` }),
+      },
+      cache: options.cache ?? 'force-cache',
+      next: {
+        revalidate: options.revalidate,
+        tags: options.tags,
+      },
+    });
 
-  if (!res.ok) throw new Error(`Server fetch failed: ${res.status}`);
+    const data = await res.json().catch(() => null);
 
-  return res.json();
+    if (!res.ok) {
+      return Promise.reject({
+        status: res.status,
+        message: data?.message ?? 'Server fetch failed',
+      } as TErrorObject);
+    }
+
+    return data;
+  } catch (err: any) {
+    console.error('Server fetch error:', err);
+    return Promise.reject({
+      status: 500,
+      message: err.message || 'Unknown server error',
+    } as TErrorObject);
+  }
 }
 
 async function clientFetch<T>(
@@ -101,44 +114,50 @@ async function clientFetch<T>(
     retry?: boolean;
   } = {},
 ): Promise<T> {
-  const requiresAuth = !noAuthRequired.some((p) => url.includes(p));
-  const token = Cookies.get('accessToken');
+  try {
+    const requiresAuth = !noAuthRequired.some((p) => url.includes(p));
+    const token = Cookies.get('accessToken');
 
-  if (requiresAuth && !token) {
-    toast.error('Session expired. Please log in.');
-    logoutClient();
-    throw new Error('No access token');
-  }
-
-  const res = await fetch(buildUrl(url, options.params), {
-    method: options.method ?? 'GET',
-    credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json',
-      ...(requiresAuth && token && { Authorization: `Bearer ${token}` }),
-    },
-    body: options.body ? JSON.stringify(options.body) : undefined,
-  });
-
-  if (res.status === 401 && !options.retry && requiresAuth) {
-    try {
-      await refreshTokenClient();
-      return clientFetch<T>(url, { ...options, retry: true });
-    } catch {
-      toast.error('Session expired. Please log in again.');
+    if (requiresAuth && !token) {
       logoutClient();
+      return Promise.reject({ status: 401, message: 'No access token' } as TErrorObject);
     }
+
+    const res = await fetch(buildUrl(url, options.params), {
+      method: options.method ?? 'GET',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        ...(requiresAuth && token && { Authorization: `Bearer ${token}` }),
+      },
+      body: options.body ? JSON.stringify(options.body) : undefined,
+    });
+
+    if (res.status === 401 && !options.retry && requiresAuth) {
+      const refreshed = await refreshTokenClient();
+      if (refreshed) return clientFetch<T>(url, { ...options, retry: true });
+
+      logoutClient();
+      return Promise.reject({ status: 401, message: 'Unauthorized' } as TErrorObject);
+    }
+
+    const data = await res.json().catch(() => null);
+
+    if (!res.ok) {
+      return Promise.reject({
+        status: res.status,
+        message: data?.message ?? 'Client fetch failed',
+      } as TErrorObject);
+    }
+
+    return data;
+  } catch (err: any) {
+    console.error('Client fetch error:', err);
+    return Promise.reject({
+      status: 500,
+      message: err.message || 'Unknown client error',
+    } as TErrorObject);
   }
-
-  if (!res.ok) {
-    const errorMessage = await res.text();
-
-    const error = JSON.parse(errorMessage);
-
-    return error;
-  }
-
-  return res.json();
 }
 
 type GetOptions = {

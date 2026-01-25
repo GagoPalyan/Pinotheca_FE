@@ -36,15 +36,13 @@ function Input({
           {label}
         </label>
       )}
-      <div
+      <label
         className={twMerge(
-          'flex items-center justify-between border rounded-sm h-11 w-full gap-3 relative',
-          prependIcon ? 'pl-11' : 'pl-3',
-          appendIcon ? 'pr-11' : 'pr-3',
+          'flex items-center justify-between border rounded-sm h-11 w-full gap-3 relative z-10',
           errorMessage ? 'border-error-500' : 'border-gray-400',
         )}
       >
-        {prependIcon && <Icon name={prependIcon} size={4} iconClass="absolute left-3" />}
+        {prependIcon && <Icon name={prependIcon} size={4} iconClass="absolute z-20 left-3" />}
         {withController ? (
           <Controller
             name={name}
@@ -70,11 +68,11 @@ function Input({
           />
         )}
         {type === 'password' ? (
-          <Icon name="lucide_eye" size={4} iconClass="right-3" handleClick={showPassword} />
+          <Icon name="lucide_eye" size={4} iconClass="absolute z-20 right-3" handleClick={showPassword} />
         ) : appendIcon ? (
-          <Icon name={appendIcon} size={4} iconClass="right-3" />
+          <Icon name={appendIcon} size={4} iconClass="absolute z-20 right-3" />
         ) : null}
-      </div>
+      </label>
       <span className="base-medium text-error-500">{errorMessage && t(errorMessage)}</span>
     </div>
   );

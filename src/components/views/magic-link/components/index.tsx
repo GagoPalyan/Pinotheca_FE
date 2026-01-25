@@ -1,64 +1,84 @@
 'use client';
 
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useRegister } from '@/hooks/api/auth/register';
-import { emailSchema } from '@/utils/validations/auth.schema';
-import type { TRegisterEmailForm } from '@/types/auth.types';
+import { magicLinkSchema } from '@/utils/validations/auth.schema';
+import type { TRegisterMagicLinkFrom } from '@/types/auth.types';
 import AuthLayout from '@/components/shared/auth';
 import Input from '@/components/ui/input';
 import { useTranslations } from 'next-intl';
-import PageSwitcher from '@/components/shared/auth/page-switcher';
 import Button from '@/components/ui/button/components';
-import { useState } from 'react';
-import RegisterSuccessModal from './modal';
 import { magicLinkFields } from '../constants/fields-list';
+import { useMagicLink } from '@/hooks/api/auth/magic-link';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { toast } from 'react-toastify';
+import { PageUrls } from '@/types/path.enums';
+import Checkbox from '@/components/ui/checkbox';
 
 function MagicLinkPage() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
   const t = useTranslations();
-  const [modalContent, setModalContent] = useState<string | null>(null);
   const {
     handleSubmit,
     register,
+    control,
     formState: { errors },
-  } = useForm<TRegisterEmailForm>({
+  } = useForm<TRegisterMagicLinkFrom>({
     mode: 'onBlur',
-    resolver: yupResolver(emailSchema),
+    resolver: yupResolver(magicLinkSchema),
+    defaultValues: {
+      terms: false,
+    },
   });
-  const { mutateAsync, isPending } = useRegister();
+  const { mutateAsync, isPending } = useMagicLink();
   const disableFields = isPending;
 
-  const onSubmit = async (data: TRegisterEmailForm) => {
-    const { message } = await mutateAsync(data);
+  const onSubmit = async (data: TRegisterMagicLinkFrom) => {
+    const token = searchParams.get('token');
+    if (!token) return toast.error('Invalid token');
 
-    setModalContent(message);
+    const result = await mutateAsync({ ...data, token });
+    if (result?.accessToken) return router.replace(PageUrls.HOME);
   };
 
   return (
-    <>
-      <AuthLayout>
-        <form
-          className="w-full flex items-center justify-center flex-col gap-1"
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          {magicLinkFields.map(({ name, type }) => (
-            <Input
-              {...register(name)}
-              type={type}
-              placeholder={t(`auth.fields.${name}.label`)}
-              label={t(`auth.fields.${name}.label`)}
-              disabled={disableFields}
-              errorMessage={errors[name]?.message}
-            />
-          ))}
+    <AuthLayout>
+      <form
+        className="w-full flex items-center justify-center flex-col gap-1"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        {magicLinkFields.map(({ name, type }) => (
+          <Input
+            key={name}
+            {...register(name)}
+            type={type}
+            placeholder={t(`auth.fields.${name}.label`)}
+            label={t(`auth.fields.${name}.label`)}
+            disabled={disableFields}
+            errorMessage={errors[name]?.message}
+          />
+        ))}
 
-          <Button type="submit" disabled={disableFields}>
-            {t('auth.pages.register.title')}
-          </Button>
-          <PageSwitcher page="login" />
-        </form>
-      </AuthLayout>
-    </>
+        <Controller
+          name="terms"
+          control={control}
+          render={({ field }) => (
+            <Checkbox
+              value={field.value}
+              handleChange={() => field.onChange(!field.value)}
+              label={t('auth.fields.terms.label')}
+              disabled={disableFields}
+              errorMessage={errors.terms?.message}
+            />
+          )}
+        />
+
+        <Button type="submit" disabled={disableFields}>
+          {t('auth.pages.magic_link.title')}
+        </Button>
+      </form>
+    </AuthLayout>
   );
 }
 

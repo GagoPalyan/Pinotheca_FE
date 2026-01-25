@@ -13,7 +13,7 @@ function AuthLayout({ title, text, children }: IAuthLayout) {
       {Boolean(text) && <p className="base-medium text-gray-600">{text}</p>}
       <Button variant="secondary" customClass="hover:bg-unset">
         <div className="flex items-center gap-2.5">
-          <Image src={GoogleIcon} alt="google-icon" />
+          <Image src={GoogleIcon} alt="google-icon" unoptimized />
           <span className="base-semibold">{t('auth.common.google-sign-in')}</span>
         </div>
       </Button>

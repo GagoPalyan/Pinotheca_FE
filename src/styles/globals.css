@@ -22,7 +22,7 @@
   --color-primary-50: #f3e9e3;
   --color-primary-100: #e0c7b8;
   --color-primary-200: #cda68e;
-  --color-primary-300: #7f56d9;
+  --color-primary-300: #bb8563;
   --color-primary-400: #aa6f4b;
   --color-primary-500: #8e5d3e;
   --color-primary-600: #714a32;
@@ -98,5 +98,11 @@
     font-style: normal;
     font-weight: 600;
     line-height: 21px;
+  }
+  .small-medium {
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 160%;
   }
 }

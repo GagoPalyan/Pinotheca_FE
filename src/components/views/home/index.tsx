@@ -6,7 +6,7 @@ import React from 'react';
 function HomePage() {
   return (
     <div>
-      <Button click={() => {}} size="large" text="123" variant="ghost" />
+      <Button handleClick={() => {}} size="large" variant="ghost" />
     </div>
   );
 }

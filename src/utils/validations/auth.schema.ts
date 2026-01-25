@@ -24,9 +24,11 @@ export const magicLinkSchema = Yup.object().shape({
     )
     .required('auth.fields.password.errors.required'),
   confirmPassword: Yup.string()
-    .oneOf([Yup.ref('password')], 'auth.fields.password.errors.match')
-    .required('auth.fields.password.errors.confirm-required'),
-  terms: Yup.boolean().oneOf([true], 'auth.fields.terms.errors.required').required(),
+    .oneOf([Yup.ref('password')], 'auth.fields.password.errors.confirm_required')
+    .required('auth.fields.password.errors.confirm_required'),
+  terms: Yup.boolean()
+    .oneOf([true], 'auth.fields.terms.errors.required')
+    .required('auth.fields.terms.errors.required'),
 });
 
 export const loginSchema = Yup.object().shape({
