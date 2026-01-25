@@ -1,10 +1,12 @@
-import React from 'react';
-
-export interface IModalBasic {
-  onClose: () => void;
-  children: React.ReactNode;
+export interface IIcon {
+  name: string;
+  size?: number;
+  color?: string;
+  iconClass?: string;
+  handleClick?: () => void;
 }
 
-export interface IModal extends IModalBasic {
-  isOpen: boolean;
+export interface IComponentIcons {
+  prependIcon?: string;
+  appendIcon?: string;
 }

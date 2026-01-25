@@ -3,7 +3,7 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import { useMagicLink } from '@/api/auth/magic-link';
+import { useMagicLink } from '@/hooks/api/auth/magic-link';
 import { magicLinkFields } from '@/constants/magic-link-fields';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { PageUrls } from '@/types/path.enums';
@@ -22,7 +22,7 @@ function MagicLinkPage() {
   const { mutateAsync, isPending, isSuccess } = useMagicLink();
   const disableFields = isPending || isSuccess;
 
-  const onSubmit = async(data: TRegisterMagicLinkFrom) => {
+  const onSubmit = async (data: TRegisterMagicLinkFrom) => {
     const token = searchParams.get('token');
     if (!token) {
       return toast.error('Invalid token');

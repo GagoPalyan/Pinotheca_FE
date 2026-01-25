@@ -1,35 +1,48 @@
 import * as Yup from 'yup';
 
 export const emailSchema = Yup.object().shape({
-  email: Yup.string().email().required(),
+  email: Yup.string()
+    .email('auth.fields.email.errors.invalid')
+    .required('auth.fields.email.errors.required'),
 });
 
 export const magicLinkSchema = Yup.object().shape({
-  firstname: Yup.string().min(2).max(50).required(),
-  lastname: Yup.string().min(2).max(50).required(),
+  firstname: Yup.string()
+    .min(2, 'auth.fields.firstname.errors.min')
+    .max(50, 'auth.fields.firstname.errors.max')
+    .required('auth.fields.firstname.errors.required'),
+  lastname: Yup.string()
+    .min(2, 'auth.fields.lastname.errors.min')
+    .max(50, 'auth.fields.lastname.errors.max')
+    .required('auth.fields.lastname.errors.required'),
   password: Yup.string()
-    .min(8)
-    .max(32)
+    .min(8, 'auth.fields.password.errors.min')
+    .max(32, 'auth.fields.password.errors.max')
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[ !"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~])/,
-      'Password must include uppercase, lowercase, number, and special character.',
+      'auth.fields.password.errors.invalid',
     )
-    .required(),
+    .required('auth.fields.password.errors.required'),
   confirmPassword: Yup.string()
-    .oneOf([Yup.ref('password')], 'Passwords must match')
-    .required(),
-  terms: Yup.boolean().oneOf([true], 'Terms and conditions must be accepted').required(),
+    .oneOf([Yup.ref('password')], 'auth.fields.password.errors.match')
+    .required('auth.fields.password.errors.confirm-required'),
+  terms: Yup.boolean().oneOf([true], 'auth.fields.terms.errors.required').required(),
 });
 
 export const loginSchema = Yup.object().shape({
-  email: Yup.string().email().required(),
-  password: Yup.string().min(6).required(),
+  email: Yup.string()
+    .email('auth.fields.email.errors.invalid')
+    .required('auth.fields.email.errors.required'),
+  password: Yup.string()
+    .min(8, 'auth.fields.password.errors.min')
+    .max(32, 'auth.fields.password.errors.max')
+    .required('auth.fields.password.errors.required'),
 });
 
 export const resetPasswordSchema = Yup.object().shape({
   password: Yup.string()
-    .min(8)
-    .max(32)
+    .min(8, 'auth.fields.password.errors.min')
+    .max(32, 'auth.fields.password.errors.max')
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[ !"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~])/,
       'Password must include uppercase, lowercase, number, and special character.',

@@ -1,5 +1,5 @@
 import Loading from '@/components/shared/loading';
-import RegisterPage from '@/components/views/register';
+import RegisterPage from '@/components/views/register/components';
 import { Suspense } from 'react';
 
 function Register() {

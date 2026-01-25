@@ -3,7 +3,7 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { emailSchema } from '@/utils/validations/auth.schema';
-import { useForgotPassword } from '@/api/auth/forgot-password';
+import { useForgotPassword } from '@/hooks/api/auth/forgot-password';
 import type { TRegisterEmailForm } from '@/types/auth.types';
 
 function ForgotPasswordPage() {
@@ -14,7 +14,7 @@ function ForgotPasswordPage() {
   const { mutateAsync, isPending, isSuccess } = useForgotPassword();
   const disableFields = isPending || isSuccess;
 
-  const onSubmit = async(data: TRegisterEmailForm) => {
+  const onSubmit = async (data: TRegisterEmailForm) => {
     const result = await mutateAsync(data);
 
     if (result.message === 'success') {
