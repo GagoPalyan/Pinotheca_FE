@@ -32,18 +32,17 @@ function MagicLinkPage() {
     },
   });
   const { mutateAsync, isPending } = useMagicLink();
-  const disableFields = isPending;
 
   const onSubmit = async (data: TRegisterMagicLinkFrom) => {
     const token = searchParams.get('token');
-    if (!token) return toast.error('Invalid token');
+    if (!token) return toast.error(t('auth.errors.token'));
 
     const result = await mutateAsync({ ...data, token });
     if (result?.accessToken) return router.replace(PageUrls.HOME);
   };
 
   return (
-    <AuthLayout>
+    <AuthLayout hideLoginWithGoogle>
       <form
         className="w-full flex items-center justify-center flex-col gap-1"
         onSubmit={handleSubmit(onSubmit)}
@@ -55,7 +54,7 @@ function MagicLinkPage() {
             type={type}
             placeholder={t(`auth.fields.${name}.label`)}
             label={t(`auth.fields.${name}.label`)}
-            disabled={disableFields}
+            disabled={isPending}
             errorMessage={errors[name]?.message}
           />
         ))}
@@ -68,13 +67,13 @@ function MagicLinkPage() {
               value={field.value}
               handleChange={() => field.onChange(!field.value)}
               label={t('auth.fields.terms.label')}
-              disabled={disableFields}
+              disabled={isPending}
               errorMessage={errors.terms?.message}
             />
           )}
         />
 
-        <Button type="submit" disabled={disableFields}>
+        <Button type="submit" disabled={isPending}>
           {t('auth.pages.magic_link.title')}
         </Button>
       </form>

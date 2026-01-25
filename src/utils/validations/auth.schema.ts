@@ -47,10 +47,10 @@ export const resetPasswordSchema = Yup.object().shape({
     .max(32, 'auth.fields.password.errors.max')
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[ !"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~])/,
-      'Password must include uppercase, lowercase, number, and special character.',
+      'auth.fields.password.errors.invalid',
     )
-    .required(),
+    .required('auth.fields.password.errors.required'),
   confirmPassword: Yup.string()
-    .oneOf([Yup.ref('password')], 'Passwords must match')
-    .required(),
+    .oneOf([Yup.ref('password')], 'auth.fields.password.errors.confirm_required')
+    .required('auth.fields.password.errors.confirm_required'),
 });
