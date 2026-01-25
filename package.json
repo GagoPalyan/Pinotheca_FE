@@ -6,7 +6,6 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "prepare": "husky install"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",
