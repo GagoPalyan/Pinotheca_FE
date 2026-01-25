@@ -29,7 +29,7 @@ function ResetPasswordPage() {
       token,
       ...data,
     });
-    if (result.accessToken) {
+    if (result?.accessToken) {
       return router.replace(PageUrls.HOME);
     }
   };
