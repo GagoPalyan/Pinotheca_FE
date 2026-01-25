@@ -14,7 +14,7 @@
     "i18next": "^25.3.0",
     "i18next-http-backend": "^3.0.2",
     "js-cookie": "^3.0.5",
-    "next": "15.3.4",
+    "next": "15.3.8",
     "next-i18next": "^15.4.2",
     "next-intl": "^4.3.4",
     "react": "^19.0.0",
