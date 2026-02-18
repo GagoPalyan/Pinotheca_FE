@@ -20,9 +20,7 @@ export async function middleware(req: NextRequest) {
 
   let response = NextResponse.next();
 
-  if (!accessToken && refreshToken) {
-    response = await refreshTokenServer(refreshToken);
-  }
+  if (!accessToken && refreshToken) response = await refreshTokenServer(refreshToken);
 
   const token = accessToken || refreshToken;
 
@@ -36,5 +34,14 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: [...protectedRoutes, ...authRoutes],
+  matcher: [
+    '/favorites',
+    '/cart',
+    '/profile',
+    '/login',
+    '/register',
+    '/magic-link',
+    '/forgot-password',
+    '/reset-password',
+  ],
 };
