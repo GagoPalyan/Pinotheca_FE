@@ -31,9 +31,9 @@ function Input({
 
   return (
     <div className="w-full flex flex-col gap-1 items-start">
-      {Boolean(label) && (
+      {label && (
         <label htmlFor={name} className="base-semibold text-gray-950">
-          {label}
+          {t(label)}
         </label>
       )}
       <label
@@ -68,12 +68,17 @@ function Input({
           />
         )}
         {type === 'password' ? (
-          <Icon name="lucide_eye" size={4} iconClass="absolute z-20 right-3" handleClick={showPassword} />
+          <Icon
+            name={inputType === 'password' ? 'lucide_eye' : 'lucide_eye_off'}
+            size={4}
+            iconClass="absolute z-20 right-3"
+            handleClick={showPassword}
+          />
         ) : appendIcon ? (
           <Icon name={appendIcon} size={4} iconClass="absolute z-20 right-3" />
         ) : null}
       </label>
-      <span className="base-medium text-error-500">{errorMessage && t(errorMessage)}</span>
+      <span className="base-normal text-error-500">{errorMessage && t(errorMessage)}</span>
     </div>
   );
 }

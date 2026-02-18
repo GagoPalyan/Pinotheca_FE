@@ -5,7 +5,7 @@ function Checkbox({ handleChange, value, label, disabled, errorMessage }: TCheck
   const t = useTranslations();
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="w-full flex flex-col gap-2">
       <label className="flex items-center gap-3 cursor-pointer">
         <input
           disabled={disabled}
@@ -14,9 +14,9 @@ function Checkbox({ handleChange, value, label, disabled, errorMessage }: TCheck
           type="checkbox"
           className="size-5 accent-primary-300"
         />
-        <span className="small-medium">{label}</span>
+        <span className="small-normal">{t(label)}</span>
       </label>
-      {errorMessage && <span className="text-red-600 small-medium">{t(errorMessage)}</span>}
+      {errorMessage && <span className="text-red-600 small-normal">{t(errorMessage)}</span>}
     </div>
   );
 }

@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+:root {
+  --container: 1400px;
+}
+
 @theme {
   --color-gray-25: #fdfdfd;
   --color-gray-50: #fafafa;
@@ -72,21 +76,28 @@
 }
 
 @layer utilities {
-  .h3-medium {
+  .h3-bold {
     font-size: 24px;
     font-style: normal;
     font-weight: 700;
     line-height: 34px;
   }
 
-  .text-medium {
+  .text-normal {
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: 160%;
   }
 
-  .base-medium {
+  .text-semibold {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 160%;
+  }
+
+  .base-normal {
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -99,10 +110,42 @@
     font-weight: 600;
     line-height: 21px;
   }
-  .small-medium {
+
+  .small-normal {
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
     line-height: 160%;
   }
+  .small-semibold {
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 160%;
+  }
+
+  .w-container {
+    width: 100%;
+    padding-inline: calc(50% - var(--container) / 2);
+  }
+
+  @media screen and (max-width: 1440px) {
+    .w-container {
+      padding-inline: 12px;
+    }
+  }
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-primary-25);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary-200);
+  border-radius: 999px;
 }

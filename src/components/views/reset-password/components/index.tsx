@@ -48,7 +48,7 @@ function ResetPasswordPage() {
             {...register(name)}
             type={type}
             placeholder={t(`auth.fields.${name}.label`)}
-            label={t(`auth.fields.${name}.label`)}
+            label={`auth.fields.${name}.label`}
             disabled={isPending}
             errorMessage={errors[name]?.message}
           />

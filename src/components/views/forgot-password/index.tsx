@@ -15,7 +15,7 @@ import { useState } from 'react';
 import AuthSuccessModal from '@/components/shared/auth/modal';
 
 function ForgotPasswordPage() {
-  const t = useTranslations();
+  const t = useTranslations('auth');
   const [modalContent, setModalContent] = useState<TRegisterEmailResponse | null>(null);
   const {
     handleSubmit,
@@ -34,7 +34,7 @@ function ForgotPasswordPage() {
 
   return (
     <>
-      <AuthLayout title="auth.pages.forgot_password.title" hideLoginWithGoogle>
+      <AuthLayout title="pages.forgot_password.title" hideLoginWithGoogle>
         <form
           className="w-full flex items-center justify-center flex-col gap-1"
           onSubmit={handleSubmit(onSubmit)}
@@ -42,13 +42,13 @@ function ForgotPasswordPage() {
           <Input
             {...register('email')}
             type="email"
-            placeholder={t(`auth.fields.email.label`)}
-            label={t(`auth.fields.email.label`)}
+            placeholder={t(`fields.email.label`)}
+            label="auth.fields.email.label"
             disabled={isPending}
             errorMessage={errors.email?.message}
           />
           <Button type="submit" disabled={isPending}>
-            {t('auth.pages.forgot_password.button')}
+            {t('pages.forgot_password.button')}
           </Button>
 
           <PageSwitcher page="forgot_password" link={PageUrls.LOGIN} />

@@ -1,9 +1,9 @@
 import { getRequestConfig } from 'next-intl/server';
 import { cookies } from 'next/headers';
 
-export default getRequestConfig(async() => {
-  const localeCookie = cookies();
-  const locale = (await localeCookie).get('locale')?.value || 'en';
+export default getRequestConfig(async () => {
+  const localeCookie = await cookies();
+  const locale = localeCookie.get('locale')?.value || 'en';
 
   const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/translations/${locale}`);
 

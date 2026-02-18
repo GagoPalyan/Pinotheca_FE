@@ -5,4 +5,11 @@ export enum PageUrls {
   LOGIN = '/login',
   FORGOT_PASSWORD = '/forgot-password',
   RESET_PASSWORD = '/reset-password',
+  FAVORITES = '/favorites',
+  CART = '/cart',
+  PROFILE = '/profile',
+  SETTINGS = '/settings',
+  ABOUT_US = '/about-us',
+  GALLERY = '/gallery',
+  ARTISTS = '/artists',
 }

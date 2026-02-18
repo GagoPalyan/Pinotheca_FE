@@ -53,7 +53,7 @@ function MagicLinkPage() {
             {...register(name)}
             type={type}
             placeholder={t(`auth.fields.${name}.label`)}
-            label={t(`auth.fields.${name}.label`)}
+            label={`auth.fields.${name}.label`}
             disabled={isPending}
             errorMessage={errors[name]?.message}
           />
@@ -66,7 +66,7 @@ function MagicLinkPage() {
             <Checkbox
               value={field.value}
               handleChange={() => field.onChange(!field.value)}
-              label={t('auth.fields.terms.label')}
+              label={'auth.fields.terms.label'}
               disabled={isPending}
               errorMessage={errors.terms?.message}
             />

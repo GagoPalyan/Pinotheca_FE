@@ -5,7 +5,7 @@ import {
   type TRegisterEmailResponse,
 } from '@/types/auth.types';
 import { AuthAPIPathEnum } from './paths';
-import { API } from '@/utils/helpers/api.utils';
+import { API } from '@/utils/api/api.utils';
 import { TErrorMessage } from '@/types/global.types';
 
 const register = async (data: TRegisterEmailForm): Promise<TRegisterEmailResponse> => {

@@ -47,7 +47,7 @@ function LoginPage() {
             {...register(key)}
             type={key}
             placeholder={t(`auth.fields.${key}.label`)}
-            label={t(`auth.fields.${key}.label`)}
+            label={`auth.fields.${key}.label`}
             disabled={isPending}
             errorMessage={errors[key]?.message}
           />

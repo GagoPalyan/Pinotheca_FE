@@ -43,7 +43,7 @@ function RegisterPage() {
             {...register('email')}
             type={'email'}
             placeholder={t('auth.fields.email.label')}
-            label={t('auth.fields.email.label')}
+            label='auth.fields.email.label'
             disabled={isPending}
             errorMessage={errors.email?.message}
           />
