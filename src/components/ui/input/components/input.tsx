@@ -1,14 +1,10 @@
-import React from 'react';
 import { IInput } from '../types';
-import { twMerge } from 'tailwind-merge';
 
 function InputComponent({
   name,
   type,
   placeholder,
   disabled,
-  appendIcon,
-  prependIcon,
   ...props
 }: IInput) {
   return (
@@ -19,11 +15,7 @@ function InputComponent({
       type={type}
       placeholder={placeholder}
       disabled={disabled}
-      className={twMerge(
-        'text-normal text-gray-950 outline-none border-none w-full h-full rounded-sm',
-        prependIcon ? 'pl-11' : 'pl-3',
-        appendIcon || type === 'password' ? 'pr-11' : 'pr-3',
-      )}
+      className="text-normal text-gray-950 outline-none border-none w-full h-full rounded-sm"
     />
   );
 }

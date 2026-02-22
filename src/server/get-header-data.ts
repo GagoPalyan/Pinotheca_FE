@@ -1,8 +1,13 @@
 'use server';
 
+import { revalidateTag } from 'next/cache';
 import { cookies } from 'next/headers';
 import { API } from '../utils/api/api.utils';
-import { AuthPathEnum, IHeaderData, TUserData } from '@/types/auth.types';
+import { AuthPathEnum, type IHeaderData, type TUserData } from '@/types/auth.types';
+
+export async function revalidateHeader() {
+  revalidateTag('me');
+}
 
 const getHeaderData = async () => {
   try {
@@ -11,7 +16,9 @@ const getHeaderData = async () => {
 
     if (!accessToken) return null;
 
-    const data: TUserData | null = await API.get(AuthPathEnum.ME);
+    const data: TUserData | null = await API.get(AuthPathEnum.ME, {
+      tags: ['me'],
+    });
 
     if (!data) return null;
 

@@ -27,9 +27,9 @@ function buildUrl(url: string, params?: Record<string, unknown>) {
   return `${BASE_URL}${url}?${sp.toString()}`;
 }
 
-async function logoutClient() {
-  Object.keys(Cookies.get()).forEach((c) => Cookies.remove(c, { path: '/' }));
+export async function logoutClient() {
   await API.get(AuthPathEnum.LOGOUT);
+  Object.keys(Cookies.get()).forEach((c) => Cookies.remove(c, { path: '/' }));
   window.location.href = PageUrls.HOME;
 }
 
@@ -175,6 +175,10 @@ type GetOptions = {
   cache?: RequestCache;
   revalidate?: number;
   tags?: string[];
+  next?: {
+    revalidate?: number;
+    tags?: string[];
+  };
 };
 
 export const API = {

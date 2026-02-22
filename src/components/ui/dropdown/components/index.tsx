@@ -11,6 +11,7 @@ export default function Dropdown<T>({
   list,
   prependIcon,
   onSelect,
+  dropdownPosition = 'bottom',
   labelValue = 'label',
   customClass = '',
 }: IDropdownProps<T>) {
@@ -43,7 +44,14 @@ export default function Dropdown<T>({
         customClass={customClass}
       />
 
-      {open && <DropdownList value={value} list={list} onSelect={handleSelect} />}
+      {open && (
+        <DropdownList
+          value={value}
+          list={list}
+          onSelect={handleSelect}
+          dropdownPosition={dropdownPosition}
+        />
+      )}
     </div>
   );
 }

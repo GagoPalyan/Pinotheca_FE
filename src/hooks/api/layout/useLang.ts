@@ -1,23 +1,22 @@
 import { LanguagesValueEnum } from '@/types/lang.enums';
 import getLanguage from '@/utils/helpers/getLanguage.utils';
 import cookies from 'js-cookie';
-import { useCallback, useMemo } from 'react';
+import { useRouter } from 'next/navigation';
+import { useCallback } from 'react';
 
 const useLang = () => {
-  const locale = useMemo(() => getLanguage(), []);
+  const locale = getLanguage();
+  const router = useRouter();
 
   const handleLanguageChange = useCallback(
-    async (lang: LanguagesValueEnum) => {
+    (lang: LanguagesValueEnum) => {
       cookies.set('locale', lang);
-      window.location.reload();
+      router.refresh();
     },
     [locale],
   );
 
-  return {
-    locale,
-    handleLanguageChange,
-  };
+  return { locale, handleLanguageChange };
 };
 
 export default useLang;

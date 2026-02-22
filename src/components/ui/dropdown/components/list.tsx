@@ -1,11 +1,22 @@
 import Icon from '@/components/shared/icon';
-import React from 'react';
 import { IDropdownProps } from '../types';
 import { twMerge } from 'tailwind-merge';
 
-function DropdownList<T>({ value: isSelected, list, onSelect }: IDropdownProps<T>) {
+function DropdownList<T>({
+  value: isSelected,
+  list,
+  onSelect,
+  dropdownPosition,
+}: IDropdownProps<T>) {
+  const dropdownClass = dropdownPosition === 'bottom' ? 'mt-1' : 'bottom-full mb-1';
+
   return (
-    <div className="absolute z-30 mt-1 w-full rounded-sm bg-white shadow-lg max-h-40 overflow-y-auto">
+    <div
+      className={twMerge(
+        'absolute z-30 w-full rounded-sm bg-white shadow-lg max-h-40 overflow-y-auto',
+        dropdownClass,
+      )}
+    >
       {list.map(({ label, value, icon }, idx) => (
         <button
           key={idx}

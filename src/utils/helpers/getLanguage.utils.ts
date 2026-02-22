@@ -3,12 +3,9 @@ import Cookies from 'js-cookie';
 
 const getLanguage = () => {
   const cookieStore = Cookies.get('locale');
-  if (
-    cookieStore &&
-    Object.values(LanguagesValueEnum).includes(cookieStore as LanguagesValueEnum)
-  ) {
+  if (cookieStore && Object.values(LanguagesValueEnum).includes(cookieStore as LanguagesValueEnum))
     return cookieStore as LanguagesValueEnum;
-  }
+
   return LanguagesValueEnum.EN;
 };
 

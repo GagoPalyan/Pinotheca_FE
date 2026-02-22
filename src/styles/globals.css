@@ -131,7 +131,7 @@
 
   @media screen and (max-width: 1440px) {
     .w-container {
-      padding-inline: 12px;
+      padding-inline: 16px;
     }
   }
 }

@@ -9,6 +9,7 @@ export type TDropdownItem<T = string | number> = {
 
 export type IDropdownChange<T> = (value: T) => void;
 export interface IDropdownTrigger extends IComponentIcons {
+  dropdownPosition?: 'top' | 'bottom';
   placeholder?: string;
   customClass?: string;
   labelValue?: 'label' | 'value';

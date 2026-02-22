@@ -17,7 +17,7 @@ function DropdownTrigger({
       onClick={() => setOpen(!open)}
     >
       {prependIcon && <Icon name={prependIcon} size={4} color="black" />}
-      {label ?? placeholder}
+      <span className="text-gray-950">{label ?? placeholder}</span>
 
       <Icon
         name="chevron-down"

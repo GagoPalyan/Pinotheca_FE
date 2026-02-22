@@ -7,9 +7,7 @@ export default getRequestConfig(async () => {
 
   const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/translations/${locale}`);
 
-  if (!response.ok) {
-    throw new Error(`Failed to load translations for locale "${locale}"`);
-  }
+  if (!response.ok) throw new Error(`Failed to load translations for locale "${locale}"`);
 
   const messages = await response.json();
 
