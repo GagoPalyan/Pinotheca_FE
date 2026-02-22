@@ -4,7 +4,6 @@ import '../styles/globals.css';
 import { ReactQueryProvider } from '@/providers/ReactQueryProvider';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale } from 'next-intl/server';
-import React from 'react';
 import Header from '@/components/layout/header';
 import { ToastContainer } from 'react-toastify';
 
@@ -21,9 +20,6 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: 'Pinotheca',
   description: 'Online Gallery',
-  icons: {
-    icon: '/favicon.ico',
-  },
 };
 
 export default async function RootLayout({

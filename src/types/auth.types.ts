@@ -6,7 +6,9 @@ export enum AuthPathEnum {
   LOGIN = '/login',
   FORGOT_PASSWORD = '/forgot-password',
   RESET_PASSWORD = '/reset-password',
-  REFRESH = '/refresh',
+  REFRESH = '/auth/refresh',
+  LOGOUT = '/auth/logout',
+  ME = '/auth/me',
 }
 
 export type TRegisterEmailForm = {
@@ -49,3 +51,19 @@ export interface TResetPasswordRequest extends TResetPasswordFrom {
 export type TAccessTokenResponse = {
   accessToken: string;
 };
+
+export type TUserData = {
+  email: string;
+  firstname: string;
+  lastname: string;
+  _count: {
+    likes: number;
+    orders: number;
+  };
+};
+
+export type IHeaderData = {
+  profile: string;
+  likes: number;
+  orders: number;
+} | null;

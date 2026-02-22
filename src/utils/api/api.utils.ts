@@ -1,8 +1,8 @@
 import Cookies from 'js-cookie';
-import { toast } from 'react-toastify';
 import { AuthPathEnum } from '@/types/auth.types';
 import { PageUrls } from '@/types/path.enums';
 import isDev from '@/utils/helpers/isDev.utils';
+import getLanguage from '../helpers/getLanguage.utils';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_API_URL as string;
 const IS_SERVER = typeof window === 'undefined';
@@ -27,7 +27,8 @@ function buildUrl(url: string, params?: Record<string, unknown>) {
   return `${BASE_URL}${url}?${sp.toString()}`;
 }
 
-function logoutClient() {
+export async function logoutClient() {
+  await API.get(AuthPathEnum.LOGOUT);
   Object.keys(Cookies.get()).forEach((c) => Cookies.remove(c, { path: '/' }));
   window.location.href = PageUrls.HOME;
 }
@@ -47,17 +48,19 @@ async function refreshTokenClient() {
     });
 
     return accessToken;
-  } catch (err) {
-    console.error('Refresh token error:', err);
-    return undefined;
+  } catch {
+    return null;
   }
 }
 
 async function getServerAccessToken(): Promise<string | undefined> {
   if (!IS_SERVER) return undefined;
-
   const { cookies } = require('next/headers') as typeof import('next/headers');
-  return (await cookies()).get('accessToken')?.value;
+
+  const cookiesStore = await cookies();
+  const token = cookiesStore.get('accessToken')?.value;
+
+  return token;
 }
 
 type TErrorObject = { status: number; message: string };
@@ -69,14 +72,17 @@ async function serverFetch<T>(
     cache?: RequestCache;
     revalidate?: number;
     tags?: string[];
+    retry?: boolean;
   } = {},
 ): Promise<T> {
   try {
     const token = await getServerAccessToken();
+    const language = await getLanguage();
 
     const res = await fetch(buildUrl(url, options.params), {
       headers: {
         'Content-Type': 'application/json',
+        'accept-language': language,
         ...(token && { Authorization: `Bearer ${token}` }),
       },
       cache: options.cache ?? 'force-cache',
@@ -86,8 +92,12 @@ async function serverFetch<T>(
       },
     });
 
-    const data = await res.json().catch(() => null);
+    if (res.status === 401) {
+      logoutClient();
+      return Promise.reject({ status: 401, message: 'Unauthorized' } as TErrorObject);
+    }
 
+    const data = await res.json().catch(() => null);
     if (!res.ok) {
       return Promise.reject({
         status: res.status,
@@ -165,6 +175,10 @@ type GetOptions = {
   cache?: RequestCache;
   revalidate?: number;
   tags?: string[];
+  next?: {
+    revalidate?: number;
+    tags?: string[];
+  };
 };
 
 export const API = {

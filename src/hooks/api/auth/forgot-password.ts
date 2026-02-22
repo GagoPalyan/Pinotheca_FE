@@ -5,7 +5,7 @@ import {
   type TRegisterEmailForm,
   type TRegisterEmailResponse,
 } from '@/types/auth.types';
-import { API } from '@/utils/helpers/api.utils';
+import { API } from '@/utils/api/api.utils';
 import type { TErrorMessage } from '@/types/global.types';
 
 const forgotPassword = async (data: TRegisterEmailForm): Promise<TRegisterEmailResponse> => {

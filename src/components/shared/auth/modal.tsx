@@ -35,8 +35,8 @@ function AuthSuccessModal({ modalContent, setModalContent, page }: IAuthSuccessM
       onClose={handleClose}
       contentClassname="items-center max-w-[320px]"
     >
-      <span className="h3-medium">{t(`auth.pages.${page}.${status}.title`)}</span>
-      <p className="text-medium text-center">{message}</p>
+      <span className="h3-bold">{t(`auth.pages.${page}.${status}.title`)}</span>
+      <p className="text-normal text-center">{message}</p>
       <Button type="button" customClass="w-fit" handleClick={handleSubmit}>
         {t(`auth.pages.${page}.${status}.button`)}
       </Button>

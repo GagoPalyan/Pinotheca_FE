@@ -1,6 +1,7 @@
 'use client';
 
 import { useLogin } from '@/hooks/api/auth/login';
+import { revalidateHeader } from '@/server/get-header-data';
 import { PageUrls } from '@/types/path.enums';
 import { loginSchema } from '@/utils/validations/auth.schema';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -32,7 +33,11 @@ function LoginPage() {
 
   const onSubmit = async (data: TLoginFrom) => {
     const result = await mutateAsync(data);
-    if (result?.accessToken) return router.replace(PageUrls.HOME);
+    if (result?.accessToken) {
+      await revalidateHeader();
+      router.replace(PageUrls.HOME);
+      router.refresh();
+    }
   };
 
   return (
@@ -47,7 +52,7 @@ function LoginPage() {
             {...register(key)}
             type={key}
             placeholder={t(`auth.fields.${key}.label`)}
-            label={t(`auth.fields.${key}.label`)}
+            label={`auth.fields.${key}.label`}
             disabled={isPending}
             errorMessage={errors[key]?.message}
           />

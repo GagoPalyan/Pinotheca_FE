@@ -6,6 +6,7 @@ import { resetPasswordSchema } from '@/utils/validations/auth.schema';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { PageUrls } from '@/types/path.enums';
 import { useResetPassword } from '@/hooks/api/auth/reset-password';
+import { revalidateHeader } from '@/server/get-header-data';
 import { toast } from 'react-toastify';
 import type { TResetPasswordFrom } from '@/types/auth.types';
 import AuthLayout from '@/components/shared/auth';
@@ -33,7 +34,11 @@ function ResetPasswordPage() {
     if (!token) return toast.error(t('auth.errors.token'));
 
     const result = await mutateAsync({ token, ...data });
-    if (result?.accessToken) return router.replace(PageUrls.HOME);
+    if (result?.accessToken) {
+      await revalidateHeader();
+      router.replace(PageUrls.HOME);
+      router.refresh();
+    }
   };
 
   return (
@@ -48,7 +53,7 @@ function ResetPasswordPage() {
             {...register(name)}
             type={type}
             placeholder={t(`auth.fields.${name}.label`)}
-            label={t(`auth.fields.${name}.label`)}
+            label={`auth.fields.${name}.label`}
             disabled={isPending}
             errorMessage={errors[name]?.message}
           />

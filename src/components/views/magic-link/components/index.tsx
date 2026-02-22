@@ -10,6 +10,7 @@ import { useTranslations } from 'next-intl';
 import Button from '@/components/ui/button/components';
 import { magicLinkFields } from '../constants/fields-list';
 import { useMagicLink } from '@/hooks/api/auth/magic-link';
+import { revalidateHeader } from '@/server/get-header-data';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { PageUrls } from '@/types/path.enums';
@@ -38,7 +39,11 @@ function MagicLinkPage() {
     if (!token) return toast.error(t('auth.errors.token'));
 
     const result = await mutateAsync({ ...data, token });
-    if (result?.accessToken) return router.replace(PageUrls.HOME);
+    if (result?.accessToken) {
+      await revalidateHeader();
+      router.replace(PageUrls.HOME);
+      router.refresh();
+    }
   };
 
   return (
@@ -53,7 +58,7 @@ function MagicLinkPage() {
             {...register(name)}
             type={type}
             placeholder={t(`auth.fields.${name}.label`)}
-            label={t(`auth.fields.${name}.label`)}
+            label={`auth.fields.${name}.label`}
             disabled={isPending}
             errorMessage={errors[name]?.message}
           />
@@ -66,7 +71,7 @@ function MagicLinkPage() {
             <Checkbox
               value={field.value}
               handleChange={() => field.onChange(!field.value)}
-              label={t('auth.fields.terms.label')}
+              label={'auth.fields.terms.label'}
               disabled={isPending}
               errorMessage={errors.terms?.message}
             />
