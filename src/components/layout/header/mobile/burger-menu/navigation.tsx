@@ -8,7 +8,7 @@ import { useMobileMenu } from '../context';
 
 function BurgerMenuNavigation() {
   const t = useTranslations('common.pages');
-  const { info } = useMobileMenu();
+  const { info, close } = useMobileMenu();
   const router = useRouter();
 
   const handleClick = (href: string) => {

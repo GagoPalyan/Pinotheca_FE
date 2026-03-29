@@ -10,3 +10,10 @@ export type TErrorResponse = {
 };
 
 export type TInputTypes = 'text' | 'email' | 'password';
+
+export type TMeta = {
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+};

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter, Roboto } from 'next/font/google';
+import { Inter, Lora, Roboto } from 'next/font/google';
 import '../styles/globals.css';
 import { ReactQueryProvider } from '@/providers/ReactQueryProvider';
 import { NextIntlClientProvider } from 'next-intl';
@@ -17,9 +17,16 @@ const inter = Inter({
   subsets: ['latin'],
 });
 
+export const lora = Lora({
+  variable: '--font-lora',
+  weight: ['400', '700'],
+  subsets: ['latin', 'cyrillic'],
+});
+
 export const metadata: Metadata = {
   title: 'Pinotheca',
   description: 'Online Gallery',
+  icons: { icon: '/favicon/favicon.ico' },
 };
 
 export default async function RootLayout({
@@ -31,10 +38,12 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
-      <body className={`${roboto.variable} ${inter.variable} antialiased w-full min-h-screen`}>
+      <body
+        className={`${roboto.variable} ${inter.variable} ${lora.variable} antialiased w-full min-h-screen`}
+      >
         <NextIntlClientProvider>
           <Header />
-          <main className="bg-brand-25 min-h-[calc(100dvh-75px)] flex items-center justify-center">
+          <main className="min-h-[calc(100dvh-75px)] flex items-center justify-center">
             <ReactQueryProvider>{children}</ReactQueryProvider>
           </main>
         </NextIntlClientProvider>

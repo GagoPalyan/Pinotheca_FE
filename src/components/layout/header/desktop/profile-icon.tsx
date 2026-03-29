@@ -6,7 +6,12 @@ import Link from 'next/link';
 function ProfileIcon({ letter }: { letter?: string }) {
   const t = useTranslations('common.pages');
 
-  if (!letter) return <Icon name="user" color="black" size={6} />;
+  if (!letter)
+    return (
+      <Link href={PageUrls.PROFILE} title={t('profile')}>
+        <Icon name="user" color="black" size={6} />
+      </Link>
+    );
 
   return (
     <Link

@@ -11,8 +11,8 @@ function BurgerMenu() {
   return (
     <div
       className={twMerge(
-        'max-md:flex hidden fixed top-14 right-0 z-800 h-[calc(100dvh-56px)] w-screen',
-        isOpen ? 'opacity-100 visible' : 'opacity-0 invisible',
+        'max-md:block hidden fixed top-14 right-0 z-800 h-[calc(100dvh-56px)] w-screen',
+        isOpen ? 'opacity-100 visible' : 'opacity-0 invisible delay-300',
       )}
       role="dialog"
       aria-modal="true"

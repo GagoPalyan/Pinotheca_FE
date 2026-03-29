@@ -23,7 +23,7 @@ function DesktopHeader({ info }: { info: IHeaderData }) {
       <ul className="flex gap-5 items-center">
         {headerNavPages.map(({ name, href }) => (
           <li key={href}>
-            <Link href={href} className="text-md-600 text-zinc-950">
+            <Link href={href} className="text-gray-950">
               {t(name)}
             </Link>
           </li>

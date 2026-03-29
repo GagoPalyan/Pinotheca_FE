@@ -10,7 +10,6 @@
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",
     "@tanstack/react-query": "^5.81.5",
-    "axios": "^1.10.0",
     "i18next": "^25.3.0",
     "i18next-http-backend": "^3.0.2",
     "js-cookie": "^3.0.5",
