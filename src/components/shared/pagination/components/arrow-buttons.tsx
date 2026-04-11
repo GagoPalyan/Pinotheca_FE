@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl';
 import Icon from '../../icon';
 import PaginationButton from './pagination-button';
 
@@ -8,8 +9,14 @@ interface IProps {
 }
 
 function ArrowButtons({ side, disabled, handleClick }: IProps) {
+  const t = useTranslations('common.pagination');
+
   return (
-    <PaginationButton disabled={disabled} handleClick={handleClick}>
+    <PaginationButton
+      title={t(side === 'Left' ? 'previous' : 'next')}
+      disabled={disabled}
+      handleClick={handleClick}
+    >
       <Icon name={side} size={4} iconClass="group-hover:!bg-primary-400 duration-300" />
     </PaginationButton>
   );

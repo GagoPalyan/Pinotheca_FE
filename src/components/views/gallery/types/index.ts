@@ -1,20 +1,5 @@
 import type { TMeta } from '@/types/global.types';
-
-export interface IPicture {
-  id: string;
-  title: string;
-  imageUrl: string;
-  price: string;
-  width: string;
-  height: string;
-  author: {
-    select: {
-      id: string;
-      firstname: string;
-      lastname: string;
-    };
-  };
-}
+import type { IPicture } from '@/types/picture.types';
 
 export interface IPicturesResponse {
   data: IPicture[];

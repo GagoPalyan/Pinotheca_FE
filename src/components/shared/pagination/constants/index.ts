@@ -1,5 +1,1 @@
-export const limits = [
-  { label: '12', value: 12 },
-  { label: '24', value: 24 },
-  { label: '48', value: 48 },
-];
+export const PAGE_LIMITS = [12, 24, 48];
