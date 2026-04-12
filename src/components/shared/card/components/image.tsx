@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from '@/components/ui/image/components';
 
 interface IProps {
   imageUrl: string;
@@ -7,14 +7,7 @@ interface IProps {
 
 function CardImage({ imageUrl, title }: IProps) {
   return imageUrl ? (
-    <Image
-      priority
-      className="w-full aspect-square rounded-lg"
-      src={imageUrl}
-      alt={title}
-      width={800}
-      height={800}
-    />
+    <Image priority src={imageUrl} alt={title} width={800} height={800} />
   ) : (
     <div className="w-full aspect-square rounded-lg bg-gray-200" />
   );

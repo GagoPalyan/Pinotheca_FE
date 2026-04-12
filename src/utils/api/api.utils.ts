@@ -4,17 +4,12 @@ import { PageUrls } from '@/types/path.enums';
 import isDev from '@/utils/helpers/isDev.utils';
 import getLanguage from '../helpers/getLanguage.utils';
 
+type TParams = { [key: string]: unknown };
+
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_API_URL as string;
 const IS_SERVER = typeof window === 'undefined';
 
-const noAuthRequired = [
-  AuthPathEnum.REGISTER,
-  AuthPathEnum.LOGIN,
-  AuthPathEnum.MAGIC_LINK,
-  AuthPathEnum.FORGOT_PASSWORD,
-  AuthPathEnum.RESET_PASSWORD,
-  AuthPathEnum.REFRESH,
-];
+const authRequiredUrl: string[] = [];
 
 function buildUrl(url: string, params?: Record<string, unknown>) {
   if (!params) return `${BASE_URL}${url}`;
@@ -68,7 +63,7 @@ type TErrorObject = { status: number; message: string };
 async function serverFetch<T>(
   url: string,
   options: {
-    params?: Record<string, unknown>;
+    params?: TParams;
     cache?: RequestCache;
     revalidate?: number;
     tags?: string[];
@@ -120,12 +115,12 @@ async function clientFetch<T>(
   options: {
     method?: string;
     body?: unknown;
-    params?: Record<string, unknown>;
+    params?: TParams;
     retry?: boolean;
   } = {},
 ): Promise<T> {
   try {
-    const requiresAuth = !noAuthRequired.some((p) => url.includes(p));
+    const requiresAuth = authRequiredUrl.some((p) => url.includes(p));
     const token = Cookies.get('accessToken');
 
     if (requiresAuth && !token) {
@@ -171,7 +166,7 @@ async function clientFetch<T>(
 }
 
 type GetOptions = {
-  params?: Record<string, unknown>;
+  params?: { [key: string]: unknown };
   cache?: RequestCache;
   revalidate?: number;
   tags?: string[];

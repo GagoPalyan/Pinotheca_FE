@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 async function Gallery({ searchParams }: { searchParams: Promise<ISearchParams> }) {
   const data = await getPictures(searchParams);
 
-  return <GalleryPage data={data} />;
+  return <GalleryPage initialData={data} />;
 }
 
 export default Gallery;

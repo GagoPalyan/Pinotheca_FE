@@ -10,3 +10,9 @@ export interface ISearchParams {
   page?: string;
   search?: string;
 }
+
+export type TGalleryFilters = {
+  search: string;
+  page: number;
+  limit: number;
+};

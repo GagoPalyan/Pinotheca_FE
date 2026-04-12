@@ -23,7 +23,7 @@ export default function Pagination({ page, totalPages, limit }: TMeta) {
   }
 
   return (
-    <div className="flex items-center justify-center flex-wrap gap-2 px-2">
+    <div className="flex items-center justify-center flex-wrap gap-2 px-2 pt-2">
       <div className="flex items-center justify-center max-md:gap-1 gap-2">
         <ArrowButtons disabled={page <= 1} side="Left" handleClick={decrement} />
 
@@ -51,7 +51,7 @@ export default function Pagination({ page, totalPages, limit }: TMeta) {
 
         <ArrowButtons disabled={page >= totalPages} side="Right" handleClick={increment} />
       </div>
-      
+
       <div className="flex items-center justify-center max-md:gap-1 gap-2">
         <Limit limit={limit} set={setQueryParams} />
         <PageInput page={page} totalPages={totalPages} set={setQueryParams} />
