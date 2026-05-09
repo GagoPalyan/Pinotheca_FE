@@ -43,7 +43,7 @@ export default async function RootLayout({
       >
         <NextIntlClientProvider>
           <Header />
-          <main className="min-h-[calc(100dvh-75px)] flex items-center justify-center">
+          <main className="h-layout flex items-center justify-center">
             <ReactQueryProvider>{children}</ReactQueryProvider>
           </main>
         </NextIntlClientProvider>

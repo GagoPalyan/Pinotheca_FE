@@ -12,7 +12,7 @@ function GalleryPage({ initialData }: { initialData: IPicturesResponse }) {
   const { data: pictures, meta } = data;
 
   return (
-    <div className="relative w-full bg-primary-25 min-h-screen">
+    <div className="relative w-full bg-primary-25 h-layout">
       <Breadcrumbs />
       <Headline />
       <Content isLoading={isLoading} pictures={pictures} />

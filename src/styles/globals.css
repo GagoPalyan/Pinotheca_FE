@@ -129,9 +129,19 @@
     padding-inline: calc(50% - var(--container) / 2);
   }
 
+  .h-layout {
+    min-height: calc(100dvh - 76px);
+  }
+
   @media screen and (max-width: 1440px) {
     .w-container {
       padding-inline: 16px;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .h-layout {
+      min-height: calc(100dvh - 56px);
     }
   }
 }
