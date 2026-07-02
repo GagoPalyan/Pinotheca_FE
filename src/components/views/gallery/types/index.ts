@@ -6,6 +6,11 @@ export interface IPicturesResponse {
   meta: TMeta;
 }
 
+export interface IPictureLikeResponse {
+  liked: boolean;
+  message: string;
+}
+
 export interface ISearchParams {
   page?: string;
   search?: string;

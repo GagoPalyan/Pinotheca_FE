@@ -17,7 +17,7 @@ function ProfileIcon({ letter }: { letter?: string }) {
     <Link
       href={PageUrls.PROFILE}
       title={t('profile')}
-      className="size-8 rounded-full flex items-center justify-center bg-primary-100"
+      className="size-7 rounded-full flex items-center justify-center bg-primary-100"
     >
       <span className="text-primary-400 text-semibold">{letter}</span>
     </Link>

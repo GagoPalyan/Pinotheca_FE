@@ -5,10 +5,8 @@ import type { TGalleryFilters, IPicturesResponse } from '@/components/views/gall
 import { API } from '@/utils/api/api.utils';
 import useFilters from '@/components/views/gallery/hooks/useFilters';
 
-const getPictures = async (params: TGalleryFilters) => {
-  console.log('getPictures');
-  return await API.get<IPicturesResponse>('/pictures', { params });
-};
+const getPictures = async (params: TGalleryFilters) =>
+  await API.get<IPicturesResponse>('/pictures', { params });
 
 const useGetPictures = (initialData: IPicturesResponse) => {
   const { search, page, limit } = useFilters();

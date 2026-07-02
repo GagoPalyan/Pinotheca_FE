@@ -9,7 +9,7 @@ type TParams = { [key: string]: unknown };
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_API_URL as string;
 const IS_SERVER = typeof window === 'undefined';
 
-const authRequiredUrl: string[] = [];
+const authRequiredUrl: string[] = ['/pictures/like/'];
 
 function buildUrl(url: string, params?: Record<string, unknown>) {
   if (!params) return `${BASE_URL}${url}`;
@@ -80,7 +80,7 @@ async function serverFetch<T>(
         'accept-language': language,
         ...(token && { Authorization: `Bearer ${token}` }),
       },
-      cache: options.cache ?? 'force-cache',
+      cache: options.cache ?? 'no-cache',
       next: {
         revalidate: options.revalidate,
         tags: options.tags,

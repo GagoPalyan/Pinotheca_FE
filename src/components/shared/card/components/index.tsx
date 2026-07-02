@@ -2,11 +2,11 @@ import CardActions from './actions';
 import CardImage from './image';
 import type { IPicture } from '@/types/picture.types';
 
-function Card({ id, imageUrl, title, price }: IPicture) {
+function Card({ id, imageUrl, title, price, isLiked }: IPicture) {
   return (
-    <div className="flex flex-col gap-3 p-3 border border-gray-400 rounded-xl">
+    <div className="flex flex-col gap-3 p-3 rounded-xl shadow-sm bg-primary-50">
       <CardImage title={title} imageUrl={imageUrl} />
-      <CardActions price={price} id={id} />
+      <CardActions price={price} id={id} isLiked={isLiked} />
     </div>
   );
 }

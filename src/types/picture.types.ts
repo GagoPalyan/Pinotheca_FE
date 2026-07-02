@@ -12,4 +12,5 @@ export interface IPicture {
       lastname: string;
     };
   };
+  isLiked: boolean;
 }

@@ -18,7 +18,7 @@ function Content({ pictures, isLoading }: IProps) {
     );
 
   return (
-    <section className="px-3 h-max gap-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+    <section className="w-container h-max gap-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
       {pictures.map((picture) => (
         <Card key={picture.id} {...picture} />
       ))}
