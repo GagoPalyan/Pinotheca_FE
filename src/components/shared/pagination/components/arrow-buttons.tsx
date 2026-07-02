@@ -3,7 +3,7 @@ import Icon from '../../icon';
 import PaginationButton from './pagination-button';
 
 interface IProps {
-  side: 'Left' | 'Right';
+  side: 'left' | 'right';
   disabled: boolean;
   handleClick: () => void;
 }
@@ -13,7 +13,7 @@ function ArrowButtons({ side, disabled, handleClick }: IProps) {
 
   return (
     <PaginationButton
-      title={t(side === 'Left' ? 'previous' : 'next')}
+      title={t(side === 'left' ? 'previous' : 'next')}
       disabled={disabled}
       handleClick={handleClick}
     >
@@ -23,3 +23,4 @@ function ArrowButtons({ side, disabled, handleClick }: IProps) {
 }
 
 export default ArrowButtons;
+ 
