@@ -4,6 +4,7 @@ import useLikePicture from '@/hooks/api/gallery/useLikePicture';
 import Icon from '../../icon';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
+import { TErrorObject } from '@/types';
 
 interface IProps {
   price: string;
@@ -18,9 +19,13 @@ function CardActions({ price, id, isLiked }: IProps) {
   const { mutateAsync: handleLikePicture } = useLikePicture();
 
   const handleLike = async () => {
-    const { liked, message } = await handleLikePicture(id);
-    toast.success(message);
-    setLiked(liked);
+    try {
+      const { liked, message } = await handleLikePicture(id);
+      toast.success(message);
+      setLiked(liked);
+    } catch (error) {
+      toast.error((error as TErrorObject).message);
+    }
   };
 
   return (

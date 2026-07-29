@@ -3,13 +3,12 @@ import { AuthPathEnum } from '@/types/auth.types';
 import { PageUrls } from '@/types/path.enums';
 import isDev from '@/utils/helpers/isDev.utils';
 import getLanguage from '../helpers/getLanguage.utils';
-
-type TParams = { [key: string]: unknown };
+import { GetOptions, TErrorObject, TParams } from '@/types';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_API_URL as string;
 const IS_SERVER = typeof window === 'undefined';
 
-const authRequiredUrl: string[] = ['/pictures/like/'];
+const authRequiredUrl: string[] = [];
 
 function buildUrl(url: string, params?: Record<string, unknown>) {
   if (!params) return `${BASE_URL}${url}`;
@@ -57,8 +56,6 @@ async function getServerAccessToken(): Promise<string | undefined> {
 
   return token;
 }
-
-type TErrorObject = { status: number; message: string };
 
 async function serverFetch<T>(
   url: string,
@@ -133,7 +130,7 @@ async function clientFetch<T>(
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        ...(requiresAuth && token && { Authorization: `Bearer ${token}` }),
+        ...(token && { Authorization: `Bearer ${token}` }),
       },
       body: options.body ? JSON.stringify(options.body) : undefined,
     });
@@ -164,17 +161,6 @@ async function clientFetch<T>(
     } as TErrorObject);
   }
 }
-
-type GetOptions = {
-  params?: { [key: string]: unknown };
-  cache?: RequestCache;
-  revalidate?: number;
-  tags?: string[];
-  next?: {
-    revalidate?: number;
-    tags?: string[];
-  };
-};
 
 export const API = {
   get<T>(url: string, options?: GetOptions) {
