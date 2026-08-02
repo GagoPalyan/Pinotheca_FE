@@ -1,9 +1,10 @@
-import { LanguagesValueEnum } from '@/types/lang.enums';
+import { LanguagesValueEnum } from '@/types/lang.types';
 import Cookies from 'js-cookie';
 
 const getLanguage = () => {
   const cookieStore = Cookies.get('locale');
-  if (cookieStore && Object.values(LanguagesValueEnum).includes(cookieStore as LanguagesValueEnum))
+  const languagesList = new Set<LanguagesValueEnum>(Object.values(LanguagesValueEnum));
+  if (cookieStore && languagesList.has(cookieStore as LanguagesValueEnum))
     return cookieStore as LanguagesValueEnum;
 
   return LanguagesValueEnum.EN;

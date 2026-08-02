@@ -5,6 +5,8 @@ import MobileHeader from './mobile';
 async function Header() {
   const headerData = await getHeaderData();
 
+  console.log(headerData);
+
   return (
     <header>
       <DesktopHeader info={headerData} />

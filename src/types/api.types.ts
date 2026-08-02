@@ -13,6 +13,4 @@ type GetOptions = {
   };
 };
 
-
-
 export type { GetOptions, TErrorObject, TParams };

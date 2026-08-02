@@ -1,4 +1,4 @@
-export interface IPicture {
+interface IPicture {
   id: string;
   title: string;
   imageUrl: string;
@@ -14,3 +14,5 @@ export interface IPicture {
   };
   isLiked: boolean;
 }
+
+export type { IPicture };

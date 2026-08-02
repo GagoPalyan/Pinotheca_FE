@@ -1,5 +1,5 @@
 import Icon from '@/components/shared/icon';
-import { PageUrls } from '@/types/path.enums';
+import { PageUrls } from '@/types/path.types';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 

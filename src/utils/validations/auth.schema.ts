@@ -1,12 +1,12 @@
 import * as Yup from 'yup';
 
-export const emailSchema = Yup.object().shape({
+const emailSchema = Yup.object().shape({
   email: Yup.string()
     .email('auth.fields.email.errors.invalid')
     .required('auth.fields.email.errors.required'),
 });
 
-export const magicLinkSchema = Yup.object().shape({
+const magicLinkSchema = Yup.object().shape({
   firstname: Yup.string()
     .min(2, 'auth.fields.firstname.errors.min')
     .max(50, 'auth.fields.firstname.errors.max')
@@ -31,7 +31,7 @@ export const magicLinkSchema = Yup.object().shape({
     .required('auth.fields.terms.errors.required'),
 });
 
-export const loginSchema = Yup.object().shape({
+const loginSchema = Yup.object().shape({
   email: Yup.string()
     .email('auth.fields.email.errors.invalid')
     .required('auth.fields.email.errors.required'),
@@ -41,7 +41,7 @@ export const loginSchema = Yup.object().shape({
     .required('auth.fields.password.errors.required'),
 });
 
-export const resetPasswordSchema = Yup.object().shape({
+const resetPasswordSchema = Yup.object().shape({
   password: Yup.string()
     .min(8, 'auth.fields.password.errors.min')
     .max(32, 'auth.fields.password.errors.max')
@@ -54,3 +54,5 @@ export const resetPasswordSchema = Yup.object().shape({
     .oneOf([Yup.ref('password')], 'auth.fields.password.errors.confirm_required')
     .required('auth.fields.password.errors.confirm_required'),
 });
+
+export { emailSchema, loginSchema, magicLinkSchema, resetPasswordSchema };

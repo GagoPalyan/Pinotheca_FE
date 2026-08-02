@@ -1,8 +1,7 @@
 'use client';
 
 import { useLogin } from '@/hooks/api/auth/login';
-import { revalidateHeader } from '@/server/get-header-data';
-import { PageUrls } from '@/types/path.enums';
+import { PageUrls } from '@/types/path.types';
 import { loginSchema } from '@/utils/validations/auth.schema';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useRouter } from 'next/navigation';
@@ -34,7 +33,6 @@ function LoginPage() {
   const onSubmit = async (data: TLoginFrom) => {
     const result = await mutateAsync(data);
     if (result?.accessToken) {
-      await revalidateHeader();
       router.replace(PageUrls.HOME);
       router.refresh();
     }

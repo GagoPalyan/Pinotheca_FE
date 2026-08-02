@@ -1,4 +1,4 @@
-export enum PageUrls {
+enum PageUrls {
   HOME = '/',
   REGISTER = '/register',
   MAGIC_LINK = '/magic-link',
@@ -13,3 +13,5 @@ export enum PageUrls {
   GALLERY = '/gallery',
   ARTISTS = '/artists',
 }
+
+export { PageUrls };

@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
 import { Inter, Lora, Roboto } from 'next/font/google';
-import '../styles/globals.css';
 import { ReactQueryProvider } from '@/providers/ReactQueryProvider';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale } from 'next-intl/server';
 import Header from '@/components/layout/header';
 import { ToastContainer } from 'react-toastify';
+import '../styles/globals.css';
 
 const roboto = Roboto({
   variable: '--font-roboto',
@@ -17,7 +17,7 @@ const inter = Inter({
   subsets: ['latin'],
 });
 
-export const lora = Lora({
+const lora = Lora({
   variable: '--font-lora',
   weight: ['400', '700'],
   subsets: ['latin', 'cyrillic'],
@@ -26,7 +26,31 @@ export const lora = Lora({
 export const metadata: Metadata = {
   title: 'Pinotheca',
   description: 'Online Gallery',
-  icons: { icon: '/favicon/favicon.ico' },
+  icons: {
+    icon: [
+      {
+        url: '/favicon/favicon.svg',
+        type: 'image/svg+xml',
+      },
+      {
+        url: '/favicon/favicon.ico',
+        sizes: 'any',
+      },
+      {
+        url: '/favicon/favicon-96x96.png',
+        sizes: '96x96',
+        type: 'image/png',
+      },
+    ],
+    apple: [
+      {
+        url: '/favicon/apple-touch-icon.png',
+        sizes: '180x180',
+        type: 'image/png',
+      },
+    ],
+  },
+  manifest: '/favicon/site.webmanifest',
 };
 
 export default async function RootLayout({

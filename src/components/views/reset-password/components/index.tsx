@@ -4,9 +4,8 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { resetPasswordSchema } from '@/utils/validations/auth.schema';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { PageUrls } from '@/types/path.enums';
+import { PageUrls } from '@/types/path.types';
 import { useResetPassword } from '@/hooks/api/auth/reset-password';
-import { revalidateHeader } from '@/server/get-header-data';
 import { toast } from 'react-toastify';
 import type { TResetPasswordFrom } from '@/types/auth.types';
 import AuthLayout from '@/components/shared/auth';
@@ -35,7 +34,6 @@ function ResetPasswordPage() {
 
     const result = await mutateAsync({ token, ...data });
     if (result?.accessToken) {
-      await revalidateHeader();
       router.replace(PageUrls.HOME);
       router.refresh();
     }

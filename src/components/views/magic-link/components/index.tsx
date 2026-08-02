@@ -10,10 +10,9 @@ import { useTranslations } from 'next-intl';
 import Button from '@/components/ui/button/components';
 import { magicLinkFields } from '../constants/fields-list';
 import { useMagicLink } from '@/hooks/api/auth/magic-link';
-import { revalidateHeader } from '@/server/get-header-data';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { toast } from 'react-toastify';
-import { PageUrls } from '@/types/path.enums';
+import { PageUrls } from '@/types/path.types';
 import Checkbox from '@/components/ui/checkbox';
 
 function MagicLinkPage() {
@@ -40,7 +39,6 @@ function MagicLinkPage() {
 
     const result = await mutateAsync({ ...data, token });
     if (result?.accessToken) {
-      await revalidateHeader();
       router.replace(PageUrls.HOME);
       router.refresh();
     }

@@ -157,5 +157,5 @@
 
 ::-webkit-scrollbar-thumb {
   background-color: var(--color-primary-200);
-  border-radius: 999px;
+  border-radius: 6px;
 }

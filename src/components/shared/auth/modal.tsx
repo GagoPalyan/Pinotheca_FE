@@ -2,7 +2,7 @@ import Modal from '@/components/shared/modal';
 import { useTranslations } from 'next-intl';
 import Button from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
-import { PageUrls } from '@/types/path.enums';
+import { PageUrls } from '@/types/path.types';
 import { TRegisterEmailResponse } from '@/types/auth.types';
 import { Dispatch, SetStateAction } from 'react';
 

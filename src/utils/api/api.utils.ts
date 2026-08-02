@@ -1,14 +1,10 @@
 import Cookies from 'js-cookie';
 import { AuthPathEnum } from '@/types/auth.types';
-import { PageUrls } from '@/types/path.enums';
+import { PageUrls } from '@/types/path.types';
 import isDev from '@/utils/helpers/isDev.utils';
 import getLanguage from '../helpers/getLanguage.utils';
 import { GetOptions, TErrorObject, TParams } from '@/types';
-
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_API_URL as string;
-const IS_SERVER = typeof window === 'undefined';
-
-const authRequiredUrl: string[] = [];
+import { BASE_URL, AUTH_REQUIRED_URL, IS_SERVER } from './constants';
 
 function buildUrl(url: string, params?: Record<string, unknown>) {
   if (!params) return `${BASE_URL}${url}`;
@@ -21,7 +17,7 @@ function buildUrl(url: string, params?: Record<string, unknown>) {
   return `${BASE_URL}${url}?${sp.toString()}`;
 }
 
-export async function logoutClient() {
+async function logoutClient() {
   await API.get(AuthPathEnum.LOGOUT);
   Object.keys(Cookies.get()).forEach((c) => Cookies.remove(c, { path: '/' }));
   window.location.href = PageUrls.HOME;
@@ -29,9 +25,7 @@ export async function logoutClient() {
 
 async function refreshTokenClient() {
   try {
-    const res = await fetch(`${BASE_URL}${AuthPathEnum.REFRESH}`, {
-      credentials: 'include',
-    });
+    const res = await fetch(`${BASE_URL}${AuthPathEnum.REFRESH}`, { credentials: 'include' });
 
     if (!res.ok) throw new Error('Refresh failed');
 
@@ -117,7 +111,7 @@ async function clientFetch<T>(
   } = {},
 ): Promise<T> {
   try {
-    const requiresAuth = authRequiredUrl.some((p) => url.includes(p));
+    const requiresAuth = AUTH_REQUIRED_URL.has(url);
     const token = Cookies.get('accessToken');
 
     if (requiresAuth && !token) {
@@ -162,7 +156,7 @@ async function clientFetch<T>(
   }
 }
 
-export const API = {
+const API = {
   get<T>(url: string, options?: GetOptions) {
     return IS_SERVER
       ? serverFetch<T>(url, options)
@@ -185,3 +179,5 @@ export const API = {
     return clientFetch<T>(url, { method: 'DELETE' });
   },
 };
+
+export { logoutClient, API };

@@ -1,6 +1,6 @@
 'use client';
 
-import type { IHeaderData } from '@/types/auth.types';
+import type { IHeaderData } from '@/types';
 import { createContext, useContext, useState, ReactNode } from 'react';
 
 interface TMobileMenuContext {

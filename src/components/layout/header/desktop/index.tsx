@@ -2,12 +2,12 @@
 
 import Logo from '@/components/shared/logo';
 import { headerDashboardPages, headerNavPages } from '@/constants/header';
-import type { IHeaderData } from '@/types/auth.types';
 import { useTranslations } from 'next-intl';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import HeaderUserPages from './user-pages';
 import ProfileIcon from './profile-icon';
+import { IHeaderData } from '@/types';
 
 const LanguageSwitcher = dynamic(() => import('@/components/shared/language-switcher'), {
   ssr: false,

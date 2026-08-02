@@ -1,6 +1,6 @@
 import { TInputTypes } from './global.types';
 
-export enum AuthPathEnum {
+enum AuthPathEnum {
   REGISTER = '/register',
   MAGIC_LINK = '/magic-link',
   LOGIN = '/login',
@@ -11,59 +11,66 @@ export enum AuthPathEnum {
   ME = '/auth/me',
 }
 
-export type TRegisterEmailForm = {
+type TRegisterEmailForm = {
   email: string;
 };
-export type TRegisterEmailResponse = {
+type TRegisterEmailResponse = {
   message: string;
   status: number;
 };
 
-export type TRegisterFormFields = {
+type TRegisterFormFields = {
   name: keyof TRegisterMagicLinkFrom;
   label: string;
   type: TInputTypes;
 };
-export type TRegisterMagicLinkFrom = {
+
+type TRegisterMagicLinkFrom = {
   firstname: string;
   lastname: string;
   password: string;
   confirmPassword: string;
   terms: boolean;
 };
-export interface TRegisterMagicLinkRequest extends TRegisterMagicLinkFrom {
+interface TRegisterMagicLinkRequest extends TRegisterMagicLinkFrom {
   token: string;
 }
 
-export type TLoginFrom = {
+type TLoginFrom = {
   email: string;
   password: string;
 };
 
-export type TResetPasswordFrom = {
+type TResetPasswordFrom = {
   password: string;
   confirmPassword: string;
 };
-export interface TResetPasswordRequest extends TResetPasswordFrom {
+interface TResetPasswordRequest extends TResetPasswordFrom {
   token: string;
 }
 
-export type TAccessTokenResponse = {
+type TAccessTokenResponse = {
   accessToken: string;
 };
 
-export type TUserData = {
+type TUserData = {
   email: string;
   firstname: string;
   lastname: string;
-  _count: {
-    likes: number;
-    orders: number;
-  };
-};
-
-export type IHeaderData = {
-  profile: string;
   likes: number;
   orders: number;
-} | null;
+};
+
+export {
+  AuthPathEnum,
+  type TRegisterEmailForm,
+  type TRegisterEmailResponse,
+  type TRegisterFormFields,
+  type TRegisterMagicLinkRequest,
+  type TRegisterMagicLinkFrom,
+  type TLoginFrom,
+  type TResetPasswordFrom,
+  type TResetPasswordRequest,
+  type TAccessTokenResponse,
+  type TUserData,
+};

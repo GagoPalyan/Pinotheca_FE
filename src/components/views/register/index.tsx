@@ -11,7 +11,7 @@ import { useTranslations } from 'next-intl';
 import PageSwitcher from '@/components/shared/auth/page-switcher';
 import Button from '@/components/ui/button/components';
 import { useState } from 'react';
-import { PageUrls } from '@/types/path.enums';
+import { PageUrls } from '@/types/path.types';
 import AuthSuccessModal from '../../shared/auth/modal';
 
 function RegisterPage() {
@@ -43,7 +43,7 @@ function RegisterPage() {
             {...register('email')}
             type={'email'}
             placeholder={t('auth.fields.email.label')}
-            label='auth.fields.email.label'
+            label="auth.fields.email.label"
             disabled={isPending}
             errorMessage={errors.email?.message}
           />

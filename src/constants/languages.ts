@@ -1,4 +1,4 @@
-import { LanguagesLabelEnum, LanguagesValueEnum } from '@/types/lang.enums';
+import { LanguagesLabelEnum, LanguagesValueEnum } from '@/types/lang.types';
 
 export const i18nLanguages = [
   {

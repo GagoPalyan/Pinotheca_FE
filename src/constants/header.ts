@@ -1,4 +1,4 @@
-import { PageUrls } from '@/types/path.enums';
+import { PageUrls } from '@/types/path.types';
 
 export const headerNavPages = [
   {

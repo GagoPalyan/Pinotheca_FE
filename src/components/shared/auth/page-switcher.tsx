@@ -1,5 +1,5 @@
 import Link from '@/components/ui/link/components';
-import { PageUrls } from '@/types/path.enums';
+import { PageUrls } from '@/types/path.types';
 import { useTranslations } from 'next-intl';
 
 interface IProps {
