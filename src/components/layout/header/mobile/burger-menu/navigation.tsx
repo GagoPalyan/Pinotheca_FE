@@ -8,7 +8,7 @@ import { useMobileMenu } from '../context';
 
 function BurgerMenuNavigation() {
   const t = useTranslations('common.pages');
-  const { info, close } = useMobileMenu();
+  const { data, close } = useMobileMenu();
   const router = useRouter();
 
   const handleClick = (href: string) => {
@@ -26,8 +26,8 @@ function BurgerMenuNavigation() {
           handleClick={() => handleClick(href)}
         >
           {t(name)}
-          {keyName && Boolean(info?.[keyName]) && (
-            <span className="bg-primary-300 text-white size-6 rounded-full">{info?.[keyName]}</span>
+          {keyName && Boolean(data[keyName]) && (
+            <span className="bg-primary-300 text-white size-6 rounded-full">{data[keyName]}</span>
           )}
         </Button>
       ))}

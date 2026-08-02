@@ -1,11 +1,13 @@
 'use client';
 
-import type { IHeaderData } from '@/types';
+import { useUserInfo } from '@/hooks/socket/useHeaderWs';
+import type { IHeaderData, IHeaderInfo } from '@/types';
 import { createContext, useContext, useState, ReactNode } from 'react';
 
 interface TMobileMenuContext {
   isOpen: boolean;
-  info: IHeaderData;
+  userName: string | undefined;
+  data: IHeaderInfo;
   open: () => void;
   close: () => void;
   toggle: () => void;
@@ -15,13 +17,16 @@ const MobileMenuContext = createContext<TMobileMenuContext | null>(null);
 
 export function MobileMenuProvider({ info, children }: { info: IHeaderData; children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
+  const { headerInfo } = useUserInfo(info);
 
   const open = () => setIsOpen(true);
   const close = () => setIsOpen(false);
   const toggle = () => setIsOpen((prev) => !prev);
 
   return (
-    <MobileMenuContext.Provider value={{ isOpen, info, open, close, toggle }}>
+    <MobileMenuContext.Provider
+      value={{ isOpen, userName: info?.profile, data: headerInfo, open, close, toggle }}
+    >
       {children}
     </MobileMenuContext.Provider>
   );

@@ -8,6 +8,7 @@ import Link from 'next/link';
 import HeaderUserPages from './user-pages';
 import ProfileIcon from './profile-icon';
 import { IHeaderData } from '@/types';
+import { useUserInfo } from '@/hooks/socket/useHeaderWs';
 
 const LanguageSwitcher = dynamic(() => import('@/components/shared/language-switcher'), {
   ssr: false,
@@ -15,6 +16,7 @@ const LanguageSwitcher = dynamic(() => import('@/components/shared/language-swit
 
 function DesktopHeader({ info }: { info: IHeaderData }) {
   const t = useTranslations('common.pages');
+  const { headerInfo } = useUserInfo();
 
   return (
     <nav className="w-container py-6 flex justify-between items-center bg-neutral-50 max-md:hidden">
@@ -33,7 +35,7 @@ function DesktopHeader({ info }: { info: IHeaderData }) {
       <div className="flex items-center gap-6">
         <LanguageSwitcher />
         {headerDashboardPages.map(({ keyName, name, ...props }) => (
-          <HeaderUserPages key={name} {...props} name={t(name)} count={info?.[keyName] ?? 0} />
+          <HeaderUserPages key={name} {...props} name={t(name)} count={headerInfo[keyName]} />
         ))}
         <ProfileIcon letter={info?.profile} />
       </div>
