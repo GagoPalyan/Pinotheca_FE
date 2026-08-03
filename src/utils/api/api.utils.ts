@@ -127,14 +127,17 @@ async function clientFetch<T>(
         ...(token && { Authorization: `Bearer ${token}` }),
       },
       body: options.body ? JSON.stringify(options.body) : undefined,
+      cache: 'no-cache',
     });
 
-    if (res.status === 401 && !options.retry && requiresAuth) {
+    if (res.status === 401 && !options.retry) {
       const refreshed = await refreshTokenClient();
       if (refreshed) return clientFetch<T>(url, { ...options, retry: true });
 
-      logoutClient();
-      return Promise.reject({ status: 401, message: 'Unauthorized' } as TErrorObject);
+      if (requiresAuth) {
+        logoutClient();
+        return Promise.reject({ status: 401, message: 'Unauthorized' } as TErrorObject);
+      }
     }
 
     const data = await res.json().catch(() => null);

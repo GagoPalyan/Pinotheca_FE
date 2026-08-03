@@ -6,13 +6,12 @@ interface IPicture {
   width: string;
   height: string;
   author: {
-    select: {
-      id: string;
-      firstname: string;
-      lastname: string;
-    };
+    id: string;
+    firstname: string;
+    lastname: string;
   };
   isLiked: boolean;
+  isInCart: boolean;
 }
 
 export type { IPicture };

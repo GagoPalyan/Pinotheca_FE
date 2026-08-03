@@ -5,22 +5,20 @@ import { io } from 'socket.io-client';
 import { IHeaderData, IHeaderInfo } from '@/types';
 import Cookies from 'js-cookie';
 import { socketEvent, socketUrl } from '@/types/socket.types';
-
-const token = Cookies.get('accessToken');
-const SOCKET_URL = process.env.NEXT_PUBLIC_BASE_API_URL;
+import { BASE_URL } from '@/utils/api';
 
 export function useUserInfo(initialData?: IHeaderData) {
   const [headerInfo, setHeaderInfo] = useState<IHeaderInfo>({
     likes: initialData?.likes ?? 0,
-    orders: initialData?.orders ?? 0,
+    carts: initialData?.carts ?? 0,
   });
+
+  const token = Cookies.get('accessToken');
 
   useEffect(() => {
     if (!token) return;
 
-    const url = `${SOCKET_URL}${socketUrl.USER_INFO}`;
-
-    console.log('Connecting to socket:', url);
+    const url = `${BASE_URL}${socketUrl.USER_INFO}`;
 
     const socket = io(url, {
       transports: ['websocket'],
@@ -41,7 +39,7 @@ export function useUserInfo(initialData?: IHeaderData) {
     socket.on(socketEvent.carts, (cartCount: number) => {
       setHeaderInfo((prev) => ({
         ...prev,
-        orders: cartCount,
+        carts: cartCount,
       }));
     });
 

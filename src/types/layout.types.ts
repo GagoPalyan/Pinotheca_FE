@@ -1,6 +1,6 @@
 type IHeaderInfo = {
   likes: number;
-  orders: number;
+  carts: number;
 };
 
 type IHeaderData =

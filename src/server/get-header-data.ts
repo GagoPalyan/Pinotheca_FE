@@ -15,12 +15,12 @@ const getHeaderData = async () => {
 
     if (!data) return null;
 
-    const { firstname, likes, orders } = data;
+    const { firstname, likes, carts } = data;
 
     const headerData: IHeaderData = {
       profile: firstname[0],
       likes,
-      orders,
+      carts,
     };
 
     return headerData;

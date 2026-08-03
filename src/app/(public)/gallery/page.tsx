@@ -1,5 +1,7 @@
-import GalleryPage, { type ISearchParams, getPictures } from '@/components/views/gallery';
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
+import Loading from '@/components/shared/loading';
+import GalleryPage, { type ISearchParams, getPictures } from '@/components/views/gallery';
 
 export const metadata: Metadata = {
   title: 'Gallery',
@@ -7,9 +9,14 @@ export const metadata: Metadata = {
 };
 
 async function Gallery({ searchParams }: { searchParams: Promise<ISearchParams> }) {
-  const data = await getPictures(searchParams);
+  const params = await searchParams;
+  const data = await getPictures(params);
 
-  return <GalleryPage initialData={data} />;
+  return (
+    <Suspense fallback={<Loading />}>
+      <GalleryPage data={data} />;
+    </Suspense>
+  );
 }
 
 export default Gallery;

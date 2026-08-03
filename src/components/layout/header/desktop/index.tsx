@@ -16,7 +16,7 @@ const LanguageSwitcher = dynamic(() => import('@/components/shared/language-swit
 
 function DesktopHeader({ info }: { info: IHeaderData }) {
   const t = useTranslations('common.pages');
-  const { headerInfo } = useUserInfo();
+  const { headerInfo } = useUserInfo(info);
 
   return (
     <nav className="w-container py-6 flex justify-between items-center bg-neutral-50 max-md:hidden">

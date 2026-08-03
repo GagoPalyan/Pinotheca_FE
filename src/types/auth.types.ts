@@ -58,7 +58,7 @@ type TUserData = {
   firstname: string;
   lastname: string;
   likes: number;
-  orders: number;
+  carts: number;
 };
 
 export {

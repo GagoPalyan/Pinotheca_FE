@@ -24,7 +24,7 @@ export const headerDashboardPages = [
   },
   {
     name: 'cart',
-    keyName: 'orders',
+    keyName: 'carts',
     icon: 'cart',
     href: PageUrls.CART,
   },

@@ -1,23 +1,37 @@
 import type { TMeta } from '@/types/global.types';
 import type { IPicture } from '@/types/picture.types';
 
-export interface IPicturesResponse {
+interface IPicturesResponse {
   data: IPicture[];
   meta: TMeta;
 }
 
-export interface IPictureLikeResponse {
+interface IPictureLikeResponse {
   liked: boolean;
   message: string;
 }
 
-export interface ISearchParams {
-  page?: string;
-  search?: string;
+interface IPictureCartResponse {
+  isInCart: boolean;
+  message: string;
 }
 
-export type TGalleryFilters = {
+interface ISearchParams {
+  page?: string;
+  search?: string;
+  limit?: string;
+}
+
+type TGalleryFilters = {
   search: string;
   page: number;
   limit: number;
+};
+
+export type {
+  IPicturesResponse,
+  IPictureLikeResponse,
+  IPictureCartResponse,
+  ISearchParams,
+  TGalleryFilters,
 };

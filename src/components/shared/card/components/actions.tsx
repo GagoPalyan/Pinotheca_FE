@@ -1,28 +1,38 @@
 'use client';
 
-import useLikePicture from '@/hooks/api/gallery/useLikePicture';
 import Icon from '../../icon';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { TErrorObject } from '@/types';
+import { useCartPicture, useLikePicture } from '@/hooks/api/gallery';
 
 interface IProps {
   price: string;
   id: string;
   isLiked: boolean;
+  isInCart: boolean;
 }
 
-function CardActions({ price, id, isLiked }: IProps) {
+function CardActions({ price, id, isLiked, isInCart }: IProps) {
   const [liked, setLiked] = useState<boolean>(isLiked);
-  const [inCart, setInCart] = useState<boolean>(true);
+  const [inCart, setInCart] = useState<boolean>(isInCart);
 
   const { mutateAsync: handleLikePicture } = useLikePicture();
+  const { mutateAsync: handleAddToCartPicture } = useCartPicture();
 
   const handleLike = async () => {
     try {
-      const { liked, message } = await handleLikePicture(id);
-      toast.success(message);
+      const { liked } = await handleLikePicture(id);
       setLiked(liked);
+    } catch (error) {
+      toast.error((error as TErrorObject).message);
+    }
+  };
+
+  const handleAddToCart = async () => {
+    try {
+      const { isInCart } = await handleAddToCartPicture(id);
+      setInCart(isInCart);
     } catch (error) {
       toast.error((error as TErrorObject).message);
     }
@@ -37,7 +47,11 @@ function CardActions({ price, id, isLiked }: IProps) {
           color="var(--color-primary-600)"
           handleClick={handleLike}
         />
-        <Icon name={inCart ? 'cart-filled' : 'cart'} color="var(--color-primary-600)" />
+        <Icon
+          name={inCart ? 'cart-filled' : 'cart'}
+          color="var(--color-primary-600)"
+          handleClick={handleAddToCart}
+        />
       </div>
     </div>
   );
