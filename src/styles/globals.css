@@ -83,6 +83,13 @@
     line-height: 1.42;
   }
 
+  .big-semibold {
+    font-size: clamp(1.25rem, 1rem + 0.2vw, 1.5rem);
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
   .text-normal {
     font-size: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
     font-style: normal;

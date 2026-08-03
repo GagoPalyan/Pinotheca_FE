@@ -1,5 +1,5 @@
 import type { IIcon } from '@/types/shared.types';
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 function Icon({ name = '', size = 6, color = '#8C8989', iconClass = '', handleClick }: IIcon) {

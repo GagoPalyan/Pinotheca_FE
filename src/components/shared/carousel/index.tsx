@@ -1,15 +1,11 @@
 'use client';
 
 import { carouselList } from '@/constants/carousel';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 function Carousel() {
   const [activeCarousel, setActiveCarousel] = useState(0);
-
-  const changeCarouselTo = useCallback((index: number) => {
-    setActiveCarousel(index);
-  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -18,6 +14,7 @@ function Carousel() {
         return prev >= carouselList.length ? 0 : prev;
       });
     }, 3000);
+
     return () => clearInterval(interval);
   }, [activeCarousel]);
 
@@ -27,22 +24,20 @@ function Carousel() {
         className="w-full h-full flex items-center justify-start transition-all duration-300"
         style={{ transform: `translateX(-${activeCarousel}00%)` }}
       >
-        {carouselList.map((item) => {
-          return <div key={item.id} className={twMerge('min-w-full h-full', item.color)}></div>;
-        })}
+        {carouselList.map((item) => (
+          <div key={item.id} className={twMerge('min-w-full h-full', item.color)}></div>
+        ))}
       </div>
       <div className="w-full flex gap-2 items-center justify-center absolute bottom-2">
-        {carouselList.map((_, index) => {
-          return (
-            <input
-              name="carousel"
-              key={index}
-              value={index}
-              type="radio"
-              onClick={() => changeCarouselTo(index)}
-            />
-          );
-        })}
+        {carouselList.map((_, index) => (
+          <input
+            name="carousel"
+            key={index}
+            value={index}
+            type="radio"
+            onClick={() => setActiveCarousel(index)}
+          />
+        ))}
       </div>
     </section>
   );
