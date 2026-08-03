@@ -64,7 +64,7 @@ export const burgerMenuPagesList = [
   },
   {
     name: 'cart',
-    keyName: 'orders',
+    keyName: 'carts',
     href: PageUrls.CART,
   },
 ] as const;
