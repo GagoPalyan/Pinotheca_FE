@@ -13,6 +13,7 @@ function Search() {
 
   const setQueryParams = useQueryParams();
   const searchCallback = (search: string) => setQueryParams({ search });
+
   useDebounce(search, 300, searchCallback);
 
   return (
@@ -25,9 +26,11 @@ function Search() {
         placeholder="Search"
         value={search}
         className="w-full base-normal bg-gray-100 text-gray-700 outline-none"
-        onChange={({ target: t }) => setSearch(t.value)}
+        onChange={({ target }) => setSearch(target.value)}
       />
-      {search && <Icon name="x" size={5} iconClass="cursor-pointer" handleClick={() => setSearch('')} />}
+      {search && (
+        <Icon name="x" size={5} iconClass="cursor-pointer" handleClick={() => setSearch('')} />
+      )}
     </div>
   );
 }
