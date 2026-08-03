@@ -6,6 +6,7 @@ import { getLocale } from 'next-intl/server';
 import Header from '@/components/layout/header';
 import { ToastContainer } from 'react-toastify';
 import '../styles/globals.css';
+import getHeaderData from '@/server/get-header-data';
 
 const roboto = Roboto({
   variable: '--font-roboto',
@@ -59,6 +60,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const locale = await getLocale();
+  const headerData = await getHeaderData();
 
   return (
     <html lang={locale}>
@@ -66,7 +68,7 @@ export default async function RootLayout({
         className={`${roboto.variable} ${inter.variable} ${lora.variable} antialiased w-full min-h-screen`}
       >
         <NextIntlClientProvider>
-          <Header />
+          <Header info={headerData} />
           <main className="h-layout flex items-center justify-center">
             <ReactQueryProvider>{children}</ReactQueryProvider>
           </main>

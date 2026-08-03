@@ -21,7 +21,8 @@ function Limit({ limit, set }: IProps) {
 
   return (
     <Dropdown
-      customClass="h-8 px-2 bg-white rounded-sm border border-gray-400"
+      customClass="h-8 max-sm:h-10 px-2 bg-white rounded-sm border border-gray-400"
+      dropdownPosition="top"
       labelValue="label"
       list={pageLimits}
       value={limit}

@@ -1,14 +1,21 @@
-import getHeaderData from '@/server/get-header-data';
+'use client';
+
+import { IHeaderData } from '@/types';
 import DesktopHeader from './desktop';
 import MobileHeader from './mobile';
+import { useUserInfo } from '@/hooks/socket/useHeaderWs';
 
-async function Header() {
-  const headerData = await getHeaderData();
+interface IProps {
+  info: IHeaderData | null;
+}
+
+function Header({ info }: IProps) {
+  const data = useUserInfo(info);
 
   return (
     <header>
-      <DesktopHeader info={headerData} />
-      <MobileHeader info={headerData} />
+      <DesktopHeader data={data} />
+      <MobileHeader data={data} />
     </header>
   );
 }

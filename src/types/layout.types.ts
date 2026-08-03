@@ -1,12 +1,11 @@
-type IHeaderInfo = {
+enum LayoutApiUrls {
+  USER_INFO = '/layout/user-info',
+}
+
+type IHeaderData = {
   likes: number;
   carts: number;
+  nameFirstLater: string;
 };
 
-type IHeaderData =
-  | ({
-      profile: string;
-    } & IHeaderInfo)
-  | null;
-
-export type { IHeaderData, IHeaderInfo };
+export { LayoutApiUrls, type IHeaderData };

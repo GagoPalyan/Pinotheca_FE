@@ -77,51 +77,52 @@
 
 @layer utilities {
   .h3-bold {
-    font-size: 24px;
+    font-size: clamp(1.5rem, 1.35rem + 0.6vw, 1.625rem);
     font-style: normal;
     font-weight: 700;
-    line-height: 34px;
+    line-height: 1.42;
   }
 
   .text-normal {
-    font-size: 16px;
+    font-size: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
     font-style: normal;
     font-weight: 400;
-    line-height: 160%;
+    line-height: 1.6;
   }
 
   .text-semibold {
-    font-size: 16px;
+    font-size: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
     font-style: normal;
     font-weight: 600;
-    line-height: 160%;
+    line-height: 1.6;
   }
 
   .base-normal {
-    font-size: 14px;
+    font-size: clamp(0.875rem, 0.84rem + 0.15vw, 1rem);
     font-style: normal;
     font-weight: 400;
-    line-height: 170%;
+    line-height: 1.7;
   }
 
   .base-semibold {
-    font-size: 14px;
+    font-size: clamp(0.875rem, 0.84rem + 0.15vw, 1rem);
     font-style: normal;
     font-weight: 600;
-    line-height: 21px;
+    line-height: 1.5;
   }
 
   .small-normal {
-    font-size: 12px;
+    font-size: clamp(0.75rem, 0.72rem + 0.1vw, 0.875rem);
     font-style: normal;
     font-weight: 400;
-    line-height: 160%;
+    line-height: 1.6;
   }
+
   .small-semibold {
-    font-size: 12px;
+    font-size: clamp(0.75rem, 0.72rem + 0.1vw, 0.875rem);
     font-style: normal;
     font-weight: 600;
-    line-height: 160%;
+    line-height: 1.6;
   }
 
   .w-container {

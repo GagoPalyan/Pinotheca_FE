@@ -29,10 +29,10 @@ function PageInput({ totalPages, set }: IProps) {
 
   return (
     <form className="flex items-center justify-center max-md:gap-1 gap-2" onSubmit={handleSubmit}>
-      <span className="base-normal text-gray-950">{t('go-to')}</span>
+      <span className="text-normal text-gray-950">{t('go-to')}</span>
       <input
         name="goToPage"
-        className="w-16 h-8 px-2 bg-white rounded-sm border text-gray-950 border-gray-400 outline-none"
+        className="w-16 h-8 max-sm:h-10 px-2 bg-white rounded-sm border text-normal text-gray-950 border-gray-400 outline-none"
         type="number"
         value={inputValue}
         onChange={handleInputChange}

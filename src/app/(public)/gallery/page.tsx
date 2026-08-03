@@ -14,7 +14,7 @@ async function Gallery({ searchParams }: { searchParams: Promise<ISearchParams> 
 
   return (
     <Suspense fallback={<Loading />}>
-      <GalleryPage data={data} />;
+      <GalleryPage data={data} />
     </Suspense>
   );
 }

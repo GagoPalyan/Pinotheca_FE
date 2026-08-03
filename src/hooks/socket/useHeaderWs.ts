@@ -2,16 +2,14 @@
 
 import { useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
-import { IHeaderData, IHeaderInfo } from '@/types';
+import { IHeaderData } from '@/types';
 import Cookies from 'js-cookie';
 import { socketEvent, socketUrl } from '@/types/socket.types';
 import { BASE_URL } from '@/utils/api';
+import { defaultHeaderValue } from '@/constants/header';
 
-export function useUserInfo(initialData?: IHeaderData) {
-  const [headerInfo, setHeaderInfo] = useState<IHeaderInfo>({
-    likes: initialData?.likes ?? 0,
-    carts: initialData?.carts ?? 0,
-  });
+export function useUserInfo(initialData: IHeaderData | null) {
+  const [data, setData] = useState<IHeaderData>(initialData ?? defaultHeaderValue);
 
   const token = Cookies.get('accessToken');
 
@@ -25,26 +23,12 @@ export function useUserInfo(initialData?: IHeaderData) {
       auth: { token },
     });
 
-    socket.on(socketEvent.on, () => {
-      console.log('Socket connected:', socket.id);
-    });
-
     socket.on(socketEvent.likes, (likes: number) => {
-      setHeaderInfo((prev) => ({
-        ...prev,
-        likes,
-      }));
+      setData((prev) => ({ ...prev, likes }));
     });
 
-    socket.on(socketEvent.carts, (cartCount: number) => {
-      setHeaderInfo((prev) => ({
-        ...prev,
-        carts: cartCount,
-      }));
-    });
-
-    socket.on(socketEvent.off, () => {
-      console.log('Socket disconnected');
+    socket.on(socketEvent.carts, (carts: number) => {
+      setData((prev) => ({ ...prev, carts }));
     });
 
     return () => {
@@ -52,7 +36,5 @@ export function useUserInfo(initialData?: IHeaderData) {
     };
   }, []);
 
-  return {
-    headerInfo,
-  };
+  return data;
 }

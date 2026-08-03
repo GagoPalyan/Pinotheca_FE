@@ -9,8 +9,10 @@ import { logoutClient } from '@/utils/api/api.utils';
 
 function BurgerMenuAuth() {
   const t = useTranslations('common.pages');
-  const { userName, close } = useMobileMenu();
+  const { data, close } = useMobileMenu();
   const router = useRouter();
+
+  const isSigned = Boolean(data.nameFirstLater);
 
   const handleClick = (href: string) => {
     router.push(href);
@@ -21,9 +23,9 @@ function BurgerMenuAuth() {
     <Button
       variant="secondary"
       customClass="w-fit"
-      handleClick={() => (userName ? logoutClient() : handleClick(PageUrls.LOGIN))}
+      handleClick={() => (isSigned ? logoutClient() : handleClick(PageUrls.LOGIN))}
     >
-      {t(userName ? 'sign-out' : 'sign-in')}
+      {t(isSigned ? 'sign-out' : 'sign-in')}
     </Button>
   );
 }

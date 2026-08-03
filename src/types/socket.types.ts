@@ -3,8 +3,6 @@ enum socketUrl {
 }
 
 enum socketEvent {
-  on = 'connect',
-  off = 'disconnect',
   likes = 'likesUpdate',
   carts = 'cartsUpdate',
 }

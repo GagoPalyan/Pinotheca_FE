@@ -2,28 +2,18 @@
 
 import { cookies } from 'next/headers';
 import { API } from '../utils/api/api.utils';
-import { AuthPathEnum, IHeaderData, TUserData } from '@/types';
+import { IHeaderData, LayoutApiUrls } from '@/types';
 
-const getHeaderData = async () => {
+const getHeaderData = async (): Promise<IHeaderData | null> => {
   try {
     const cookiesStore = await cookies();
     const accessToken = cookiesStore.get('accessToken')?.value;
 
     if (!accessToken) return null;
 
-    const data: TUserData | null = await API.get(AuthPathEnum.ME, { tags: ['me'] });
-
-    if (!data) return null;
-
-    const { firstname, likes, carts } = data;
-
-    const headerData: IHeaderData = {
-      profile: firstname[0],
-      likes,
-      carts,
-    };
-
-    return headerData;
+    return await API.get(LayoutApiUrls.USER_INFO, {
+      tags: ['user-info'],
+    });
   } catch {
     return null;
   }
