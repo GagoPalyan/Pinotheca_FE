@@ -5,6 +5,9 @@ interface IPicture {
   price: string;
   width: string;
   height: string;
+  material: string;
+  type: string;
+  paint: string;
   author: {
     id: string;
     firstname: string;

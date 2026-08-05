@@ -5,6 +5,7 @@ import isDev from '@/utils/helpers/isDev.utils';
 import getLanguage from '../helpers/getLanguage.utils';
 import { GetOptions, TErrorObject, TParams } from '@/types';
 import { BASE_URL, AUTH_REQUIRED_URL, IS_SERVER } from './constants';
+import { logoutServer } from '@/server/logout';
 
 function buildUrl(url: string, params?: Record<string, unknown>) {
   if (!params) return `${BASE_URL}${url}`;
@@ -79,7 +80,7 @@ async function serverFetch<T>(
     });
 
     if (res.status === 401) {
-      logoutClient();
+      logoutServer();
       return Promise.reject({ status: 401, message: 'Unauthorized' } as TErrorObject);
     }
 
