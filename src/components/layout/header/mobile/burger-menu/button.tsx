@@ -2,7 +2,7 @@
 
 import { BURGER_MENU_ICON_STYLES } from '@/constants/header';
 import { twMerge } from 'tailwind-merge';
-import { useMobileMenu } from '../context';
+import { useMobileMenu } from '../Context';
 
 function BurgerMenuButton() {
   const { isOpen, toggle } = useMobileMenu();

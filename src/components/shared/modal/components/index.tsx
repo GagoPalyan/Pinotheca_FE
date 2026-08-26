@@ -1,6 +1,6 @@
 import { IModal } from '../types';
-import ModalBackground from './background';
-import ModalContent from './content';
+import ModalBackground from './Background';
+import ModalContent from './Content';
 
 function Modal({ isOpen, onClose, children, contentClassname }: IModal) {
   if (!isOpen) return null;

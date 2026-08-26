@@ -9,10 +9,10 @@ import AuthLayout from '@/components/shared/auth';
 import Input from '@/components/ui/input';
 import { useTranslations } from 'next-intl';
 import Button from '@/components/ui/button';
-import PageSwitcher from '@/components/shared/auth/page-switcher';
+import PageSwitcher from '@/components/shared/auth/PageSwitcher';
 import { PageUrls } from '@/types/path.types';
 import { useState } from 'react';
-import AuthSuccessModal from '@/components/shared/auth/modal';
+import AuthSuccessModal from '@/components/shared/auth/Modal';
 
 function ForgotPasswordPage() {
   const t = useTranslations('auth');

@@ -1,4 +1,4 @@
-import Link from '@/components/ui/link/components';
+import Link from '@/components/ui/link';
 import { PageUrls } from '@/types/path.types';
 import { useTranslations } from 'next-intl';
 

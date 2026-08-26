@@ -7,7 +7,7 @@ import type { TRegisterMagicLinkFrom } from '@/types/auth.types';
 import AuthLayout from '@/components/shared/auth';
 import Input from '@/components/ui/input';
 import { useTranslations } from 'next-intl';
-import Button from '@/components/ui/button/components';
+import Button from '@/components/ui/button';
 import { MAGIC_LINK_FIELDS } from '../constants/fields-list';
 import { useMagicLink } from '@/hooks/api/auth/magic-link';
 import { useRouter, useSearchParams } from 'next/navigation';

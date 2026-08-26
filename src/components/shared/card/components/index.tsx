@@ -1,7 +1,7 @@
-import CardActions from './actions';
-import CardImage from './image';
+import CardActions from './Actions';
+import CardImage from './Image';
 import type { IPicture } from '@/types/picture.types';
-import CardInfo from './info';
+import CardInfo from './Info';
 
 function Card({
   id,

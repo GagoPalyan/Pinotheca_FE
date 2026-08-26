@@ -1,5 +1,5 @@
-import MobileHeaderContent from './mobile';
-import { MobileMenuProvider } from './context';
+import MobileHeaderContent from './Mobile';
+import { MobileMenuProvider } from './Context';
 import { IHeaderData } from '@/types';
 
 function MobileHeader({ data }: { data: IHeaderData }) {

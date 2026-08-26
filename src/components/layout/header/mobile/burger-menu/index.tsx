@@ -1,9 +1,9 @@
 'use client';
 
 import { twMerge } from 'tailwind-merge';
-import { useMobileMenu } from '../context';
-import BurgerMenuBackground from './background';
-import BurgerMenuContent from './content';
+import { useMobileMenu } from '../Context';
+import BurgerMenuBackground from './Background';
+import BurgerMenuContent from './Content';
 
 function BurgerMenu() {
   const { isOpen } = useMobileMenu();

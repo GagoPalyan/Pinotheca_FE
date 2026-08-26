@@ -8,11 +8,11 @@ import type { TRegisterEmailForm, TRegisterEmailResponse } from '@/types/auth.ty
 import AuthLayout from '@/components/shared/auth';
 import Input from '@/components/ui/input';
 import { useTranslations } from 'next-intl';
-import PageSwitcher from '@/components/shared/auth/page-switcher';
-import Button from '@/components/ui/button/components';
+import PageSwitcher from '@/components/shared/auth/PageSwitcher';
+import Button from '@/components/ui/button';
 import { useState } from 'react';
 import { PageUrls } from '@/types/path.types';
-import AuthSuccessModal from '../../shared/auth/modal';
+import AuthSuccessModal from '@/components/shared/auth/Modal';
 
 function RegisterPage() {
   const t = useTranslations();

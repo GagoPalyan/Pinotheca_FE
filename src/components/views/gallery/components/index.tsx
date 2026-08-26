@@ -1,7 +1,7 @@
 'use client';
 
-import Headline from './headline';
-import Content from './content';
+import Headline from './Headline';
+import Content from './Content';
 import Breadcrumbs from '@/components/shared/breadcrumbs';
 import Pagination from '@/components/shared/pagination';
 import type { IPicturesResponse } from '../types';

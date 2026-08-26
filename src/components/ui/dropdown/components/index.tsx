@@ -2,8 +2,8 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { IDropdownProps } from '../types';
-import DropdownTrigger from './trigger';
-import DropdownList from './list';
+import DropdownTrigger from './Trigger';
+import DropdownList from './List';
 
 export default function Dropdown<T>({
   value,

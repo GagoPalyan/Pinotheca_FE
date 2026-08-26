@@ -1,4 +1,4 @@
-import Image from '@/components/ui/image/components';
+import Image from '@/components/ui/image';
 
 interface IProps {
   imageUrl: string;

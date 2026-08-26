@@ -1,12 +1,12 @@
 'use client';
 
 import type { TMeta } from '@/types/global.types';
-import Limit from './limit';
-import ArrowButtons from './arrow-buttons';
-import PaginationButton from './pagination-button';
+import Limit from './Limit';
+import ArrowButtons from './ArrowButtons';
+import PaginationButton from './PaginationButton';
 import useArrowBtnActions from '../hooks/useArrowBtnActions';
-import Dots from './dots';
-import PageInput from './page-input';
+import Dots from './Dots';
+import PageInput from './PageInput';
 
 export default function Pagination({ page, totalPages, limit }: TMeta) {
   const { increment, decrement, createPageURL, setQueryParams } = useArrowBtnActions(

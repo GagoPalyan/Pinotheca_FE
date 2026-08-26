@@ -4,7 +4,7 @@ import Button from '@/components/ui/button';
 import { BURGER_MENU_PAGES_LIST } from '@/constants/header';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
-import { useMobileMenu } from '../context';
+import { useMobileMenu } from '../Context';
 
 function BurgerMenuNavigation() {
   const t = useTranslations('common.pages');

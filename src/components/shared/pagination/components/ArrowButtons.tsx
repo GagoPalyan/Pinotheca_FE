@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl';
 import Icon from '../../icon';
-import PaginationButton from './pagination-button';
+import PaginationButton from './PaginationButton';
 
 interface IProps {
   side: 'left' | 'right';

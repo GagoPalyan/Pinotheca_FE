@@ -5,8 +5,8 @@ import { HEADER_DASHBOARD_PAGES, HEADER_NAV_PAGES } from '@/constants/header';
 import { useTranslations } from 'next-intl';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import HeaderUserPages from './user-pages';
-import ProfileIcon from './profile-icon';
+import HeaderUserPages from './UserPages';
+import ProfileIcon from './ProfileIcon';
 import { IHeaderData } from '@/types';
 import { useUserInfo } from '@/hooks/socket/useHeaderWs';
 

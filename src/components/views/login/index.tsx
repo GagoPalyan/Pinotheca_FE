@@ -9,10 +9,10 @@ import { useForm } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
 import { AuthPathEnum, type TLoginFrom } from '@/types/auth.types';
 import Input from '@/components/ui/input';
-import Button from '@/components/ui/button/components';
+import Button from '@/components/ui/button';
 import Link from '@/components/ui/link';
 import AuthLayout from '@/components/shared/auth';
-import PageSwitcher from '@/components/shared/auth/page-switcher';
+import PageSwitcher from '@/components/shared/auth/PageSwitcher';
 
 const FIELDS_LIST: (keyof TLoginFrom)[] = ['email', 'password'];
 

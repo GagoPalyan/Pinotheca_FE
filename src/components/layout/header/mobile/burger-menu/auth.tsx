@@ -3,7 +3,7 @@
 import Button from '@/components/ui/button';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
-import { useMobileMenu } from '../context';
+import { useMobileMenu } from '../Context';
 import { PageUrls } from '@/types/path.types';
 import { logoutClient } from '@/utils/api/api.utils';
 

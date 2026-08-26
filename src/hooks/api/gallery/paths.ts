@@ -1,7 +1,8 @@
 enum GalleryPaths {
   PICTURES = '/pictures',
-  PICTURE_LIKE = '/pictures/like/',
-  PICTURE_CART = '/pictures/cart/',
 }
 
-export { GalleryPaths };
+const pictureLikePath = (id: string) => `${GalleryPaths.PICTURES}/${id}/like`;
+const pictureCartPath = (id: string) => `${GalleryPaths.PICTURES}/${id}/cart`;
+
+export { GalleryPaths, pictureLikePath, pictureCartPath };

@@ -1,0 +1,55 @@
+---
+description: FE folder layers, component packages, exports and imports
+alwaysApply: true
+---
+
+# Components & folders
+
+## Layers
+
+| Layer     | Path                    | Use for                                 |
+| --------- | ----------------------- | --------------------------------------- |
+| `ui/`     | `src/components/ui`     | Primitives, no business logic           |
+| `shared/` | `src/components/shared` | Composed widgets used on multiple pages |
+| `views/`  | `src/components/views`  | Page/feature-specific UI                |
+| `layout/` | `src/components/layout` | Shell (header/footer)                   |
+
+## New component package
+
+Always:
+
+```
+feature-or-component/
+├── index.ts          # public barrel
+└── components/       # implementation
+```
+
+Add `types/`, `hooks/`, `utils/`, `constants/` **only when needed** (no empty folders).
+
+## Exports & imports
+
+- Components: **default** export + barrel re-export.
+- Hooks / types / utils: **named** exports.
+- Import only via barrel: `@/components/ui/button` — never `@/components/ui/button/components`.
+
+```ts
+// ✅
+import Button from '@/components/ui/button';
+import Filters from '@/components/shared/filters';
+
+// ❌
+import Button from '@/components/ui/button/components';
+```
+
+## File naming
+
+- Component files: **PascalCase** (`FiltersTrigger.tsx`, `Headline.tsx`, `Mobile.tsx`).
+- Hooks: `useX.ts`. Folders: kebab-case.
+
+## New page checklist
+
+1. Thin `src/app/.../page.tsx` (metadata + data + Suspense).
+2. Feature under `src/components/views/<feature>/`.
+3. Include Suspense + Loading fallback + page metadata.
+
+---
