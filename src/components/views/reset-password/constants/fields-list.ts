@@ -1,6 +1,6 @@
 import type { IResetPasswordFields } from '../types';
 
-export const resetPasswordFields: IResetPasswordFields[] = [
+export const RESET_PASSWORD_FIELDS: IResetPasswordFields[] = [
   {
     name: 'password',
     type: 'password',

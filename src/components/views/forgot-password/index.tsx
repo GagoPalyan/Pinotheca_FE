@@ -2,7 +2,7 @@
 
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { emailSchema } from '@/utils/validations/auth.schema';
+import { EMAIL_SCHEMA } from '@/utils/validations/auth.schema';
 import { useForgotPassword } from '@/hooks/api/auth/forgot-password';
 import type { TRegisterEmailForm, TRegisterEmailResponse } from '@/types/auth.types';
 import AuthLayout from '@/components/shared/auth';
@@ -23,7 +23,7 @@ function ForgotPasswordPage() {
     formState: { errors },
   } = useForm<TRegisterEmailForm>({
     mode: 'onBlur',
-    resolver: yupResolver(emailSchema),
+    resolver: yupResolver(EMAIL_SCHEMA),
   });
   const { mutateAsync, isPending } = useForgotPassword();
 

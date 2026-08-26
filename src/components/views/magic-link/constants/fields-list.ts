@@ -1,6 +1,6 @@
 import type { IMagicLinkFields } from '../types';
 
-export const magicLinkFields: IMagicLinkFields[] = [
+export const MAGIC_LINK_FIELDS: IMagicLinkFields[] = [
   {
     name: 'firstname',
     type: 'text',

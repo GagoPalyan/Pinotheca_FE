@@ -6,10 +6,11 @@ import { IHeaderData } from '@/types';
 import Cookies from 'js-cookie';
 import { socketEvent, socketUrl } from '@/types/socket.types';
 import { BASE_URL } from '@/utils/api';
-import { defaultHeaderValue } from '@/constants/header';
+import { DEFAULT_HEADER_VALUE } from '@/constants/header';
 
 export function useUserInfo(initialData: IHeaderData | null) {
-  const [data, setData] = useState<IHeaderData>(initialData ?? defaultHeaderValue);
+  console.log('hook is runed');
+  const [data, setData] = useState<IHeaderData>(initialData ?? DEFAULT_HEADER_VALUE);
 
   const token = Cookies.get('accessToken');
 
@@ -35,6 +36,11 @@ export function useUserInfo(initialData: IHeaderData | null) {
       socket.disconnect();
     };
   }, []);
+
+  useEffect(() => {
+    console.log('initialData', initialData);
+    if (initialData) setData(initialData);
+  }, [initialData]);
 
   return data;
 }

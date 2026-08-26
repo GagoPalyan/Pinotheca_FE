@@ -23,11 +23,11 @@ function DropdownList<T>({
           type="button"
           onClick={() => onSelect(value)}
           className={twMerge(
-            'cursor-pointer duration-200 rounded-md  hover:bg-primary-100 transition-all w-full px-2 py-1 flex items-center gap-5',
+            'cursor-pointer duration-200 rounded-md  hover:bg-primary-100 transition-all w-full px-2 py-1 flex items-center gap-1',
             isSelected === value && 'bg-primary-50',
           )}
         >
-          {icon && <Icon name={icon} />}
+          {icon && <Icon name={icon} size={5} />}
           <span className="base-normal">{label}</span>
         </button>
       ))}

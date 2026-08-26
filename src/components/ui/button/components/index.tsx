@@ -3,7 +3,7 @@
 import React, { useCallback } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { IButton } from '../types';
-import { buttonSizes, buttonVariants } from '../constants';
+import { BUTTON_ICONS_COLORS, BUTTON_SIZES, BUTTON_VARIANTS } from '../constants';
 import Icon from '@/components/shared/icon';
 
 function Button({
@@ -24,20 +24,18 @@ function Button({
   return (
     <button
       className={twMerge(
-        'w-full flex items-center justify-center gap-1 rounded-lg outline-none cursor-pointer',
-        buttonSizes[size],
-        buttonVariants[variant],
-        prependIcon ? 'pl-11' : 'pl-3',
-        appendIcon ? 'pr-11' : 'pr-3',
+        'w-full flex items-center justify-center gap-2 rounded-lg outline-none cursor-pointer',
+        BUTTON_SIZES[size],
+        BUTTON_VARIANTS[variant],
         customClass,
       )}
       onClick={onClick}
       type={type}
       disabled={disabled}
     >
-      {prependIcon && <Icon name={prependIcon} size={4} iconClass="absolute left-3" />}
+      {prependIcon && <Icon name={prependIcon} size={4} color={BUTTON_ICONS_COLORS[variant]} />}
       {children}
-      {appendIcon && <Icon name={prependIcon} size={4} iconClass="absolute left-3" />}
+      {appendIcon && <Icon name={prependIcon} size={4} color={BUTTON_ICONS_COLORS[variant]} />}
     </button>
   );
 }

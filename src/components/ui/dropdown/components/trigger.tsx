@@ -8,21 +8,25 @@ function DropdownTrigger({
   label,
   placeholder = '',
   prependIcon,
+  chevronColor = 'black',
   customClass,
 }: IDropdownTriggerProps) {
   return (
     <button
-      className={twMerge('flex items-center w-full gap-2 cursor-pointer', customClass)}
+      className={twMerge(
+        'flex items-center w-full gap-2 cursor-pointer text-gray-950 text-normal',
+        customClass,
+      )}
       type="button"
       onClick={() => setOpen(!open)}
     >
       {prependIcon && <Icon name={prependIcon} size={4} color="black" />}
-      <span className="text-gray-950 text-normal">{label ?? placeholder}</span>
+      <span>{label ?? placeholder}</span>
 
       <Icon
         name="chevron-down"
         size={4}
-        color="black"
+        color={chevronColor}
         iconClass={twMerge('transition ml-auto duration-300', open ? 'rotate-180' : '')}
       />
     </button>

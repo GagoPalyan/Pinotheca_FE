@@ -1,12 +1,20 @@
 'use client';
 
 import Button from '@/components/ui/button/components';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
 function HomePage() {
+  const router = useRouter();
   return (
     <div>
-      <Button handleClick={() => {}} size="large" variant="ghost" />
+      <Button
+        handleClick={() => {
+          router.refresh();
+        }}
+        size="large"
+        variant="ghost"
+      />
     </div>
   );
 }

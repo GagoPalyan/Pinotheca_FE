@@ -1,7 +1,7 @@
 'use client';
 
 import Logo from '@/components/shared/logo';
-import { headerDashboardPages, headerNavPages } from '@/constants/header';
+import { HEADER_DASHBOARD_PAGES, HEADER_NAV_PAGES } from '@/constants/header';
 import { useTranslations } from 'next-intl';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
@@ -22,7 +22,7 @@ function DesktopHeader({ data }: { data: IHeaderData }) {
       <Logo />
 
       <ul className="flex gap-5 items-center">
-        {headerNavPages.map(({ name, href }) => (
+        {HEADER_NAV_PAGES.map(({ name, href }) => (
           <li key={href}>
             <Link href={href} className="text-gray-950">
               {t(name)}
@@ -33,7 +33,7 @@ function DesktopHeader({ data }: { data: IHeaderData }) {
 
       <div className="flex items-center gap-6">
         <LanguageSwitcher />
-        {headerDashboardPages.map(({ keyName, name, ...props }) => (
+        {HEADER_DASHBOARD_PAGES.map(({ keyName, name, ...props }) => (
           <HeaderUserPages key={name} {...props} name={t(name)} count={data[keyName]} />
         ))}
         <ProfileIcon letter={data.nameFirstLater} />

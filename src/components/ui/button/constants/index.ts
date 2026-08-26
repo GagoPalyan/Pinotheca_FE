@@ -1,4 +1,4 @@
-export const buttonVariants = {
+const BUTTON_VARIANTS = {
   primary:
     'text-white border-none bg-primary-500 hover:bg-primary-600 active:bg-primary-700 disabled:bg-gray-300',
   secondary:
@@ -12,11 +12,20 @@ export const buttonVariants = {
   ghost:
     'text-gray-600 border-none bg-primary-25 hover:bg-primary-50 active:bg-primary-200 disabled:bg-gray-300',
 };
-export const buttonSizes = {
+
+const BUTTON_SIZES = {
   small: 'px-3 py-1',
   medium: 'px-4 py-1.5',
   large: 'px-6 py-2',
 };
 
-export type IButtonVariants = keyof typeof buttonVariants;
-export type IButtonSizes = keyof typeof buttonSizes;
+const BUTTON_ICONS_COLORS = {
+  primary: 'white',
+  secondary: 'var(--color-primary-600)',
+  success: 'white',
+  warning: 'white',
+  danger: 'white',
+  ghost: 'var(--color-gray-600)',
+};
+
+export { BUTTON_VARIANTS, BUTTON_SIZES, BUTTON_ICONS_COLORS };

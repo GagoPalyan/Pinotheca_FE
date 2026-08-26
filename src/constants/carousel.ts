@@ -1,4 +1,4 @@
-export const carouselList = [
+export const CAROUSEL_LIST = [
   {
     id: 1,
     color: 'bg-red-500',

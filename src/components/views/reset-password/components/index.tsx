@@ -2,7 +2,7 @@
 
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { resetPasswordSchema } from '@/utils/validations/auth.schema';
+import { RESET_PASSWORD_SCHEMA } from '@/utils/validations/auth.schema';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { PageUrls } from '@/types/path.types';
 import { useResetPassword } from '@/hooks/api/auth/reset-password';
@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 import type { TResetPasswordFrom } from '@/types/auth.types';
 import AuthLayout from '@/components/shared/auth';
 import Input from '@/components/ui/input';
-import { resetPasswordFields } from '../constants/fields-list';
+import { RESET_PASSWORD_FIELDS } from '../constants/fields-list';
 import { useTranslations } from 'next-intl';
 import Button from '@/components/ui/button';
 
@@ -24,7 +24,7 @@ function ResetPasswordPage() {
     formState: { errors },
   } = useForm<TResetPasswordFrom>({
     mode: 'onBlur',
-    resolver: yupResolver(resetPasswordSchema),
+    resolver: yupResolver(RESET_PASSWORD_SCHEMA),
   });
   const { mutateAsync, isPending } = useResetPassword();
 
@@ -34,7 +34,7 @@ function ResetPasswordPage() {
 
     const result = await mutateAsync({ token, ...data });
     if (result?.accessToken) {
-      router.replace(PageUrls.HOME);
+      await router.replace(PageUrls.HOME);
       router.refresh();
     }
   };
@@ -45,7 +45,7 @@ function ResetPasswordPage() {
         className="w-full flex items-center justify-center flex-col gap-1"
         onSubmit={handleSubmit(onSubmit)}
       >
-        {resetPasswordFields.map(({ name, type }) => (
+        {RESET_PASSWORD_FIELDS.map(({ name, type }) => (
           <Input
             key={name}
             {...register(name)}

@@ -1,6 +1,6 @@
 import type { TRegisterFormFields } from '@/types/auth.types';
 
-export const magicLinkFields: TRegisterFormFields[] = [
+export const MAGIC_LINK_FIELDS: TRegisterFormFields[] = [
   {
     name: 'firstname',
     label: 'First Name',

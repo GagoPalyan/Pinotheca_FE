@@ -3,7 +3,7 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useRegister } from '@/hooks/api/auth/register';
-import { emailSchema } from '@/utils/validations/auth.schema';
+import { EMAIL_SCHEMA } from '@/utils/validations/auth.schema';
 import type { TRegisterEmailForm, TRegisterEmailResponse } from '@/types/auth.types';
 import AuthLayout from '@/components/shared/auth';
 import Input from '@/components/ui/input';
@@ -23,7 +23,7 @@ function RegisterPage() {
     formState: { errors },
   } = useForm<TRegisterEmailForm>({
     mode: 'onBlur',
-    resolver: yupResolver(emailSchema),
+    resolver: yupResolver(EMAIL_SCHEMA),
   });
   const { mutateAsync, isPending } = useRegister();
 

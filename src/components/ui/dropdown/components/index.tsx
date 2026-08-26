@@ -13,6 +13,7 @@ export default function Dropdown<T>({
   onSelect,
   dropdownPosition = 'bottom',
   labelValue = 'label',
+  chevronColor = 'black',
   customClass = '',
 }: IDropdownProps<T>) {
   const [open, setOpen] = useState(false);
@@ -42,6 +43,7 @@ export default function Dropdown<T>({
         prependIcon={prependIcon}
         placeholder={placeholder}
         customClass={customClass}
+        chevronColor={chevronColor}
       />
 
       {open && (

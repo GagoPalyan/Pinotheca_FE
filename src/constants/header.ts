@@ -1,7 +1,7 @@
 import { IHeaderData } from '@/types';
 import { PageUrls } from '@/types/path.types';
 
-const headerNavPages = [
+const HEADER_NAV_PAGES = [
   {
     name: 'artists',
     href: PageUrls.ARTISTS,
@@ -16,7 +16,7 @@ const headerNavPages = [
   },
 ];
 
-const headerDashboardPages = [
+const HEADER_DASHBOARD_PAGES = [
   {
     name: 'favorites',
     keyName: 'likes',
@@ -31,13 +31,13 @@ const headerDashboardPages = [
   },
 ] as const;
 
-const burgerMenuIconStyles = [
+const BURGER_MENU_ICON_STYLES = [
   'rotate-45 translate-y-1.5',
   'opacity-0',
   '-rotate-45 -translate-y-1.5',
 ];
 
-const burgerMenuPagesList = [
+const BURGER_MENU_PAGES_LIST = [
   {
     name: 'home',
     keyName: null,
@@ -70,16 +70,16 @@ const burgerMenuPagesList = [
   },
 ] as const;
 
-const defaultHeaderValue: IHeaderData = {
+const DEFAULT_HEADER_VALUE: IHeaderData = {
   carts: 0,
   likes: 0,
   nameFirstLater: '',
 };
 
 export {
-  headerNavPages,
-  headerDashboardPages,
-  burgerMenuIconStyles,
-  burgerMenuPagesList,
-  defaultHeaderValue,
+  HEADER_NAV_PAGES,
+  HEADER_DASHBOARD_PAGES,
+  BURGER_MENU_ICON_STYLES,
+  BURGER_MENU_PAGES_LIST,
+  DEFAULT_HEADER_VALUE,
 };

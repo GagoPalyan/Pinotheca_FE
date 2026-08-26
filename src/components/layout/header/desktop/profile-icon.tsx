@@ -1,6 +1,7 @@
-import Icon from '@/components/shared/icon';
 import { PageUrls } from '@/types/path.types';
+import UserIcon from '#/icons/user.svg';
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 import Link from 'next/link';
 
 function ProfileIcon({ letter }: { letter?: string }) {
@@ -9,7 +10,7 @@ function ProfileIcon({ letter }: { letter?: string }) {
   if (!letter)
     return (
       <Link href={PageUrls.PROFILE} title={t('profile')}>
-        <Icon name="user" color="black" size={6} />
+        <Image src={UserIcon} alt="User icon" width={28} height={28} />
       </Link>
     );
 

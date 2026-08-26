@@ -1,7 +1,7 @@
 'use client';
 
 import Button from '@/components/ui/button';
-import { burgerMenuPagesList } from '@/constants/header';
+import { BURGER_MENU_PAGES_LIST } from '@/constants/header';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { useMobileMenu } from '../context';
@@ -18,7 +18,7 @@ function BurgerMenuNavigation() {
 
   return (
     <nav className="flex flex-col gap-2">
-      {burgerMenuPagesList.map(({ name, keyName, href }) => (
+      {BURGER_MENU_PAGES_LIST.map(({ name, keyName, href }) => (
         <Button
           key={name}
           variant="secondary"

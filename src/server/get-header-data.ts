@@ -11,8 +11,9 @@ const getHeaderData = async (): Promise<IHeaderData | null> => {
 
     if (!accessToken) return null;
 
+    console.log('run request');
     return await API.get(LayoutApiUrls.USER_INFO, {
-      tags: ['user-info'],
+      cache: 'no-store',
     });
   } catch {
     return null;
