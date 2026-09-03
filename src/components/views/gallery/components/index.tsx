@@ -14,7 +14,7 @@ function GalleryPage({ data }: { data: IPicturesResponse }) {
     <div className="relative w-full bg-primary-25 h-layout">
       <Breadcrumbs />
       <Headline />
-      <Filters />
+      <Filters minPrice={meta.minPrice} maxPrice={meta.maxPrice} />
       <Content pictures={pictures} />
       <Pagination {...meta} />
     </div>

@@ -14,6 +14,26 @@ alwaysApply: true
 | `views/`  | `src/components/views`  | Page/feature-specific UI                |
 | `layout/` | `src/components/layout` | Shell (header/footer)                   |
 
+## Prefer UI primitives
+
+Always check `src/components/ui` before using raw HTML interactive elements. Prefer existing primitives (`Button`, `Input`, `Checkbox`, `Link`, `Dropdown`, `Multiselect`, `DualRangeSlider`, …) over native tags.
+
+- Style via the component API (`variant`, `size`, `customClass`, icons props) — do not reimplement with raw `<button>`, `<input>`, `<a>`, etc.
+- Native elements are OK only when no UI primitive fits, or when implementing inside a `ui/` primitive itself.
+- Import via barrels (`@/components/ui/button`).
+
+```tsx
+// ❌
+<button type="button" onClick={onRemove} className="px-3 py-1 rounded-lg ...">
+  {label}
+</button>
+
+// ✅
+<Button size="small" customClass="w-fit ..." handleClick={onRemove}>
+  {label}
+</Button>
+```
+
 ## New component package
 
 Always:
@@ -29,22 +49,70 @@ Add `types/`, `hooks/`, `utils/`, `constants/` **only when needed** (no empty fo
 ## Exports & imports
 
 - Components: **default** export + barrel re-export.
-- Hooks / types / utils: **named** exports.
+- Hooks / types / utils / enums / constants: **named** exports.
 - Import only via barrel: `@/components/ui/button` — never `@/components/ui/button/components`.
+- For enums, types, interfaces, and constants: declare first, then export at the **end** of the file (no inline `export enum` / `export type` / `export interface` / `export const`).
+- Re-export types with the `type` keyword in the export list.
+
+### Naming: `type` vs `interface`
+
+- **Component props / context contracts:** `interface` with **`I` prefix** (`IButton`, `IFiltersPanelContext`).
+- **Aliases, unions, picks, domain shapes:** `type` with **`T` prefix** (`TFiltersForm`, `TFilterOption`).
+
+```ts
+// ✅
+interface IPriceFilter {
+  priceMin: string;
+  onChange: (min: string, max: string) => void;
+}
+
+type TFiltersForm = {
+  priceMin: string;
+  material: string[];
+};
+
+// ❌
+type TPriceFilter = { ... };
+interface TFiltersPanelContext { ... };
+```
 
 ```ts
 // ✅
 import Button from '@/components/ui/button';
 import Filters from '@/components/shared/filters';
 
+enum MaterialEnum {
+  canvas = 'canvas',
+}
+type TFilterOption = {
+  value: string;
+};
+export { MaterialEnum, type TFilterOption };
+
 // ❌
 import Button from '@/components/ui/button/components';
+export enum MaterialEnum {
+  canvas = 'canvas',
+}
 ```
+
+- Exception: Next.js `export const metadata` / `export const config` stay as framework requires.
 
 ## File naming
 
 - Component files: **PascalCase** (`FiltersTrigger.tsx`, `Headline.tsx`, `Mobile.tsx`).
 - Hooks: `useX.ts`. Folders: kebab-case.
+
+## One component per file
+
+- **Never** define more than one React component in a single file.
+- Each component gets its own PascalCase file (default export).
+- Helpers that are not components (hooks, utils, constants, types) stay in their own folders — do not co-locate extra components as “private” siblings in the same file.
+
+```tsx
+// ❌ BAD — FilterGroup + RangeField + Content in Content.tsx
+// ✅ GOOD — FilterGroup.tsx, RangeField.tsx, Content.tsx
+```
 
 ## New page checklist
 

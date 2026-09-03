@@ -1,6 +1,6 @@
 import type { IMagicLinkFields } from '../types';
 
-export const MAGIC_LINK_FIELDS: IMagicLinkFields[] = [
+const MAGIC_LINK_FIELDS: IMagicLinkFields[] = [
   {
     name: 'firstname',
     type: 'text',
@@ -18,3 +18,5 @@ export const MAGIC_LINK_FIELDS: IMagicLinkFields[] = [
     type: 'password',
   },
 ];
+
+export { MAGIC_LINK_FIELDS };

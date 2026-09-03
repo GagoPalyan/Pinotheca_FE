@@ -3,6 +3,8 @@ const BUTTON_VARIANTS = {
     'text-white border-none bg-primary-500 hover:bg-primary-600 active:bg-primary-700 disabled:bg-gray-300',
   secondary:
     'text-primary-600 border border-primary-600 hover:bg-primary-100 active:bg-primary-200 disabled:bg-gray-300',
+  tertiary:
+    'text-primary-600 border-none bg-primary-50 hover:bg-primary-100 active:bg-primary-200 disabled:bg-gray-300',
   success:
     'text-white border-none bg-success-500 hover:bg-success-600 active:bg-success-700 disabled:bg-gray-300',
   warning:
@@ -22,6 +24,7 @@ const BUTTON_SIZES = {
 const BUTTON_ICONS_COLORS = {
   primary: 'white',
   secondary: 'var(--color-primary-600)',
+  tertiary: 'var(--color-primary-600)',
   success: 'white',
   warning: 'white',
   danger: 'white',

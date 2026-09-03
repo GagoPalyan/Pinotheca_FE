@@ -35,7 +35,7 @@ function Button({
     >
       {prependIcon && <Icon name={prependIcon} size={4} color={BUTTON_ICONS_COLORS[variant]} />}
       {children}
-      {appendIcon && <Icon name={prependIcon} size={4} color={BUTTON_ICONS_COLORS[variant]} />}
+      {appendIcon && <Icon name={appendIcon} size={4} color={BUTTON_ICONS_COLORS[variant]} />}
     </button>
   );
 }

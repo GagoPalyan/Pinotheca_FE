@@ -3,7 +3,7 @@
 import type { IHeaderData } from '@/types';
 import { createContext, useContext, useState, ReactNode } from 'react';
 
-interface TMobileMenuContext {
+interface IMobileMenuContext {
   isOpen: boolean;
   data: IHeaderData;
   open: () => void;
@@ -11,7 +11,7 @@ interface TMobileMenuContext {
   toggle: () => void;
 }
 
-const MobileMenuContext = createContext<TMobileMenuContext | null>(null);
+const MobileMenuContext = createContext<IMobileMenuContext | null>(null);
 
 export function MobileMenuProvider({ data, children }: { data: IHeaderData; children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);

@@ -9,7 +9,7 @@ function SortDropdown() {
   const { sort, setQueryParams } = useFilters();
 
   const onSelect = (sort: SortBy) => {
-    setQueryParams({ sort });
+    setQueryParams({ sort, page: '1' });
   };
 
   return (
@@ -17,7 +17,7 @@ function SortDropdown() {
       value={sort}
       onSelect={onSelect}
       list={SORT_LIST}
-      customClass="w-20 text-primary-600"
+      customClass="w-20 text-primary-600 border py-1 px-2 rounded-lg"
       chevronColor="var(--color-primary-600)"
     />
   );

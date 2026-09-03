@@ -12,10 +12,20 @@ function buildUrl(url: string, params?: Record<string, unknown>) {
 
   const sp = new URLSearchParams();
   Object.entries(params).forEach(([k, v]) => {
-    if (v !== undefined && v !== null) sp.append(k, String(v));
+    if (v === undefined || v === null || v === '') return;
+
+    if (Array.isArray(v)) {
+      v.forEach((item) => {
+        if (item !== undefined && item !== null && item !== '') sp.append(k, String(item));
+      });
+      return;
+    }
+
+    sp.append(k, String(v));
   });
 
-  return `${BASE_URL}${url}?${sp.toString()}`;
+  const query = sp.toString();
+  return query ? `${BASE_URL}${url}?${query}` : `${BASE_URL}${url}`;
 }
 
 async function logoutClient() {

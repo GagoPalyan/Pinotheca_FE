@@ -1,6 +1,6 @@
 import { LanguagesLabelEnum, LanguagesValueEnum } from '@/types/lang.types';
 
-export const I18N_LANGUAGES = [
+const I18N_LANGUAGES = [
   {
     label: LanguagesLabelEnum.EN,
     value: LanguagesValueEnum.EN,
@@ -14,3 +14,5 @@ export const I18N_LANGUAGES = [
     value: LanguagesValueEnum.AM,
   },
 ];
+
+export { I18N_LANGUAGES };

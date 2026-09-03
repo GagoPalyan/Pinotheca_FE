@@ -1,16 +1,11 @@
 import { API } from '@/utils/api/api.utils';
-import type { IPicturesResponse } from '../types';
+import type { TParams } from '@/types';
+import type { IPicturesResponse, ISearchParams } from '../types';
 
-type TGetPictures = {
-  page?: string;
-  search?: string;
-  limit?: string;
-};
-
-const getPictures = async (params: TGetPictures) => {
+const getPictures = async (params: ISearchParams) => {
   'use server';
 
-  return await API.get<IPicturesResponse>('/pictures', { params });
+  return await API.get<IPicturesResponse>('/pictures', { params: params as TParams });
 };
 
 export { getPictures };
