@@ -6,7 +6,7 @@ interface IProps {
 }
 
 function CardImage({ imageUrl, title }: IProps) {
-  return imageUrl ? (
+  return (
     <Image
       priority
       src={imageUrl}
@@ -15,8 +15,6 @@ function CardImage({ imageUrl, title }: IProps) {
       height={800}
       customClass="aspect-square"
     />
-  ) : (
-    <div className="w-full aspect-square rounded-lg bg-gray-200" />
   );
 }
 
