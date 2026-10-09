@@ -14,7 +14,9 @@ function HomePage() {
         }}
         size="large"
         variant="ghost"
-      />
+      >
+        Test
+      </Button>
     </div>
   );
 }

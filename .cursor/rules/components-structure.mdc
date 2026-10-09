@@ -46,6 +46,28 @@ feature-or-component/
 
 Add `types/`, `hooks/`, `utils/`, `constants/` **only when needed** (no empty folders).
 
+## Where types live
+
+- **Never** declare `type` / `interface` / `enum` in `constants/` or `utils/` files.
+- Put them in `types/` (or colocated in a component/hook file when they are private to that unit).
+- `constants/` and `utils/` may **import** types; they must not define them.
+
+```ts
+// ❌ constants/index.ts or utils/index.ts
+type TPictureDetailsTab = 'about' | 'dimensions';
+interface IPictureDetailsTabPanel { ... }
+const PICTURE_DETAILS_TABS = [ ... ];
+
+// ✅ types/index.ts
+type TPictureDetailsTab = 'about' | 'dimensions';
+interface IPictureDetailsTabPanel { ... }
+export type { TPictureDetailsTab, IPictureDetailsTabPanel };
+
+// ✅ constants/index.ts
+import type { TPictureDetailsTabItem } from '../types';
+const PICTURE_DETAILS_TABS = [ ... ] as const satisfies ReadonlyArray<TPictureDetailsTabItem>;
+```
+
 ## Exports & imports
 
 - Components: **default** export + barrel re-export.

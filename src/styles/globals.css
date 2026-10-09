@@ -76,11 +76,44 @@
 }
 
 @layer utilities {
+  .font-playfair {
+    font-family: var(--font-playfair), serif;
+  }
+
+  .h2-bold {
+    font-size: clamp(1.5rem, 1.2rem + 1vw, 1.9375rem);
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
   .h3-bold {
     font-size: clamp(1.5rem, 1.35rem + 0.6vw, 1.625rem);
     font-style: normal;
     font-weight: 700;
     line-height: 1.42;
+  }
+
+  .h4-bold {
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  .faq-title {
+    font-family: var(--font-playfair), serif;
+    font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5625rem);
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.36;
+  }
+
+  .meta-semibold {
+    font-size: 0.7rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.6;
   }
 
   .big-semibold {
@@ -138,7 +171,7 @@
   }
 
   .h-layout {
-    min-height: calc(100dvh - 76px);
+    min-height: calc(100dvh - 77px);
   }
 
   @media screen and (max-width: 1440px) {

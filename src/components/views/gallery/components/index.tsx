@@ -2,7 +2,7 @@
 
 import Headline from './Headline';
 import Content from './Content';
-import Breadcrumbs from '@/components/shared/breadcrumbs';
+import Breadcrumbs from '@/components/shared/breadcrumbs/components';
 import Pagination from '@/components/shared/pagination';
 import type { IPicturesResponse } from '../types';
 import Filters from '@/components/shared/filters';

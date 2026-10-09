@@ -12,7 +12,7 @@ const BUTTON_VARIANTS = {
   danger:
     'text-white border-none bg-error-500 hover:bg-error-600 active:bg-error-700 disabled:bg-gray-300',
   ghost:
-    'text-gray-600 border-none bg-primary-25 hover:bg-primary-50 active:bg-primary-200 disabled:bg-gray-300',
+    'text-primary-600 border-none bg-transparent hover:bg-primary-50 active:bg-primary-100 disabled:bg-gray-300',
 };
 
 const BUTTON_SIZES = {
@@ -28,7 +28,7 @@ const BUTTON_ICONS_COLORS = {
   success: 'white',
   warning: 'white',
   danger: 'white',
-  ghost: 'var(--color-gray-600)',
+  ghost: 'var(--color-primary-600)',
 };
 
 export { BUTTON_VARIANTS, BUTTON_SIZES, BUTTON_ICONS_COLORS };

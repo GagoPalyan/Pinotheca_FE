@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter, Lora, Roboto } from 'next/font/google';
+import { Inter, Lora, Playfair_Display, Roboto } from 'next/font/google';
 import { ReactQueryProvider } from '@/providers/ReactQueryProvider';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale } from 'next-intl/server';
@@ -21,6 +21,12 @@ const inter = Inter({
 const lora = Lora({
   variable: '--font-lora',
   weight: ['400', '700'],
+  subsets: ['latin', 'cyrillic'],
+});
+
+const playfair = Playfair_Display({
+  variable: '--font-playfair',
+  weight: ['700'],
   subsets: ['latin', 'cyrillic'],
 });
 
@@ -65,11 +71,11 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body
-        className={`${roboto.variable} ${inter.variable} ${lora.variable} antialiased w-full min-h-screen`}
+        className={`${roboto.variable} ${inter.variable} ${lora.variable} ${playfair.variable} antialiased w-full min-h-screen`}
       >
         <NextIntlClientProvider>
           <Header info={headerData} />
-          <main className="h-layout flex items-center justify-center">
+          <main className="flex flex-col items-center justify-center h-layout w-full">
             <ReactQueryProvider>{children}</ReactQueryProvider>
           </main>
         </NextIntlClientProvider>

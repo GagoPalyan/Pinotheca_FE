@@ -18,7 +18,7 @@ function LanguageSwitcher({
       onSelect={handleLanguageChange}
       prependIcon="globe"
       labelValue="value"
-      customClass="w-[75px] uppercase"
+      customClass="w-[80px] uppercase"
       dropdownPosition={dropdownPosition}
     />
   );

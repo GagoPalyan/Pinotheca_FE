@@ -11,7 +11,8 @@ interface IImage {
   customClass?: string;
 }
 
-function Image({ src, alt, width, height, priority = true, customClass }: IImage) {
+function 
+Image({ src, alt, width, height, priority = true, customClass }: IImage) {
   const imageUrl = getImageUrl(src);
 
   return (

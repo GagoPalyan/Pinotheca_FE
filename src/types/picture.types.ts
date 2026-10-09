@@ -8,6 +8,7 @@ interface IPicture {
   material: string;
   type: string;
   paint: string;
+  isSold?: boolean;
   author: {
     id: string;
     firstname: string;
