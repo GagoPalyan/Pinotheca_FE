@@ -1,6 +1,5 @@
 import { useTranslations } from 'next-intl';
 import { PAYMENT_ICONS } from '../constants';
-import Image from 'next/image';
 
 function Payment() {
   const t = useTranslations('picture.payment');
@@ -10,13 +9,11 @@ function Payment() {
       <h2 className="text-semibold text-black">{t('title')}</h2>
       <div className="flex items-center gap-3.5">
         {PAYMENT_ICONS.map((icon) => (
-          <Image
+          <img
             key={icon}
             src={`/icons/${icon}.svg`}
             alt={icon}
-            width={24}
-            height={24}
-            className="w-auto"
+            className="w-auto h-6"
           />
         ))}
       </div>

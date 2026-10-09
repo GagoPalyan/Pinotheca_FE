@@ -8,7 +8,6 @@ import { useTranslations } from 'next-intl';
 import { getImageUrl } from '@/components/ui/image';
 import type { IPicture } from '@/types/picture.types';
 import MediaStats from './MediaStats';
-import MediaThumbnail from './MediaThumbnail';
 
 const ZoomModal = dynamic(() => import('./ZoomModal'), { ssr: false });
 
@@ -21,48 +20,23 @@ interface IMedia {
   relatedPictures: IPicture[];
 }
 
-function Media({ id, imageUrl, title, likesCount, sharesCount, relatedPictures }: IMedia) {
+function Media({ id, imageUrl, title, likesCount, sharesCount }: IMedia) {
   const t = useTranslations('picture');
   const [isZoomOpen, setIsZoomOpen] = useState(false);
 
-  const thumbnails = [
-    { id, imageUrl, title },
-    ...relatedPictures.map((picture) => ({
-      id: picture.id,
-      imageUrl: picture.imageUrl,
-      title: picture.title,
-    })),
-  ].slice(0, 4);
-
   return (
     <div className="w-full flex flex-col gap-8">
-      <div className="w-full max-w-[619px] flex flex-col gap-3.5">
+      <div className="w-full max-w-xl flex flex-col gap-3.5">
         <Image
           src={imageUrl}
           alt={title}
           width={1000}
           height={1000}
-          priority
-          customClass="w-full aspect-square rounded-lg object-cover"
+          customClass="object-contain"
         />
         <MediaStats likesCount={likesCount} sharesCount={sharesCount} />
-        {thumbnails.length > 1 && (
-          <div className="w-full flex gap-3.5 overflow-x-auto [scrollbar-width:none]">
-            {thumbnails.map((thumbnail) => (
-              <MediaThumbnail
-                key={thumbnail.id}
-                id={thumbnail.id}
-                imageUrl={thumbnail.imageUrl}
-                title={thumbnail.title}
-                isActive={thumbnail.id === id}
-                isCurrent={thumbnail.id === id}
-                onSelect={() => undefined}
-              />
-            ))}
-          </div>
-        )}
       </div>
-      <div className="w-full max-w-[619px] flex items-center gap-2 flex-wrap">
+      <div className="w-full max-w-xl flex items-center gap-2 flex-wrap">
         <Button
           variant="ghost"
           size="small"

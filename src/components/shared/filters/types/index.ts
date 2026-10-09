@@ -11,12 +11,12 @@ enum MaterialEnum {
 }
 
 enum PaintEnum {
-  oilPaint = 'oil paint',
+  oilPaint = 'oilPaint',
   acrylic = 'acrylic',
-  watercolor = 'water color',
+  waterColor = 'waterColor',
   gouache = 'gouache',
   pencil = 'pencil',
-  mixedMedia = 'mixed media',
+  mixedMedia = 'mixedMedia',
   charcoal = 'charcoal',
   ink = 'ink',
 }

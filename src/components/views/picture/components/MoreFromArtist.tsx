@@ -30,7 +30,7 @@ function MoreFromArtist({ pictures }: IMoreFromArtist) {
         <Button
           variant="tertiary"
           size="small"
-          customClass="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 min-w-10 rounded-full bg-gray-25 shadow-sm p-0 hidden md:flex"
+          customClass="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 min-w-10 rounded-full bg-gray-25/60 shadow-sm p-0 hidden md:flex"
           prependIcon="left"
           handleClick={() => scroll('left')}
         />
@@ -39,7 +39,7 @@ function MoreFromArtist({ pictures }: IMoreFromArtist) {
           className="w-full flex gap-6 overflow-x-auto scroll-smooth pb-2 [scrollbar-width:none]"
         >
           {pictures.map((picture) => (
-            <div key={picture.id} className="min-w-[300px] max-w-[384px] flex-1">
+            <div key={picture.id} className="min-w-2xs max-w-sm flex-1">
               <Card {...picture} />
             </div>
           ))}
@@ -47,7 +47,7 @@ function MoreFromArtist({ pictures }: IMoreFromArtist) {
         <Button
           variant="tertiary"
           size="small"
-          customClass="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 min-w-10 rounded-full bg-gray-25 shadow-sm p-0 hidden md:flex"
+          customClass="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 min-w-10 rounded-full bg-gray-25/60 shadow-sm p-0 hidden md:flex"
           prependIcon="right"
           handleClick={() => scroll('right')}
         />

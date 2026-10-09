@@ -9,7 +9,6 @@ import { BASE_URL } from '@/utils/api';
 import { DEFAULT_HEADER_VALUE } from '@/constants/header';
 
 export function useUserInfo(initialData: IHeaderData | null) {
-  console.log('hook is runed');
   const [data, setData] = useState<IHeaderData>(initialData ?? DEFAULT_HEADER_VALUE);
 
   const token = Cookies.get('accessToken');
@@ -38,7 +37,6 @@ export function useUserInfo(initialData: IHeaderData | null) {
   }, []);
 
   useEffect(() => {
-    console.log('initialData', initialData);
     if (initialData) setData(initialData);
   }, [initialData]);
 

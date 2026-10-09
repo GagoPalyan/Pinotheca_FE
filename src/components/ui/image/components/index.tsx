@@ -11,13 +11,12 @@ interface IImage {
   customClass?: string;
 }
 
-function 
-Image({ src, alt, width, height, priority = true, customClass }: IImage) {
+function Image({ src, alt, width, height, priority = true, customClass }: IImage) {
   const imageUrl = getImageUrl(src);
 
   return (
     <NextImage
-      className={twMerge('w-full aspect-square rounded-lg', customClass)}
+      className={twMerge('w-full rounded-lg', customClass)}
       priority={priority}
       src={imageUrl}
       alt={alt}

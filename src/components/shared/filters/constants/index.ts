@@ -33,7 +33,7 @@ const MATERIAL_OPTIONS: TFilterOption[] = [
 const PAINT_OPTIONS: TFilterOption[] = [
   { value: PaintEnum.oilPaint, label: 'gallery.picture.paint.oilPaint' },
   { value: PaintEnum.acrylic, label: 'gallery.picture.paint.acrylic' },
-  { value: PaintEnum.watercolor, label: 'gallery.picture.paint.watercolor' },
+  { value: PaintEnum.waterColor, label: 'gallery.picture.paint.waterColor' },
   { value: PaintEnum.gouache, label: 'gallery.picture.paint.gouache' },
   { value: PaintEnum.pencil, label: 'gallery.picture.paint.pencil' },
   { value: PaintEnum.mixedMedia, label: 'gallery.picture.paint.mixedMedia' },
