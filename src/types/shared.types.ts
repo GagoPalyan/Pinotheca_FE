@@ -1,13 +1,13 @@
 import type { ReactElement } from 'react';
 
-export interface IAuthLayout {
+interface IAuthLayout {
   title?: string;
   text?: string;
   hideLoginWithGoogle?: boolean;
   children: ReactElement;
 }
 
-export interface IIcon {
+interface IIcon {
   name: string;
   size?: number;
   color?: string;
@@ -15,7 +15,9 @@ export interface IIcon {
   handleClick?: () => void;
 }
 
-export interface IComponentIcons {
+interface IComponentIcons {
   prependIcon?: string;
   appendIcon?: string;
 }
+
+export type { IAuthLayout, IIcon, IComponentIcons };

@@ -1,0 +1,17 @@
+enum PageUrls {
+  HOME = '/',
+  REGISTER = '/register',
+  MAGIC_LINK = '/magic-link',
+  LOGIN = '/login',
+  FORGOT_PASSWORD = '/forgot-password',
+  RESET_PASSWORD = '/reset-password',
+  FAVORITES = '/favorites',
+  CART = '/cart',
+  PROFILE = '/profile',
+  SETTINGS = '/settings',
+  ABOUT_US = '/about-us',
+  GALLERY = '/gallery',
+  ARTISTS = '/artists',
+}
+
+export { PageUrls };

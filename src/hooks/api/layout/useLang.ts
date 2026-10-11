@@ -1,4 +1,4 @@
-import { LanguagesValueEnum } from '@/types/lang.enums';
+import { LanguagesValueEnum } from '@/types/lang.types';
 import getLanguage from '@/utils/helpers/getLanguage.utils';
 import cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';

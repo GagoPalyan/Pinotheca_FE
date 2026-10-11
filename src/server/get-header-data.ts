@@ -1,35 +1,19 @@
 'use server';
 
-import { revalidateTag } from 'next/cache';
 import { cookies } from 'next/headers';
 import { API } from '../utils/api/api.utils';
-import { AuthPathEnum, type IHeaderData, type TUserData } from '@/types/auth.types';
+import { IHeaderData, LayoutApiUrls } from '@/types';
 
-export async function revalidateHeader() {
-  revalidateTag('me');
-}
-
-const getHeaderData = async () => {
+const getHeaderData = async (): Promise<IHeaderData | null> => {
   try {
     const cookiesStore = await cookies();
     const accessToken = cookiesStore.get('accessToken')?.value;
 
     if (!accessToken) return null;
 
-    const data: TUserData | null = await API.get(AuthPathEnum.ME, {
-      tags: ['me'],
+    return await API.get(LayoutApiUrls.USER_INFO, {
+      cache: 'no-store',
     });
-
-    if (!data) return null;
-
-    const { firstname, _count } = data;
-
-    const headerData: IHeaderData = {
-      profile: firstname[0],
-      ..._count,
-    };
-
-    return headerData;
   } catch {
     return null;
   }

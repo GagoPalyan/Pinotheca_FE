@@ -1,10 +1,10 @@
-import MobileHeaderContent from './mobile';
-import { MobileMenuProvider } from './context';
-import type { IHeaderData } from '@/types/auth.types';
+import MobileHeaderContent from './Mobile';
+import { MobileMenuProvider } from './Context';
+import { IHeaderData } from '@/types';
 
-function MobileHeader({ info }: { info: IHeaderData }) {
+function MobileHeader({ data }: { data: IHeaderData }) {
   return (
-    <MobileMenuProvider info={info}>
+    <MobileMenuProvider data={data}>
       <MobileHeaderContent />
     </MobileMenuProvider>
   );

@@ -1,7 +1,7 @@
 'use client';
 
 import Dropdown from '@/components/ui/dropdown';
-import { i18nLanguages } from '@/constants/languages';
+import { I18N_LANGUAGES } from '@/constants/languages';
 import useLang from '@/hooks/api/layout/useLang';
 
 function LanguageSwitcher({
@@ -14,11 +14,11 @@ function LanguageSwitcher({
   return (
     <Dropdown
       value={locale}
-      list={i18nLanguages}
+      list={I18N_LANGUAGES}
       onSelect={handleLanguageChange}
       prependIcon="globe"
       labelValue="value"
-      customClass="w-[75px] uppercase"
+      customClass="w-[80px] uppercase"
       dropdownPosition={dropdownPosition}
     />
   );

@@ -3,7 +3,7 @@
 import Icon from '@/components/shared/icon';
 import { useCallback, useState } from 'react';
 import { Controller } from 'react-hook-form';
-import InputComponent from './input';
+import InputComponent from './Input';
 import { twMerge } from 'tailwind-merge';
 import { useTranslations } from 'next-intl';
 import { IInput } from '../types';

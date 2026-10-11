@@ -1,0 +1,28 @@
+---
+description: Pinotheca FE project overview and agent working rules
+alwaysApply: true
+---
+
+# Pinotheca Frontend
+
+Online art gallery: browse pictures, like/cart, artists, auth. Stack: Next.js 15 App Router, React 19, TypeScript, Tailwind v4, next-intl, TanStack Query, Socket.IO client.
+
+## Agent rules
+
+- Follow these rules strictly. If there is no clear template, ask before inventing a new pattern.
+- **Ask first** before changing: auth/middleware, i18n setup/locale contract, shared UI primitives (`components/ui`).
+- **Never** add comments in code.
+- **Never** run git commands, create commits, or touch git config. The user handles all git.
+- Default locale: `en` (also `ru`, `hy` via locale cookie + next-intl).
+- Mirror closest existing feature when possible; still prefer rules over copy-paste of legacy naming.
+
+## Required env names (values never in repo)
+
+`NEXT_PUBLIC_BASE_API_URL`, `NEXT_PUBLIC_BASE_CLIENT_URL`, `CLOUDINARY_URL`, `HOST`
+
+## Conventions
+
+- Component files: **PascalCase**. Folders: kebab-case. Hooks: `useX.ts`.
+- Import via barrels (`@/components/ui/button`). When touching deep imports (`.../button/components`), switch to barrels.
+
+---

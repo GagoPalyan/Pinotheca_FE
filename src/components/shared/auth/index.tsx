@@ -1,4 +1,4 @@
-import Button from '@/components/ui/button/components';
+import Button from '@/components/ui/button';
 import type { IAuthLayout } from '@/types/shared.types';
 import { useTranslations } from 'next-intl';
 import GoogleIcon from '@/../public/icons/google.svg';

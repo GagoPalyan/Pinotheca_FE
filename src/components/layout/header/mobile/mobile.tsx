@@ -1,5 +1,5 @@
 import Logo from '@/components/shared/logo';
-import BurgerMenuButton from './burger-menu/button';
+import BurgerMenuButton from './burger-menu/Button';
 import BurgerMenu from './burger-menu';
 
 function MobileHeaderContent() {

@@ -1,9 +1,9 @@
 'use client';
 
 import { twMerge } from 'tailwind-merge';
-import { useMobileMenu } from '../context';
-import BurgerMenuBackground from './background';
-import BurgerMenuContent from './content';
+import { useMobileMenu } from '../Context';
+import BurgerMenuBackground from './Background';
+import BurgerMenuContent from './Content';
 
 function BurgerMenu() {
   const { isOpen } = useMobileMenu();
@@ -11,8 +11,8 @@ function BurgerMenu() {
   return (
     <div
       className={twMerge(
-        'max-md:flex hidden fixed top-14 right-0 z-800 h-[calc(100dvh-56px)] w-screen',
-        isOpen ? 'opacity-100 visible' : 'opacity-0 invisible',
+        'max-md:block hidden fixed top-14 right-0 z-800 h-[calc(100dvh-56px)] w-screen',
+        isOpen ? 'opacity-100 visible' : 'opacity-0 invisible delay-300',
       )}
       role="dialog"
       aria-modal="true"

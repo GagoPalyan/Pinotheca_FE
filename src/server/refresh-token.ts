@@ -1,9 +1,10 @@
 'use server';
 
-import { AuthPathEnum } from '@/types/auth.types';
+import { AuthPathEnum } from '@/types';
 import { NextResponse } from 'next/server';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_API_URL as string;
+const MAX_AGE = 60 * 60 * 2; // 2 hours
 
 const deleteCookies = (response: NextResponse) => {
   response.cookies.delete('accessToken');
@@ -24,7 +25,7 @@ export async function refreshTokenServer(refreshToken: string) {
       response.cookies.set('accessToken', accessToken, {
         secure: true,
         sameSite: 'strict',
-        maxAge: 60 * 60 * 2,
+        maxAge: MAX_AGE,
       });
 
       return response;

@@ -1,9 +1,11 @@
 import type { IIcon } from '@/types/shared.types';
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 function Icon({ name = '', size = 6, color = '#8C8989', iconClass = '', handleClick }: IIcon) {
   if (!name) return null;
+
+  const iconSize = size * 4;
 
   const onClick = useCallback(() => {
     if (handleClick) handleClick();
@@ -14,8 +16,8 @@ function Icon({ name = '', size = 6, color = '#8C8989', iconClass = '', handleCl
       onClick={onClick}
       style={{
         maskImage: `url(/icons/${name}.svg)`,
-        minWidth: size * 4,
-        maxWidth: size * 4,
+        minWidth: iconSize,
+        maxWidth: iconSize,
         backgroundColor: color,
       }}
       className={twMerge(

@@ -1,11 +1,10 @@
 'use client';
 
 import { twMerge } from 'tailwind-merge';
-import { useMobileMenu } from '../context';
+import { useMobileMenu } from '../Context';
 import { useEffect, useRef } from 'react';
-import { useTranslations } from 'next-intl';
-import BurgerMenuNavigation from './navigation';
-import BurgerMenuAuth from './auth';
+import BurgerMenuNavigation from './Navigation';
+import BurgerMenuAuth from './Auth';
 import dynamic from 'next/dynamic';
 
 const LanguageSwitcher = dynamic(() => import('@/components/shared/language-switcher'), {
@@ -13,11 +12,12 @@ const LanguageSwitcher = dynamic(() => import('@/components/shared/language-swit
 });
 
 function BurgerMenuContent() {
-  const t = useTranslations('common.pages');
   const { isOpen, close } = useMobileMenu();
   const menuRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+
     if (!isOpen) return;
 
     const handleClickOutside = (e: PointerEvent) => {

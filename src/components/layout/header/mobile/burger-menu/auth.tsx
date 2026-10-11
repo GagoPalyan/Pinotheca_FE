@@ -3,16 +3,16 @@
 import Button from '@/components/ui/button';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
-import { useMobileMenu } from '../context';
-import { PageUrls } from '@/types/path.enums';
+import { useMobileMenu } from '../Context';
+import { PageUrls } from '@/types/path.types';
 import { logoutClient } from '@/utils/api/api.utils';
 
 function BurgerMenuAuth() {
   const t = useTranslations('common.pages');
-  const { info, close } = useMobileMenu();
+  const { data, close } = useMobileMenu();
   const router = useRouter();
 
-  const isSigned = Boolean(info?.profile);
+  const isSigned = Boolean(data.nameFirstLater);
 
   const handleClick = (href: string) => {
     router.push(href);

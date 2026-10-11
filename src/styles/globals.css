@@ -76,52 +76,93 @@
 }
 
 @layer utilities {
-  .h3-bold {
-    font-size: 24px;
+  .font-playfair {
+    font-family: var(--font-playfair), serif;
+  }
+
+  .h2-bold {
+    font-size: clamp(1.5rem, 1.2rem + 1vw, 1.9375rem);
     font-style: normal;
     font-weight: 700;
-    line-height: 34px;
+    line-height: 1.35;
+  }
+
+  .h3-bold {
+    font-size: clamp(1.5rem, 1.35rem + 0.6vw, 1.625rem);
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.42;
+  }
+
+  .h4-bold {
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  .faq-title {
+    font-family: var(--font-playfair), serif;
+    font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5625rem);
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.36;
+  }
+
+  .meta-semibold {
+    font-size: 0.7rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.6;
+  }
+
+  .big-semibold {
+    font-size: clamp(1.25rem, 1rem + 0.2vw, 1.5rem);
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
   }
 
   .text-normal {
-    font-size: 16px;
+    font-size: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
     font-style: normal;
     font-weight: 400;
-    line-height: 160%;
+    line-height: 1.6;
   }
 
   .text-semibold {
-    font-size: 16px;
+    font-size: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
     font-style: normal;
     font-weight: 600;
-    line-height: 160%;
+    line-height: 1.6;
   }
 
   .base-normal {
-    font-size: 14px;
+    font-size: clamp(0.875rem, 0.84rem + 0.15vw, 1rem);
     font-style: normal;
     font-weight: 400;
-    line-height: 170%;
+    line-height: 1.7;
   }
 
   .base-semibold {
-    font-size: 14px;
+    font-size: clamp(0.875rem, 0.84rem + 0.15vw, 1rem);
     font-style: normal;
     font-weight: 600;
-    line-height: 21px;
+    line-height: 1.5;
   }
 
   .small-normal {
-    font-size: 12px;
+    font-size: clamp(0.75rem, 0.72rem + 0.1vw, 0.875rem);
     font-style: normal;
     font-weight: 400;
-    line-height: 160%;
+    line-height: 1.6;
   }
+
   .small-semibold {
-    font-size: 12px;
+    font-size: clamp(0.75rem, 0.72rem + 0.1vw, 0.875rem);
     font-style: normal;
     font-weight: 600;
-    line-height: 160%;
+    line-height: 1.6;
   }
 
   .w-container {
@@ -129,9 +170,19 @@
     padding-inline: calc(50% - var(--container) / 2);
   }
 
+  .h-layout {
+    min-height: calc(100dvh - 77px);
+  }
+
   @media screen and (max-width: 1440px) {
     .w-container {
       padding-inline: 16px;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .h-layout {
+      min-height: calc(100dvh - 56px);
     }
   }
 }
@@ -147,5 +198,5 @@
 
 ::-webkit-scrollbar-thumb {
   background-color: var(--color-primary-200);
-  border-radius: 999px;
+  border-radius: 6px;
 }

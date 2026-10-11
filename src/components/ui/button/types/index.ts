@@ -1,7 +1,9 @@
 import { IComponentIcons } from '@/types/shared.types';
-import { IButtonSizes, IButtonVariants } from '../constants';
+import { BUTTON_SIZES, BUTTON_VARIANTS } from '../constants';
 
-export interface IButton extends IComponentIcons {
+type IButtonVariants = keyof typeof BUTTON_VARIANTS;
+type IButtonSizes = keyof typeof BUTTON_SIZES;
+interface IButton extends IComponentIcons {
   variant?: IButtonVariants;
   type?: 'button' | 'submit';
   size?: IButtonSizes;
@@ -10,3 +12,5 @@ export interface IButton extends IComponentIcons {
   children?: React.ReactNode;
   handleClick?: () => void;
 }
+
+export type { IButtonVariants, IButtonSizes, IButton };

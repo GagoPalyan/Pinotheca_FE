@@ -1,14 +1,14 @@
 'use client';
 
 import Button from '@/components/ui/button';
-import { burgerMenuPagesList } from '@/constants/header';
+import { BURGER_MENU_PAGES_LIST } from '@/constants/header';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
-import { useMobileMenu } from '../context';
+import { useMobileMenu } from '../Context';
 
 function BurgerMenuNavigation() {
   const t = useTranslations('common.pages');
-  const { info } = useMobileMenu();
+  const { data, close } = useMobileMenu();
   const router = useRouter();
 
   const handleClick = (href: string) => {
@@ -18,7 +18,7 @@ function BurgerMenuNavigation() {
 
   return (
     <nav className="flex flex-col gap-2">
-      {burgerMenuPagesList.map(({ name, keyName, href }) => (
+      {BURGER_MENU_PAGES_LIST.map(({ name, keyName, href }) => (
         <Button
           key={name}
           variant="secondary"
@@ -26,8 +26,8 @@ function BurgerMenuNavigation() {
           handleClick={() => handleClick(href)}
         >
           {t(name)}
-          {keyName && Boolean(info?.[keyName]) && (
-            <span className="bg-primary-300 text-white size-6 rounded-full">{info?.[keyName]}</span>
+          {keyName && Boolean(data[keyName]) && (
+            <span className="bg-primary-300 text-white size-6 rounded-full">{data[keyName]}</span>
           )}
         </Button>
       ))}

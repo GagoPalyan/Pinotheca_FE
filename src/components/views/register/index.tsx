@@ -3,16 +3,16 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useRegister } from '@/hooks/api/auth/register';
-import { emailSchema } from '@/utils/validations/auth.schema';
+import { EMAIL_SCHEMA } from '@/utils/validations/auth.schema';
 import type { TRegisterEmailForm, TRegisterEmailResponse } from '@/types/auth.types';
 import AuthLayout from '@/components/shared/auth';
 import Input from '@/components/ui/input';
 import { useTranslations } from 'next-intl';
-import PageSwitcher from '@/components/shared/auth/page-switcher';
-import Button from '@/components/ui/button/components';
+import PageSwitcher from '@/components/shared/auth/PageSwitcher';
+import Button from '@/components/ui/button';
 import { useState } from 'react';
-import { PageUrls } from '@/types/path.enums';
-import AuthSuccessModal from '../../shared/auth/modal';
+import { PageUrls } from '@/types/path.types';
+import AuthSuccessModal from '@/components/shared/auth/Modal';
 
 function RegisterPage() {
   const t = useTranslations();
@@ -23,7 +23,7 @@ function RegisterPage() {
     formState: { errors },
   } = useForm<TRegisterEmailForm>({
     mode: 'onBlur',
-    resolver: yupResolver(emailSchema),
+    resolver: yupResolver(EMAIL_SCHEMA),
   });
   const { mutateAsync, isPending } = useRegister();
 
@@ -43,7 +43,7 @@ function RegisterPage() {
             {...register('email')}
             type={'email'}
             placeholder={t('auth.fields.email.label')}
-            label='auth.fields.email.label'
+            label="auth.fields.email.label"
             disabled={isPending}
             errorMessage={errors.email?.message}
           />

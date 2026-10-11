@@ -2,18 +2,17 @@
 
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { magicLinkSchema } from '@/utils/validations/auth.schema';
+import { MAGIC_LINK_SCHEMA } from '@/utils/validations/auth.schema';
 import type { TRegisterMagicLinkFrom } from '@/types/auth.types';
 import AuthLayout from '@/components/shared/auth';
 import Input from '@/components/ui/input';
 import { useTranslations } from 'next-intl';
-import Button from '@/components/ui/button/components';
-import { magicLinkFields } from '../constants/fields-list';
+import Button from '@/components/ui/button';
+import { MAGIC_LINK_FIELDS } from '../constants/fields-list';
 import { useMagicLink } from '@/hooks/api/auth/magic-link';
-import { revalidateHeader } from '@/server/get-header-data';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { toast } from 'react-toastify';
-import { PageUrls } from '@/types/path.enums';
+import { PageUrls } from '@/types/path.types';
 import Checkbox from '@/components/ui/checkbox';
 
 function MagicLinkPage() {
@@ -27,7 +26,7 @@ function MagicLinkPage() {
     formState: { errors },
   } = useForm<TRegisterMagicLinkFrom>({
     mode: 'onBlur',
-    resolver: yupResolver(magicLinkSchema),
+    resolver: yupResolver(MAGIC_LINK_SCHEMA),
     defaultValues: {
       terms: false,
     },
@@ -40,8 +39,7 @@ function MagicLinkPage() {
 
     const result = await mutateAsync({ ...data, token });
     if (result?.accessToken) {
-      await revalidateHeader();
-      router.replace(PageUrls.HOME);
+      await router.replace(PageUrls.HOME);
       router.refresh();
     }
   };
@@ -52,7 +50,7 @@ function MagicLinkPage() {
         className="w-full flex items-center justify-center flex-col gap-1"
         onSubmit={handleSubmit(onSubmit)}
       >
-        {magicLinkFields.map(({ name, type }) => (
+        {MAGIC_LINK_FIELDS.map(({ name, type }) => (
           <Input
             key={name}
             {...register(name)}

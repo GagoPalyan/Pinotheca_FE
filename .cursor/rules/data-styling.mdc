@@ -1,0 +1,39 @@
+---
+description: FE data fetching, URL state, styling, icons, images, optimization
+alwaysApply: true
+---
+
+# Data, styling, optimization
+
+## Data fetching
+
+- **Reads:** server (RSC / `'use server'` helpers + shared `API` util).
+- **Mutations:** client TanStack Query hooks under `src/hooks/api/`.
+- Use path aliases `@/*` → `src/*`. Prefer `'use client'` only when interactive.
+
+## List / filter state
+
+URL query params are the source of truth (see gallery: `search`, `page`, `limit`, `sort` + `useQueryParams`).
+
+## Styling
+
+- Tailwind v4 only + design tokens in `src/styles/globals.css`.
+- Merge classes with `twMerge`.
+- No CSS Modules / styled-components for new code.
+
+## Icons & images
+
+- Icons: shared `Icon` (mask SVGs under `/icons`).
+- Images: `components/ui/image` + Cloudinary `/cloud` proxy (`getImageUrl`) — not raw remote URLs.
+
+## Optimization
+
+- Use `next/dynamic` for heavy optional UI (e.g. language switcher, menus).
+- Do not add memoization by default unless there is a clear need.
+
+## Forms & i18n
+
+- Forms: react-hook-form + Yup; validation messages as i18n keys.
+- UI copy: `useTranslations` / next-intl (messages from BE `/translations/:locale`).
+
+---

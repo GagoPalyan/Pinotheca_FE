@@ -1,14 +1,16 @@
-export interface IModalBasic {
+interface IModalBasic {
   onClose: () => void;
   children: React.ReactNode;
 }
 
-export interface IModal extends IModalBasic {
+interface IModal extends IModalBasic {
   isOpen: boolean;
   contentClassname?: string;
 }
 
-export interface IModalContent {
+interface IModalContent {
   contentClassname?: string;
   children: React.ReactNode;
 }
+
+export type { IModalBasic, IModal, IModalContent };

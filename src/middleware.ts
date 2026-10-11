@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PageUrls } from './types/path.enums';
+import { PageUrls } from './types/path.types';
 import { refreshTokenServer } from './server/refresh-token';
 
-const protectedRoutes = [PageUrls.FAVORITES, PageUrls.CART, PageUrls.PROFILE];
+const PROTECTED_ROUTES = [PageUrls.FAVORITES, PageUrls.CART, PageUrls.PROFILE];
 
-const authRoutes = [
+const AUTH_ROUTES = [
   PageUrls.LOGIN,
   PageUrls.REGISTER,
   PageUrls.MAGIC_LINK,
@@ -24,11 +24,13 @@ export async function middleware(req: NextRequest) {
 
   const token = accessToken || refreshToken;
 
-  if (protectedRoutes.some((route) => pathname.startsWith(route)) && !token)
-    return NextResponse.redirect(new URL(PageUrls.LOGIN, req.url));
-
-  if (authRoutes.some((route) => pathname.startsWith(route)) && token)
-    return NextResponse.redirect(new URL(PageUrls.HOME, req.url));
+  if (token) {
+    if (AUTH_ROUTES.some((route) => pathname.startsWith(route)))
+      return NextResponse.redirect(new URL(PageUrls.HOME, req.url));
+  } else {
+    if (PROTECTED_ROUTES.some((route) => pathname.startsWith(route)))
+      return NextResponse.redirect(new URL(PageUrls.LOGIN, req.url));
+  }
 
   return response;
 }

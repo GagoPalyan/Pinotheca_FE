@@ -1,6 +1,7 @@
-import { PageUrls } from '@/types/path.enums';
+import { IHeaderData } from '@/types';
+import { PageUrls } from '@/types/path.types';
 
-export const headerNavPages = [
+const HEADER_NAV_PAGES = [
   {
     name: 'artists',
     href: PageUrls.ARTISTS,
@@ -15,7 +16,7 @@ export const headerNavPages = [
   },
 ];
 
-export const headerDashboardPages = [
+const HEADER_DASHBOARD_PAGES = [
   {
     name: 'favorites',
     keyName: 'likes',
@@ -24,19 +25,19 @@ export const headerDashboardPages = [
   },
   {
     name: 'cart',
-    keyName: 'orders',
+    keyName: 'carts',
     icon: 'cart',
     href: PageUrls.CART,
   },
 ] as const;
 
-export const burgerMenuIconStyles = [
+const BURGER_MENU_ICON_STYLES = [
   'rotate-45 translate-y-1.5',
   'opacity-0',
   '-rotate-45 -translate-y-1.5',
 ];
 
-export const burgerMenuPagesList = [
+const BURGER_MENU_PAGES_LIST = [
   {
     name: 'home',
     keyName: null,
@@ -64,7 +65,21 @@ export const burgerMenuPagesList = [
   },
   {
     name: 'cart',
-    keyName: 'orders',
+    keyName: 'carts',
     href: PageUrls.CART,
   },
 ] as const;
+
+const DEFAULT_HEADER_VALUE: IHeaderData = {
+  carts: 0,
+  likes: 0,
+  nameFirstLater: '',
+};
+
+export {
+  HEADER_NAV_PAGES,
+  HEADER_DASHBOARD_PAGES,
+  BURGER_MENU_ICON_STYLES,
+  BURGER_MENU_PAGES_LIST,
+  DEFAULT_HEADER_VALUE,
+};
