@@ -12,6 +12,10 @@ async function Gallery({ searchParams }: { searchParams: Promise<ISearchParams> 
   const params = await searchParams;
   const data = await getPictures(params);
 
+  console.log('data', data)
+
+  if(!data) throw new Error('getPictures returned null')
+
   return (
     <Suspense fallback={<Loading />}>
       <GalleryPage data={data} />
