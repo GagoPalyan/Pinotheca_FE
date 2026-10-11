@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation';
 import { PageUrls } from '@/types/path.types';
 import { useTranslations } from 'next-intl';
-import BreadcrumbsLink from './link';
+import BreadcrumbsLink from './Link';
 
 interface IBreadcrumbs {
   lastText?: string;

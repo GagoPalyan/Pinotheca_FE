@@ -8,11 +8,8 @@ import Link from 'next/link';
 import HeaderUserPages from './UserPages';
 import ProfileIcon from './ProfileIcon';
 import { IHeaderData } from '@/types';
-import { useUserInfo } from '@/hooks/socket/useHeaderWs';
 
-const LanguageSwitcher = dynamic(() => import('@/components/shared/language-switcher'), {
-  ssr: false,
-});
+const LanguageSwitcher = dynamic(() => import('@/components/shared/language-switcher'));
 
 function DesktopHeader({ data }: { data: IHeaderData }) {
   const t = useTranslations('common.pages');
