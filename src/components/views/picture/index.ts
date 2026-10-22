@@ -1,6 +1,3 @@
-import PicturePage from './components';
-
+export { default } from './components';
 export * from './types';
 export * from './utils';
-
-export default PicturePage;

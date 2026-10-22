@@ -11,8 +11,8 @@ import Share from './Share';
 import Shipping from './Shipping';
 import Payment from './Payment';
 import Details from './Details';
-import MoreFromArtist from './MoreFromArtist';
 
+const PicturesCarousel = dynamic(() => import('@/components/shared/pictures-carousel/components'));
 const Faq = dynamic(() => import('./Faq'));
 
 interface IPicturePage {
@@ -35,7 +35,7 @@ function PicturePage({ data }: IPicturePage) {
           sharesCount={sharesCount}
           relatedPictures={data.author.pictures}
         />
-        <div className="flex flex-col gap-11 max-w-[343px]">
+        <div className="flex flex-col gap-11">
           <div className="flex flex-col gap-4">
             <Summary picture={data} likesCount={likesCount} onLikesCountChange={setLikesCount} />
             <BuyButton id={data.id} isInCart={data.isInCart} isSold={Boolean(data.isSold)} />
@@ -52,7 +52,7 @@ function PicturePage({ data }: IPicturePage) {
         </div>
       </section>
       <Details picture={data} />
-      <MoreFromArtist pictures={data.author.pictures} />
+      <PicturesCarousel title="picture.moreFromArtist" pictures={data.author.pictures} />
       <Faq />
     </div>
   );

@@ -74,6 +74,7 @@ const DEFAULT_HEADER_VALUE: IHeaderData = {
   carts: 0,
   likes: 0,
   nameFirstLater: '',
+  imageUrl: null,
 };
 
 export {
