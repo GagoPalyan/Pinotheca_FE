@@ -1,3 +1,1 @@
-import MagicLinkPage from './components';
-
-export default MagicLinkPage;
+export { default } from './components';

@@ -4,7 +4,12 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 
-function ProfileIcon({ letter }: { letter?: string }) {
+interface IProfileIcon {
+  letter?: string;
+  imageUrl: string | null;
+}
+
+function ProfileIcon({ letter, imageUrl }: IProfileIcon) {
   const t = useTranslations('common.pages');
 
   if (!letter)
@@ -18,9 +23,13 @@ function ProfileIcon({ letter }: { letter?: string }) {
     <Link
       href={PageUrls.PROFILE}
       title={t('profile')}
-      className="size-7 rounded-full flex items-center justify-center bg-primary-100"
+      className="size-7 rounded-full flex items-center justify-center overflow-hidden bg-primary-100"
     >
-      <span className="text-primary-400 text-semibold">{letter}</span>
+      {imageUrl ? (
+        <Image width={28} height={28} alt="User Image" src={imageUrl} />
+      ) : (
+        <span className="text-primary-400 text-semibold">{letter}</span>
+      )}
     </Link>
   );
 }

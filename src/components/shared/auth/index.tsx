@@ -3,9 +3,14 @@ import type { IAuthLayout } from '@/types/shared.types';
 import { useTranslations } from 'next-intl';
 import GoogleIcon from '@/../public/icons/google.svg';
 import Image from 'next/image';
+import { BASE_URL } from '@/utils/api';
 
 function AuthLayout({ title, text, hideLoginWithGoogle = false, children }: IAuthLayout) {
   const t = useTranslations('auth');
+
+  const handleGoogleLogin = () => {
+    window.location.href = `${BASE_URL}/auth/google`;
+  };
 
   return (
     <div className="w-[286px] flex flex-col gap-7.5 items-center">
@@ -13,7 +18,7 @@ function AuthLayout({ title, text, hideLoginWithGoogle = false, children }: IAut
       {Boolean(text) && <p className="base-normal text-gray-600">{text}</p>}
       {!hideLoginWithGoogle && (
         <>
-          <Button variant="secondary" customClass="hover:bg-unset">
+          <Button variant="secondary" customClass="hover:bg-unset" handleClick={handleGoogleLogin}>
             <div className="flex items-center gap-2.5">
               <Image src={GoogleIcon} alt="google-icon" unoptimized />
               <span className="base-semibold">{t('common.google-sign-in')}</span>

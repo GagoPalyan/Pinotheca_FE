@@ -33,7 +33,7 @@ function DesktopHeader({ data }: { data: IHeaderData }) {
         {HEADER_DASHBOARD_PAGES.map(({ keyName, name, ...props }) => (
           <HeaderUserPages key={name} {...props} name={t(name)} count={data[keyName]} />
         ))}
-        <ProfileIcon letter={data.nameFirstLater} />
+        <ProfileIcon letter={data.nameFirstLater} imageUrl={data.imageUrl} />
       </div>
     </nav>
   );
