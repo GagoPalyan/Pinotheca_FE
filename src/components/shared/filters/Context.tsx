@@ -1,11 +1,11 @@
 'use client';
 
+import type { TFiltersMeta } from '@/components/views/gallery';
 import { createContext, useContext, useState, ReactNode } from 'react';
 
 interface IFiltersPanelContext {
   isOpen: boolean;
-  minPrice: number;
-  maxPrice: number;
+  filters: TFiltersMeta;
   open: () => void;
   close: () => void;
   toggle: () => void;
@@ -15,12 +15,10 @@ const FiltersPanelContext = createContext<IFiltersPanelContext | null>(null);
 
 export function FiltersPanelProvider({
   children,
-  minPrice,
-  maxPrice,
+  filters,
 }: {
   children: ReactNode;
-  minPrice: number;
-  maxPrice: number;
+  filters: TFiltersMeta;
 }) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -29,7 +27,7 @@ export function FiltersPanelProvider({
   const toggle = () => setIsOpen((prev) => !prev);
 
   return (
-    <FiltersPanelContext.Provider value={{ isOpen, minPrice, maxPrice, open, close, toggle }}>
+    <FiltersPanelContext.Provider value={{ isOpen, filters, open, close, toggle }}>
       {children}
     </FiltersPanelContext.Provider>
   );

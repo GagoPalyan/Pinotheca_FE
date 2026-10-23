@@ -14,17 +14,12 @@ interface IFilterGroup {
 function FilterGroup({ title, options, selected, onToggle }: IFilterGroup) {
   const t = useTranslations();
 
-  const list = options.map((option) => ({
-    value: option.value,
-    label: t(option.label),
-  }));
-
   return (
     <div className="flex flex-col gap-2 border-b border-gray-200 pb-3">
       <h3 className="base-semibold text-gray-950">{t(title)}</h3>
       <Multiselect
         value={selected}
-        list={list}
+        list={options}
         onToggle={onToggle}
         placeholder={t(title)}
         customClass="border border-gray-400 rounded-sm h-11 px-3"

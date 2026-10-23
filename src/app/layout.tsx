@@ -5,8 +5,8 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getLocale } from 'next-intl/server';
 import Header from '@/components/layout/header';
 import { ToastContainer } from 'react-toastify';
-import '../styles/globals.css';
 import getHeaderData from '@/server/get-header-data';
+import '../styles/globals.css';
 
 const roboto = Roboto({
   variable: '--font-roboto',
@@ -35,19 +35,9 @@ export const metadata: Metadata = {
   description: 'Online Gallery',
   icons: {
     icon: [
-      {
-        url: '/favicon/favicon.svg',
-        type: 'image/svg+xml',
-      },
-      {
-        url: '/favicon/favicon.ico',
-        sizes: 'any',
-      },
-      {
-        url: '/favicon/favicon-96x96.png',
-        sizes: '96x96',
-        type: 'image/png',
-      },
+      { url: '/favicon/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon/favicon.ico', sizes: 'any' },
+      { url: '/favicon/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
     ],
     apple: [
       {
@@ -78,8 +68,8 @@ export default async function RootLayout({
           <main className="flex flex-col items-center justify-center h-layout w-full">
             <ReactQueryProvider>{children}</ReactQueryProvider>
           </main>
+          <ToastContainer />
         </NextIntlClientProvider>
-        <ToastContainer />
       </body>
     </html>
   );

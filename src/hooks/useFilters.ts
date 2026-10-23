@@ -6,7 +6,7 @@ const useFilters = () => {
   const searchParams = useSearchParams();
   const setQueryParams = useQueryParams();
 
-  const sort: SortBy = (searchParams.get('sort') as SortBy) ?? SortBy.DESC;
+  const sort = (searchParams.get('sort') as SortBy) ?? SortBy.DESC;
   const values: TFiltersForm = {
     material: searchParams.getAll('material'),
     paint: searchParams.getAll('paint'),

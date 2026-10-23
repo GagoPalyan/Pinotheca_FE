@@ -1,3 +1,5 @@
+import type { useTranslations } from 'next-intl';
+
 enum SortBy {
   ASC = 'asc',
   DESC = 'desc',
@@ -47,17 +49,7 @@ type TFiltersForm = {
 };
 
 type TFilterArrayKey = keyof Pick<TFiltersForm, 'material' | 'paint' | 'type'>;
-
-type TSizeDimension = 'width' | 'height';
-
-type TSizeBound = 'min' | 'max';
-
-type TSizeFormField = `${TSizeDimension}${Capitalize<TSizeBound>}`;
-
-type TRangeFieldKey = {
-  key: TSizeDimension;
-  labels: readonly TSizeBound[];
-};
+type TFilterRangeKey = 'price' | 'width' | 'height';
 
 type TFilterGroupConfig = {
   key: TFilterArrayKey;
@@ -74,7 +66,7 @@ type TActiveFilterChip = {
   patch: Partial<TFiltersForm>;
 };
 
-type TTranslateFn = (key: string, values?: Record<string, string | number>) => string;
+type TTranslateFn = ReturnType<typeof useTranslations>;
 
 export {
   SortBy,
@@ -84,12 +76,9 @@ export {
   type TActiveFilterChip,
   type TFilters,
   type TFilterArrayKey,
+  type TFilterRangeKey,
   type TFilterGroupConfig,
   type TFilterOption,
   type TFiltersForm,
-  type TRangeFieldKey,
-  type TSizeBound,
-  type TSizeDimension,
-  type TSizeFormField,
   type TTranslateFn,
 };

@@ -2,7 +2,6 @@
 
 import Icon from '@/components/shared/icon';
 import { useCallback, useState } from 'react';
-import { Controller } from 'react-hook-form';
 import InputComponent from './Input';
 import { twMerge } from 'tailwind-merge';
 import { useTranslations } from 'next-intl';
@@ -16,7 +15,6 @@ function Input({
   errorMessage,
   prependIcon = '',
   appendIcon = '',
-  withController = false,
   control,
   disabled = false,
   ...props
@@ -43,41 +41,24 @@ function Input({
         )}
       >
         {prependIcon && <Icon name={prependIcon} size={4} />}
-        {withController ? (
-          <Controller
-            name={name}
-            control={control}
-            render={({ field }) => (
-              <InputComponent
-                {...props}
-                {...field}
-                name={name}
-                type={inputType}
-                placeholder={placeholder}
-                disabled={disabled}
-              />
-            )}
-          />
-        ) : (
-          <InputComponent
-            {...props}
-            name={name}
-            type={inputType}
-            placeholder={placeholder}
-            disabled={disabled}
-          />
-        )}
+        <InputComponent
+          {...props}
+          name={name}
+          type={inputType}
+          placeholder={placeholder}
+          disabled={disabled}
+        />
         {type === 'password' ? (
           <Icon
             name={inputType === 'password' ? 'lucide_eye' : 'lucide_eye_off'}
             size={4}
             handleClick={showPassword}
           />
-        ) : appendIcon ? (
-          <Icon name={appendIcon} size={4} />
-        ) : null}
+        ) : (
+          appendIcon && <Icon name={appendIcon} size={4} />
+        )}
       </div>
-      <span className="base-normal text-error-500">{errorMessage && t(errorMessage)}</span>
+      {errorMessage && <span className="base-normal text-error-500">{t(errorMessage)}</span>}
     </div>
   );
 }

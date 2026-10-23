@@ -1,46 +1,12 @@
 import { clampNumber } from '@/utils/helpers';
-import { FILTER_GROUPS } from '../constants';
+import { FILTER_GROUPS, FILTER_LABELS, RANGE_FILTER_KEYS } from '../constants';
 import type {
   TActiveFilterChip,
   TFilterArrayKey,
+  TFilterRangeKey,
   TFiltersForm,
-  TSizeBound,
-  TSizeDimension,
-  TSizeFormField,
   TTranslateFn,
 } from '../types';
-
-function getSizeFormField(dimension: TSizeDimension, bound: TSizeBound): TSizeFormField {
-  return `${dimension}${bound === 'min' ? 'Min' : 'Max'}`;
-}
-
-function getFiltersFormValues(source: TFiltersForm): TFiltersForm {
-  return {
-    material: [...source.material],
-    paint: [...source.paint],
-    type: [...source.type],
-    priceMin: source.priceMin,
-    priceMax: source.priceMax,
-    widthMin: source.widthMin,
-    widthMax: source.widthMax,
-    heightMin: source.heightMin,
-    heightMax: source.heightMax,
-  };
-}
-
-function getFiltersFormKey(values: TFiltersForm): string {
-  return [
-    values.material.join('\0'),
-    values.paint.join('\0'),
-    values.type.join('\0'),
-    values.priceMin,
-    values.priceMax,
-    values.widthMin,
-    values.widthMax,
-    values.heightMin,
-    values.heightMax,
-  ].join('|');
-}
 
 function toggleListItem(list: string[], value: string): string[] {
   return list.includes(value) ? list.filter((item) => item !== value) : [...list, value];
@@ -77,14 +43,12 @@ function resolvePriceValues(
 }
 
 function getOptionLabelKey(key: TFilterArrayKey, value: string): string {
-  const group = FILTER_GROUPS.find((item) => item.key === key);
-
-  return group?.options.find((option) => option.value === value)?.label ?? value;
+  return FILTER_LABELS.get(`${key}:${value}`) ?? value;
 }
 
 function getRangeChipLabel(
   t: TTranslateFn,
-  key: 'price' | 'width' | 'height',
+  key: TFilterRangeKey,
   min: string,
   max: string,
 ): string {
@@ -98,40 +62,31 @@ function getActiveFilterChips(values: TFiltersForm, t: TTranslateFn): TActiveFil
   const chips: TActiveFilterChip[] = [];
 
   FILTER_GROUPS.forEach(({ key }) => {
-    values[key].forEach((value) => {
-      const translated = t(getOptionLabelKey(key, value));
+    const selectedValues = values[key];
 
+    selectedValues.forEach((value) => {
       chips.push({
         id: `${key}:${value}`,
-        label: translated.charAt(0).toUpperCase() + translated.slice(1),
-        patch: { [key]: values[key].filter((item) => item !== value) },
+        label: t(getOptionLabelKey(key, value)),
+        patch: { [key]: selectedValues.filter((item) => item !== value) },
       });
     });
   });
 
-  if (values.priceMin || values.priceMax) {
-    chips.push({
-      id: 'price',
-      label: getRangeChipLabel(t, 'price', values.priceMin, values.priceMax),
-      patch: { priceMin: '', priceMax: '' },
-    });
-  }
+  RANGE_FILTER_KEYS.forEach((key) => {
+    const minKey = `${key}Min` as const;
+    const maxKey = `${key}Max` as const;
+    const min = values[minKey];
+    const max = values[maxKey];
 
-  if (values.widthMin || values.widthMax) {
-    chips.push({
-      id: 'width',
-      label: getRangeChipLabel(t, 'width', values.widthMin, values.widthMax),
-      patch: { widthMin: '', widthMax: '' },
-    });
-  }
+    if (!min && !max) return;
 
-  if (values.heightMin || values.heightMax) {
     chips.push({
-      id: 'height',
-      label: getRangeChipLabel(t, 'height', values.heightMin, values.heightMax),
-      patch: { heightMin: '', heightMax: '' },
+      id: key,
+      label: getRangeChipLabel(t, key, min, max),
+      patch: { [minKey]: '', [maxKey]: '' },
     });
-  }
+  });
 
   return chips;
 }
@@ -148,9 +103,6 @@ function getActiveFiltersCount(values: TFiltersForm): number {
 }
 
 export {
-  getFiltersFormValues,
-  getFiltersFormKey,
-  getSizeFormField,
   toggleListItem,
   getPriceBounds,
   resolvePriceValues,

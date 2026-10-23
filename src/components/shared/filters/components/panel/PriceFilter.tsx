@@ -6,22 +6,25 @@ import DualRangeSlider from '@/components/ui/dual-range-slider';
 import Input from '@/components/ui/input';
 import { useFiltersPanel } from '../../Context';
 import { getPriceBounds, resolvePriceValues } from '../../utils';
+import type { TFilterRangeKey } from '../../types';
 
 interface IPriceFilter {
-  priceMin: string;
-  priceMax: string;
+  filterKey: TFilterRangeKey;
+  minValue: string;
+  maxValue: string;
   onChange: (min: string, max: string) => void;
 }
 
-function PriceFilter({ priceMin, priceMax, onChange }: IPriceFilter) {
+function PriceFilter({ minValue, maxValue, filterKey, onChange }: IPriceFilter) {
   const t = useTranslations('gallery.filters');
-  const { minPrice, maxPrice } = useFiltersPanel();
-  const { min: rangeMin, max: rangeMax } = getPriceBounds(minPrice, maxPrice);
-  const { safeMin, safeMax } = resolvePriceValues(priceMin, priceMax, rangeMin, rangeMax);
+  const { filters } = useFiltersPanel();
+  const { min, max } = filters[filterKey];
+  const { min: rangeMin, max: rangeMax } = getPriceBounds(min, max);
+  const { safeMin, safeMax } = resolvePriceValues(minValue, maxValue, rangeMin, rangeMax);
 
   return (
     <div className="flex flex-col gap-3 w-full border-b border-gray-200 pb-2">
-      <h3 className="base-semibold text-gray-950">{t('price')}</h3>
+      <h3 className="base-semibold text-gray-950">{t(filterKey)}</h3>
 
       <DualRangeSlider
         min={rangeMin}
@@ -33,20 +36,22 @@ function PriceFilter({ priceMin, priceMax, onChange }: IPriceFilter) {
 
       <div className="flex gap-3 w-full">
         <Input
+          id={`${filterKey}:min`}
           type="text"
           name="priceMin"
           placeholder={t('min')}
           inputMode="numeric"
-          value={priceMin}
-          onChange={(e) => onChange(toDigitsOnly(e.target.value), priceMax)}
+          value={minValue}
+          onChange={(e) => onChange(toDigitsOnly(e.target.value), maxValue)}
         />
         <Input
+          id={`${filterKey}:max`}
           type="text"
           name="priceMax"
           placeholder={t('max')}
           inputMode="numeric"
-          value={priceMax}
-          onChange={(e) => onChange(priceMin, toDigitsOnly(e.target.value))}
+          value={maxValue}
+          onChange={(e) => onChange(minValue, toDigitsOnly(e.target.value))}
         />
       </div>
     </div>

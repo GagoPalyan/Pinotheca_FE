@@ -9,28 +9,23 @@ import useFilters from '@/hooks/useFilters';
 import { useFiltersPanel } from '../../Context';
 import { EMPTY_FILTERS_FORM } from '../../constants';
 import type { TFiltersForm } from '../../types';
-import { getFiltersFormKey, getFiltersFormValues } from '../../utils';
 import FiltersPanelHeader from './Header';
 import FilterGroups from './FilterGroups';
-import SizeFilter from './SizeFilter';
 import PriceFilter from './PriceFilter';
 
 function FiltersPanelContent() {
   const t = useTranslations();
   const { isOpen, close } = useFiltersPanel();
   const { values, setQueryParams } = useFilters();
-  const formKey = getFiltersFormKey(values);
   const panelRef = useRef<HTMLDivElement | null>(null);
-  const valuesRef = useRef(values);
-  valuesRef.current = values;
 
   const { control, handleSubmit, reset, setValue, watch } = useForm<TFiltersForm>({
-    defaultValues: getFiltersFormValues(values),
+    defaultValues: values,
   });
 
   useEffect(() => {
-    if (isOpen) reset(getFiltersFormValues(valuesRef.current));
-  }, [isOpen, formKey, reset]);
+    if (isOpen) reset(values);
+  }, [isOpen, reset]);
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : '';
@@ -55,7 +50,7 @@ function FiltersPanelContent() {
   };
 
   const clearFilters = () => {
-    reset(getFiltersFormValues(EMPTY_FILTERS_FORM));
+    reset(EMPTY_FILTERS_FORM);
   };
 
   return (
@@ -71,8 +66,9 @@ function FiltersPanelContent() {
 
         <div className="flex flex-col gap-2 overflow-y-auto flex-1 pr-1">
           <PriceFilter
-            priceMin={watch('priceMin')}
-            priceMax={watch('priceMax')}
+            filterKey="price"
+            minValue={watch('priceMin')}
+            maxValue={watch('priceMax')}
             onChange={(min, max) => {
               setValue('priceMin', min);
               setValue('priceMax', max);
@@ -80,7 +76,25 @@ function FiltersPanelContent() {
           />
 
           <FilterGroups control={control} />
-          <SizeFilter control={control} />
+
+          <PriceFilter
+            filterKey="width"
+            minValue={watch('widthMin')}
+            maxValue={watch('widthMax')}
+            onChange={(min, max) => {
+              setValue('widthMin', min);
+              setValue('widthMax', max);
+            }}
+          />
+          <PriceFilter
+            filterKey="height"
+            minValue={watch('heightMin')}
+            maxValue={watch('heightMax')}
+            onChange={(min, max) => {
+              setValue('heightMin', min);
+              setValue('heightMax', max);
+            }}
+          />
         </div>
 
         <div className="pt-6 mt-auto flex items-center gap-3">

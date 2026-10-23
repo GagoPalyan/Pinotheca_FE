@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import type { IMultiselectProps } from '../types';
 import MultiselectTrigger from './Trigger';
 import MultiselectList from './List';
+import { useTranslations } from 'next-intl';
 
 function Multiselect<T>({
   value,
@@ -14,6 +15,8 @@ function Multiselect<T>({
   chevronColor = 'black',
   customClass = '',
 }: IMultiselectProps<T>) {
+  const t = useTranslations();
+
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -28,8 +31,11 @@ function Multiselect<T>({
   const selectedLabel = useMemo(
     () =>
       list
-        .filter((item) => value.includes(item.value))
-        .map((item) => item.label)
+        .reduce<string[]>((labels, item) => {
+          if (value.includes(item.value)) labels.push(t(item.label));
+
+          return labels;
+        }, [])
         .join(', '),
     [value, list],
   );

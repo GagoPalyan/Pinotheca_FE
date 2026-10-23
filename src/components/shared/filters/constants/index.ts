@@ -7,19 +7,18 @@ import {
   type TFilterGroupConfig,
   type TFilterOption,
   type TFiltersForm,
-  type TRangeFieldKey,
 } from '../types';
 
 const SORT_LIST: TDropdownItem<SortBy>[] = [
   {
     icon: 'arrow-down',
-    label: SortBy.ASC.toUpperCase(),
-    value: SortBy.ASC,
+    label: SortBy.DESC.toUpperCase(),
+    value: SortBy.DESC,
   },
   {
     icon: 'arrow-up',
-    label: SortBy.DESC.toUpperCase(),
-    value: SortBy.DESC,
+    label: SortBy.ASC.toUpperCase(),
+    value: SortBy.ASC,
   },
 ];
 
@@ -67,18 +66,13 @@ const FILTER_GROUPS: TFilterGroupConfig[] = [
   { key: 'type', options: TYPE_OPTIONS },
 ];
 
-const MIN_MAX_LABELS = ['min', 'max'] as const;
+const FILTER_LABELS = new Map(
+  FILTER_GROUPS.flatMap(({ key, options }) =>
+    options.map(({ value, label }) => [`${key}:${value}`, label] as const),
+  ),
+);
 
-const SIZE_FIELD_ROWS: TRangeFieldKey[] = [
-  {
-    key: 'width',
-    labels: MIN_MAX_LABELS,
-  },
-  {
-    key: 'height',
-    labels: MIN_MAX_LABELS,
-  },
-];
+const RANGE_FILTER_KEYS = ['price', 'width', 'height'] as const;
 
 export {
   SORT_LIST,
@@ -87,5 +81,6 @@ export {
   TYPE_OPTIONS,
   EMPTY_FILTERS_FORM,
   FILTER_GROUPS,
-  SIZE_FIELD_ROWS,
+  FILTER_LABELS,
+  RANGE_FILTER_KEYS,
 };

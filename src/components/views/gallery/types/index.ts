@@ -1,14 +1,15 @@
+import type { TFilterRangeKey } from '@/components/shared/filters/types';
 import type { TMeta } from '@/types/global.types';
 import type { IPicture } from '@/types/picture.types';
 
-type TPicturesMeta = TMeta & {
-  minPrice: number;
-  maxPrice: number;
-};
+type TFilterRange = { min: number; max: number };
+
+type TFiltersMeta = Record<TFilterRangeKey, TFilterRange>;
 
 interface IPicturesResponse {
   data: IPicture[];
-  meta: TPicturesMeta;
+  meta: TMeta;
+  filters: TFiltersMeta;
 }
 
 interface IPictureLikeResponse {
@@ -44,7 +45,7 @@ type TGalleryFilters = {
 };
 
 export type {
-  TPicturesMeta,
+  TFiltersMeta,
   IPicturesResponse,
   IPictureLikeResponse,
   IPictureCartResponse,

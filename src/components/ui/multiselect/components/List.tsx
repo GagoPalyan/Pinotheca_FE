@@ -3,6 +3,7 @@
 import Icon from '@/components/shared/icon';
 import { twMerge } from 'tailwind-merge';
 import type { IMultiselectListProps } from '../types';
+import { useTranslations } from 'next-intl';
 
 function MultiselectList<T>({
   value,
@@ -10,6 +11,8 @@ function MultiselectList<T>({
   onToggle,
   dropdownPosition = 'bottom',
 }: IMultiselectListProps<T>) {
+  const t = useTranslations();
+
   const dropdownClass = dropdownPosition === 'bottom' ? 'mt-1' : 'bottom-full mb-1';
 
   return (
@@ -34,7 +37,7 @@ function MultiselectList<T>({
           >
             <div className="flex items-center gap-2">
               {item.icon && <Icon name={item.icon} size={5} />}
-              <span className="base-normal">{item.label}</span>
+              <span className="base-normal">{t(item.label)}</span>
             </div>
             <span className="size-5 shrink-0 flex items-center justify-center">
               {isSelected && <Icon name="check" size={4} color="var(--color-primary-600)" />}

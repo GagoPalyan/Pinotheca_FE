@@ -1,16 +1,10 @@
-import { IInput } from '../types';
+import type { IInput } from '../types';
 
-function InputComponent({
-  name,
-  type,
-  placeholder,
-  disabled,
-  ...props
-}: IInput) {
+function InputComponent({ name, type, placeholder, disabled, ...props }: IInput) {
   return (
     <input
       {...props}
-      id={name}
+      id={props?.id ?? name}
       name={name}
       type={type}
       placeholder={placeholder}

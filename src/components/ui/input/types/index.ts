@@ -9,7 +9,6 @@ interface IInput
   label?: string;
   errorMessage?: string;
   placeholder?: string;
-  withController?: boolean;
   disabled?: boolean;
   control?: Control<FieldValues, any, FieldValues>;
 }

@@ -8,13 +8,13 @@ import type { IPicturesResponse } from '../types';
 import Filters from '@/components/shared/filters';
 
 function GalleryPage({ data }: { data: IPicturesResponse }) {
-  const { data: pictures, meta } = data;
+  const { data: pictures, meta, filters } = data;
 
   return (
     <div className="relative w-full bg-primary-25 h-layout">
       <Breadcrumbs />
       <Headline />
-      <Filters minPrice={meta.minPrice} maxPrice={meta.maxPrice} />
+      <Filters filters={filters} />
       <Content pictures={pictures} />
       <Pagination {...meta} />
     </div>

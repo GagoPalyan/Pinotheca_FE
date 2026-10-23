@@ -14,11 +14,10 @@ function RangeField({ name, placeholder, value, onChange }: IRangeField) {
     <div className="w-full flex flex-col gap-1 items-start">
       <div className="flex items-center border rounded-sm h-11 w-full px-3 border-gray-400">
         <input
-          id={name}
           name={name}
           type="text"
-          placeholder={placeholder}
           inputMode="numeric"
+          placeholder={placeholder}
           value={value}
           onChange={(e) => onChange(toDigitsOnly(e.target.value))}
           className="text-normal text-gray-950 outline-none border-none w-full h-full rounded-sm"

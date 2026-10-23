@@ -12,7 +12,7 @@ function ActiveFilterChip({ label, onRemove }: IActiveFilterChip) {
     <Button
       size="small"
       variant="tertiary"
-      customClass="w-fit"
+      customClass="w-fit capitalize"
       handleClick={onRemove}
       appendIcon="x"
     >
