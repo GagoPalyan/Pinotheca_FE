@@ -1,5 +1,8 @@
 import * as Yup from 'yup';
 
+const PASSWORD_REGEX =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[ !"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~])/;
+
 const EMAIL_SCHEMA = Yup.object().shape({
   email: Yup.string()
     .email('auth.fields.email.errors.invalid')
@@ -18,10 +21,7 @@ const MAGIC_LINK_SCHEMA = Yup.object().shape({
   password: Yup.string()
     .min(8, 'auth.fields.password.errors.min')
     .max(32, 'auth.fields.password.errors.max')
-    .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[ !"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~])/,
-      'auth.fields.password.errors.invalid',
-    )
+    .matches(PASSWORD_REGEX, 'auth.fields.password.errors.invalid')
     .required('auth.fields.password.errors.required'),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref('password')], 'auth.fields.password.errors.confirm_required')
@@ -45,10 +45,7 @@ const RESET_PASSWORD_SCHEMA = Yup.object().shape({
   password: Yup.string()
     .min(8, 'auth.fields.password.errors.min')
     .max(32, 'auth.fields.password.errors.max')
-    .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[ !"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~])/,
-      'auth.fields.password.errors.invalid',
-    )
+    .matches(PASSWORD_REGEX, 'auth.fields.password.errors.invalid')
     .required('auth.fields.password.errors.required'),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref('password')], 'auth.fields.password.errors.confirm_required')

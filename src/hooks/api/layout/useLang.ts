@@ -1,15 +1,15 @@
-import { LanguagesValueEnum } from '@/types/lang.types';
+import type { LangValue } from '@/types';
 import cookies from 'js-cookie';
 import { useLocale } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
 
 const useLang = () => {
-  const locale = useLocale() as LanguagesValueEnum;
+  const locale = useLocale() as LangValue;
   const router = useRouter();
 
   const handleLanguageChange = useCallback(
-    (lang: LanguagesValueEnum) => {
+    (lang: LangValue) => {
       cookies.set('locale', lang);
       router.refresh();
     },

@@ -1,13 +1,13 @@
-enum LanguagesValueEnum {
+enum LangValue {
   EN = 'en',
   RU = 'ru',
   AM = 'hy',
 }
 
-enum LanguagesLabelEnum {
+enum LangLabel {
   EN = 'English',
   RU = 'Русский',
   AM = 'Հայերեն',
 }
 
-export { LanguagesValueEnum, LanguagesLabelEnum };
+export { LangValue, LangLabel };

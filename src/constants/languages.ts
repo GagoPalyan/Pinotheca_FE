@@ -1,17 +1,17 @@
-import { LanguagesLabelEnum, LanguagesValueEnum } from '@/types/lang.types';
+import { LangLabel, LangValue } from '@/types/lang.types';
 
 const I18N_LANGUAGES = [
   {
-    label: LanguagesLabelEnum.EN,
-    value: LanguagesValueEnum.EN,
+    label: LangLabel.EN,
+    value: LangValue.EN,
   },
   {
-    label: LanguagesLabelEnum.RU,
-    value: LanguagesValueEnum.RU,
+    label: LangLabel.RU,
+    value: LangValue.RU,
   },
   {
-    label: LanguagesLabelEnum.AM,
-    value: LanguagesValueEnum.AM,
+    label: LangLabel.AM,
+    value: LangValue.AM,
   },
 ];
 
