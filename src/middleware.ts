@@ -1,4 +1,4 @@
-import { NextRequest } from 'next/server';
+import type { NextRequest } from 'next/server';
 import { getToken, updateCookies } from './middleware/token';
 import { middlewareRoute } from './middleware/routes';
 

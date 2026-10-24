@@ -4,8 +4,8 @@ import { getLocale } from 'next-intl/server';
 import Header from '@/components/layout/header';
 import { ToastContainer } from 'react-toastify';
 import getHeaderData from '@/server/get-header-data';
-import layoutMetadata from '@/configs/global/metadata';
-import { inter, lora, playfair, roboto } from '@/configs/global/fonts';
+import layoutMetadata from '@/configs/metadata';
+import { inter, lora, playfair, roboto } from '@/configs/fonts';
 import '@/styles/globals.css';
 
 export const metadata = layoutMetadata;
