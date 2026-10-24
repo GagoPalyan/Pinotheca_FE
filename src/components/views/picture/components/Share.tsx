@@ -51,7 +51,12 @@ function Share({ id, title, imageUrl, sharesCount, onSharesCountChange }: IShare
             customClass="w-fit p-0 size-6 min-w-6 bg-transparent hover:bg-transparent active:bg-transparent"
             handleClick={() => handleShare(network.id)}
           >
-            <img src={`/icons/${network.icon}.svg`} alt={network.id} className="size-6" />
+            <img
+              src={`/icons/${network.icon}.svg`}
+              alt={network.id}
+              className="size-6"
+              loading="lazy"
+            />
           </Button>
         ))}
       </div>

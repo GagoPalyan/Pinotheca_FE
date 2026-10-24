@@ -12,6 +12,8 @@ interface IProps {
 function Header({ info }: IProps) {
   const data = useUserInfo(info);
 
+  console.log('data', data);
+
   return (
     <header>
       <DesktopHeader data={data} />

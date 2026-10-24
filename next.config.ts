@@ -5,28 +5,13 @@ import createNextIntlPlugin from 'next-intl/plugin';
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**.googleusercontent.com',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'res.cloudinary.com',
-      },
-      {
-        protocol: isDev() ? 'http' : 'https',
-        hostname: process.env.HOST as string,
-      },
+      { protocol: 'https', hostname: '**.googleusercontent.com', pathname: '/**' },
+      { protocol: 'https', hostname: 'res.cloudinary.com' },
+      { protocol: isDev() ? 'http' : 'https', hostname: process.env.HOST as string },
     ],
   },
   async rewrites() {
-    return [
-      {
-        source: '/cloud/:path*',
-        destination: process.env.CLOUDINARY_URL + '/:path*',
-      },
-    ];
+    return [{ source: '/cloud/:path*', destination: process.env.CLOUDINARY_URL + '/:path*' }];
   },
 };
 

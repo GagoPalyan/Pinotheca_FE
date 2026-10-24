@@ -9,9 +9,7 @@ const getCookie = (cookies: TRequestCookies, key: Token) => cookies.get(key)?.va
 const getAccessToken = async (refreshToken: string): Promise<string | null> => {
   try {
     const res = await fetch(`${BASE_URL}${AuthPathEnum.REFRESH}`, {
-      headers: {
-        Cookie: `refreshToken=${refreshToken}`,
-      },
+      headers: { Cookie: `refreshToken=${refreshToken}` },
       cache: 'no-store',
     });
 

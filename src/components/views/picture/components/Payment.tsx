@@ -14,6 +14,7 @@ function Payment() {
             src={`/icons/${icon}.svg`}
             alt={icon}
             className="w-auto h-6"
+            loading="lazy"
           />
         ))}
       </div>
