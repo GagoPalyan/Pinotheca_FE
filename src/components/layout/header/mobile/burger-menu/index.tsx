@@ -1,26 +1,16 @@
 'use client';
 
-import { twMerge } from 'tailwind-merge';
 import { useMobileMenu } from '../Context';
-import BurgerMenuBackground from './Background';
 import BurgerMenuContent from './Content';
+import OverlayDialog from '@/components/shared/overlay-dialog';
 
 function BurgerMenu() {
   const { isOpen } = useMobileMenu();
 
   return (
-    <div
-      className={twMerge(
-        'max-md:block hidden fixed top-14 right-0 z-800 h-[calc(100dvh-56px)] w-screen',
-        isOpen ? 'opacity-100 visible' : 'opacity-0 invisible delay-300',
-      )}
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="mobile-menu-title"
-    >
-      <BurgerMenuBackground />
+    <OverlayDialog isOpen={isOpen} titleId="mobile-menu-title" className="hidden max-md:block">
       <BurgerMenuContent />
-    </div>
+    </OverlayDialog>
   );
 }
 

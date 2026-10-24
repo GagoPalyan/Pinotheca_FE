@@ -3,7 +3,7 @@
 import FiltersTrigger from './FiltersTrigger';
 import SortDropdown from './SortDropdown';
 import ActiveFilters from './ActiveFilters';
-import { FiltersPanelProvider } from '../Context';
+import { FiltersPanelProvider } from './Context';
 import useFilters from '@/hooks/useFilters';
 import { getActiveFiltersCount } from '../utils';
 import type { TFiltersMeta } from '@/components/views/gallery';

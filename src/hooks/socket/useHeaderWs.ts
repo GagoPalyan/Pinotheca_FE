@@ -10,6 +10,7 @@ import { DEFAULT_HEADER_VALUE } from '@/constants/header';
 
 export function useUserInfo(initialData: IHeaderData | null) {
   const [data, setData] = useState<IHeaderData>(initialData ?? DEFAULT_HEADER_VALUE);
+  console.log('initialData', initialData);
 
   const token = Cookies.get('accessToken');
 

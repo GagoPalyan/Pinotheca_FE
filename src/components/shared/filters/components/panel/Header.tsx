@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import Icon from '@/components/shared/icon';
-import { useFiltersPanel } from '../../Context';
+import { useFiltersPanel } from '../Context';
 
 function FiltersPanelHeader() {
   const t = useTranslations();

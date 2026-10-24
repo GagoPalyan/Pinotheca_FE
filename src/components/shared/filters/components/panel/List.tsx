@@ -4,13 +4,13 @@ import { Controller, type Control } from 'react-hook-form';
 import { FILTER_GROUPS } from '../../constants';
 import type { TFiltersForm } from '../../types';
 import { toggleListItem } from '../../utils';
-import FilterGroup from './FilterGroup';
+import FilterMultiselect from './FilterMultiselect';
 
-interface IFilterGroups {
+interface IFiltersList {
   control: Control<TFiltersForm>;
 }
 
-function FilterGroups({ control }: IFilterGroups) {
+function FiltersList({ control }: IFiltersList) {
   return (
     <>
       {FILTER_GROUPS.map(({ key, options }) => (
@@ -19,7 +19,7 @@ function FilterGroups({ control }: IFilterGroups) {
           name={key}
           control={control}
           render={({ field }) => (
-            <FilterGroup
+            <FilterMultiselect
               title={`gallery.filters.${key}`}
               options={options}
               selected={field.value}
@@ -32,4 +32,4 @@ function FilterGroups({ control }: IFilterGroups) {
   );
 }
 
-export default FilterGroups;
+export default FiltersList;

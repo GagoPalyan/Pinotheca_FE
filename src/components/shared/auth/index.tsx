@@ -13,7 +13,7 @@ function AuthLayout({ title, text, hideLoginWithGoogle = false, children }: IAut
   };
 
   return (
-    <div className="w-[286px] flex flex-col gap-7.5 items-center">
+    <div className="w-2xs flex flex-col gap-7.5 items-center">
       <h1 className="h3-bold text-center">{t(title ?? 'common.welcome')}</h1>
       {Boolean(text) && <p className="base-normal text-gray-600">{text}</p>}
       {!hideLoginWithGoogle && (

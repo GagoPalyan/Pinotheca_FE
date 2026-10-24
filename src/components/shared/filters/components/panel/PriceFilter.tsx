@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import { toDigitsOnly } from '@/utils/helpers';
 import DualRangeSlider from '@/components/ui/dual-range-slider';
 import Input from '@/components/ui/input';
-import { useFiltersPanel } from '../../Context';
+import { useFiltersPanel } from '../Context';
 import { getPriceBounds, resolvePriceValues } from '../../utils';
 import type { TFilterRangeKey } from '../../types';
 

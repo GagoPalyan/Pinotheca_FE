@@ -1,26 +1,18 @@
 'use client';
 
-import { twMerge } from 'tailwind-merge';
-import { useFiltersPanel } from '../../Context';
-import FiltersPanelBackground from './Background';
+import { useFiltersPanel } from '../Context';
 import FiltersPanelContent from './Content';
+import Background from '@/components/shared/background';
+import OverlayDialog from '@/components/shared/overlay-dialog';
 
 function FiltersPanel() {
   const { isOpen } = useFiltersPanel();
 
   return (
-    <div
-      className={twMerge(
-        'fixed top-0 right-0 z-800 h-dvh w-screen max-md:top-14 max-md:h-[calc(100dvh-56px)]',
-        isOpen ? 'opacity-100 visible' : 'opacity-0 invisible delay-300',
-      )}
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="filters-panel-title"
-    >
-      <FiltersPanelBackground />
+    <OverlayDialog isOpen={isOpen} titleId="filters-panel-title" className="md:top-0 md:h-dvh">
+      <Background isOpen={isOpen} />
       <FiltersPanelContent />
-    </div>
+    </OverlayDialog>
   );
 }
 

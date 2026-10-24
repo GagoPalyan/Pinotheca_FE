@@ -6,11 +6,11 @@ import { twMerge } from 'tailwind-merge';
 import { useTranslations } from 'next-intl';
 import Button from '@/components/ui/button';
 import useFilters from '@/hooks/useFilters';
-import { useFiltersPanel } from '../../Context';
+import { useFiltersPanel } from '../Context';
 import { EMPTY_FILTERS_FORM } from '../../constants';
 import type { TFiltersForm } from '../../types';
 import FiltersPanelHeader from './Header';
-import FilterGroups from './FilterGroups';
+import FiltersList from './List';
 import PriceFilter from './PriceFilter';
 
 function FiltersPanelContent() {
@@ -75,7 +75,7 @@ function FiltersPanelContent() {
             }}
           />
 
-          <FilterGroups control={control} />
+          <FiltersList control={control} />
 
           <PriceFilter
             filterKey="width"

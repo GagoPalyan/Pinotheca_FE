@@ -4,14 +4,14 @@ import { useTranslations } from 'next-intl';
 import Multiselect from '@/components/ui/multiselect';
 import type { TFilterOption } from '../../types';
 
-interface IFilterGroup {
+interface IFilterMultiselect {
   title: string;
   options: TFilterOption[];
   selected: string[];
   onToggle: (value: string) => void;
 }
 
-function FilterGroup({ title, options, selected, onToggle }: IFilterGroup) {
+function FilterMultiselect({ title, options, selected, onToggle }: IFilterMultiselect) {
   const t = useTranslations();
 
   return (
@@ -29,4 +29,4 @@ function FilterGroup({ title, options, selected, onToggle }: IFilterGroup) {
   );
 }
 
-export default FilterGroup;
+export default FilterMultiselect;
